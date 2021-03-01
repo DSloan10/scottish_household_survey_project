@@ -11,32 +11,85 @@ This document is meant as a reference point for questions to be answered during 
 
 We would like to to help us gain insights into how people feel about their local communities in Scotland. In particular, we are interested in the relationship between distance to outdoor space, and neighbourhood ratings.
 
-1. Are there certain groups that have local access to green space?
+*A lot of info should be able to be garnered fairly simply from the distance to green or blue space dataset included within the household survey and the brief ([link here](https://statistics.gov.scot/resource?uri=http%3A%2F%2Fstatistics.gov.scot%2Fdata%2Fgreen-or-blue-space-shs)). The variable that could be included in the "certain groups" category mentioned above are as follows:*
 
-*This info should be able to be garnered fairly simply from the distance to green or blue space dataset included within the household survey and the brief ([link here](https://statistics.gov.scot/resource?uri=http%3A%2F%2Fstatistics.gov.scot%2Fdata%2Fgreen-or-blue-space-shs)). The variable that could be included in the "certain groups" category mentioned above are as follows:*
-
-*Age*: 3 different distinct groups to explore here:
+**Age**: 3 different distinct groups to explore here:
 
 16-34 
 35-64
 65 years and older
 
-*Distance to nearest Green or Blue space*: This will, I guess, be the main target variable for this particular question. There are 4 different groups and we will need to define what it means to have "local access" based on these:
+**Distance to nearest Green or Blue space**: This will, I guess, be the main target variable for this particular question. There are 4 different groups and we will need to define what it means to have "local access" based on these:
 
 A 5 minute walk or less 
 An 11 minute walk or more 
 Don't Know 
 Within a 6-10 minute walk 
 
-*Ethnicity*: Slightly disappointing that there is not a greater breakdown of groups in terms of this variable. As it is, the groups are as follows:
+**Ethnicity**: Slightly disappointing that there is not a greater breakdown of groups in terms of this variable. As it is, the groups are as follows:
 
 Other 
 White
 
+**Gender**: Split by Male and Female, although there is an all category which may allow an "Other" group to be created
+
+**Household Type**: We have a breakdown of three distinct groups:
+
+Adults
+Pensioners 
+With Children 
+
+**Measure Type** This is an interesting one that needs to be explored further early on in the project. There are three options:
+
+95% Lower Confidence Limit, Percent 
+95% Upper Confidence Limit, Percent 
+Percent 
+
+**Reference Period** 2013 - 2014 available. Will be particularly important to check missing values. 
+
+**SIMD Quintiles** A really intersesting variable if we are to touch on socio-economic links. Only two groups though:
+
+20% most deprived 
+80% least deprived 
+
+**Type Of Tenure** This could be interesting as it suggests in itself a certain socio-economic dimension, although this may not necessarily be the case in isolation, but rather when combined with another element such as age. A larger list of groups include:
+
+Owned Mortgage/Loan 
+Owned Outright 
+Private Rented 
+Social Rented 
+
+**Urban Rural Classification** A nice one to look at, although it may be fairly predictable:
+
+Rural
+Urban
+
+**Reference Area** This says that it is provided by country and by council area by default, which adds an interesting geographical dimension to this. I'll need to see what the data looks like before this to check how robust such an analysis would be. 
+
+
+**This is the first dataset to be looked at, with the further two datasets containing much the same breakdown, with one or two crucial caveats:**
+
+**Neighbourhood rating dataset** - This dataset contains one additional variable and one adjusted one: 
+
+*Neighbourhood rating* - Provide on a 4 point scale (Very Poor to Very Good), with a "No opinion" option also included.
+
+*Walking Distance to nearest Greenspace* - So crucially, this is different from the above data set with only green space included (i.e. no blue space). Although the distance is still measured in terms of a time estimate, it is also different from the above with only more/less than 10 minutes walking distance or a Don't know as options. 
+
+
+**Community belonging dataset** - Once again, same general variables, but with the same "Walking Distance" variable mentioned in the Neighbourhood rating dataset, and one unique variable:
+
+*Community belonging* - This looks like it is accessed on a scale showing strength of sentiment. Once again four points (Not at all strongly to Very Strongly) with a "Don't know" option also included. 
+
+
+
+
+
+
+1. Are there certain groups that have local access to green space?
+
 
 
 2. Are there groups that are lacking access?
-
 
 
 
