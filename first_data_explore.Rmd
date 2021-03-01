@@ -1,0 +1,78 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+library(janitor)
+
+green_blue_comp_data <- read_csv("data/complete_dist_blue_green.csv") %>% clean_names()
+neighbourhood_comp_data <- read_csv("data/complete_neighbourhood_rating.csv") %>% clean_names()
+community_comp_data <- read_csv("data/complete_community_belonging.csv") %>% clean_names()
+```
+
+I really want to work out if we can get all these bound together in one big dataset.
+
+```{r}
+green_blue_comp_data %>% 
+  glimpse()
+
+neighbourhood_comp_data %>% 
+  glimpse()
+
+community_comp_data %>% 
+  glimpse()
+```
+
+```{r}
+codes_gb <-
+green_blue_comp_data %>% 
+  distinct(feature_code)
+
+codes_gb
+
+green_blue_comp_data %>% 
+  distinct(units)
+```
+
+```{r}
+codes_neigh <-
+neighbourhood_comp_data %>% 
+  distinct(feature_code)
+
+codes_neigh
+
+neighbourhood_comp_data %>% 
+  distinct(units)
+```
+
+```{r}
+codes_community <-
+community_comp_data %>% 
+  distinct(feature_code)
+
+community_comp_data %>% 
+  distinct(units)
+```
+
+Cool, so all three datasets seem to have the same amount of variables, altough there will be a slight difference in the measure of each. The thing I want to get checking is that feature codes refer to regions or, more likely, council areas. I also just want to double check that these are all the same in each dataset. I'm pretty sure we actually have the codes down for this in the previous report which would be super handy. 
+
+```{r}
+all_equal(codes_community, codes_gb, codes_neigh)
+```
+
+Sweet, it looks like all the codes match which I'm hoping means we can just do a join on all these. Not sure whether to change the codes now or after. Think I might just do now so the join is a bit clearer for me, although I'm guessing it would be best practice to do it after.
+
+My mistake earlier, just realised those were NHS codes not council ones. 
+
+```{r}
+local_authority_codes <- read_csv("data/Local_Authority_Districts_Codes.csv") %>% clean_names()
+```
+
+```{r}
+scot_local_auth_codes <-
+local_authority_codes %>% 
+  filter(str_detect(lad19cd, "S12"))
+```
+

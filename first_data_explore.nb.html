@@ -1797,73 +1797,283 @@ summary {
 
 
 <!-- rnb-text-begin -->
-<p><strong>Defining the Questions</strong></p>
-<p>This document is meant as a reference point for questions to be answered during the project. For the fundamental questions highlighted in the project brief, these should remain consistent from the beginning of the project and should not be edited to a significant degree. However, as time and insights allow, supplementary questions to be answered can be added in addition to the core 6.</p>
-<p><strong>The original questions with further comment and clarification</strong></p>
-<p>We would like to to help us gain insights into how people feel about their local communities in Scotland. In particular, we are interested in the relationship between distance to outdoor space, and neighbourhood ratings.</p>
-<p><em>A lot of info should be able to be garnered fairly simply from the distance to green or blue space dataset included within the household survey and the brief (<a href="https://statistics.gov.scot/resource?uri=http%3A%2F%2Fstatistics.gov.scot%2Fdata%2Fgreen-or-blue-space-shs">link here</a>). The variable that could be included in the “certain groups” category mentioned above are as follows:</em></p>
-<p><strong>Age</strong>: 3 different distinct groups to explore here:</p>
-<p>16-34 35-64 65 years and older</p>
-<p><strong>Distance to nearest Green or Blue space</strong>: This will, I guess, be the main target variable for this particular question. There are 4 different groups and we will need to define what it means to have “local access” based on these:</p>
-<p>A 5 minute walk or less An 11 minute walk or more Don’t Know Within a 6-10 minute walk</p>
-<p><strong>Ethnicity</strong>: Slightly disappointing that there is not a greater breakdown of groups in terms of this variable. As it is, the groups are as follows:</p>
-<p>Other White</p>
-<p><strong>Gender</strong>: Split by Male and Female, although there is an all category which may allow an “Other” group to be created</p>
-<p><em>Checking the above!</em> - it seems there’s a note on this:</p>
-<p>“In the 2018 Scottish Household Survey the gender question was revised. In previous years interviewers asked if household members were ‘male’ or ‘female’. In the 2018 survey the options given were: ‘man/boy’, ‘woman/girl’ and two additional responses: ‘identified in another way’ and ‘refused’. In order to remain harmonised with other statistics.gov.scot datasets, the previous response options ‘male’ and ‘female’ will be maintained.”</p>
-<p><strong>Household Type</strong>: We have a breakdown of three distinct groups:</p>
-<p>Adults Pensioners With Children</p>
-<p><strong>Measure Type</strong> This is an interesting one that needs to be explored further early on in the project. There are three options:</p>
-<p>95% Lower Confidence Limit, Percent 95% Upper Confidence Limit, Percent Percent</p>
-<p><strong>Reference Period</strong> 2013 - 2019 available. Will be particularly important to check missing values.</p>
-<p><strong>SIMD Quintiles</strong> A really intersesting variable if we are to touch on socio-economic links. Only two groups though:</p>
-<p>20% most deprived 80% least deprived</p>
-<p><strong>Type Of Tenure</strong> This could be interesting as it suggests in itself a certain socio-economic dimension, although this may not necessarily be the case in isolation, but rather when combined with another element such as age. A larger list of groups include:</p>
-<p>Owned Mortgage/Loan Owned Outright Private Rented Social Rented</p>
-<p><strong>Urban Rural Classification</strong> A nice one to look at, although it may be fairly predictable:</p>
-<p>Rural Urban</p>
-<p><strong>Reference Area</strong> This says that it is provided by country and by council area by default, which adds an interesting geographical dimension to this. I’ll need to see what the data looks like before this to check how robust such an analysis would be.</p>
-<p><strong>This is the first dataset to be looked at, with the further two datasets containing much the same breakdown, with one or two crucial caveats:</strong></p>
-<p><strong>Neighbourhood rating dataset</strong> - This dataset contains one additional variable and one adjusted one:</p>
-<p><em>Neighbourhood rating</em> - Provide on a 4 point scale (Very Poor to Very Good), with a “No opinion” option also included.</p>
-<p><em>Walking Distance to nearest Greenspace</em> - So crucially, this is different from the above data set with only green space included (i.e. no blue space). Although the distance is still measured in terms of a time estimate, it is also different from the above with only more/less than 10 minutes walking distance or a Don’t know as options.</p>
-<p><strong>Community belonging dataset</strong> - Once again, same general variables, but with the same “Walking Distance” variable mentioned in the Neighbourhood rating dataset, and one unique variable:</p>
-<p><em>Community belonging</em> - This looks like it is accessed on a scale showing strength of sentiment. Once again four points (Not at all strongly to Very Strongly) with a “Don’t know” option also included.</p>
-<p><strong>The main thing that I want to establish at this stage is whether or not these different datasets contain observations from the same source. In other words, is there anything to link individuals between the two datasets.</strong></p>
-<p>In translating the following business questions into data questions, I think I need to define how each variable can be measured in a quantitative way to shed light on the original question. Thoughts and final definitions below. It was recommended that I try to answer each of these questions individually instead of answering them all in stages. With this in mind, I think I can safely get the data together for the first four questions and then answer each of these individually after this.</p>
-<ol style="list-style-type: decimal">
-<li>Are there certain groups that have local access to green space?</li>
-</ol>
-<p><em>First of all, we need to define the elements in the second clause here.</em></p>
-<p>Local access we can define as being within a ten minute walk of an individuals home. This should allow us to deal to use both variables mentioned above, although we might have to extend this definition to include up to 11 minutes given the second of the two variables. Strictly speaking, this would mean that a certain number of people who thought that they lived 11 minutes away from a green space may be misclassified, but given it is a subjective time estimate anyway I think that we can deal with this particular error.</p>
-<p>For the second definition here, we need to think of whether we use green space from the last two datasets or include the first dataset which seems to have “green and blue spaces”. Checking in the notes for the datasets, the following is stated:</p>
-<p>“The question asking about walking distance to nearest greenspace informs the National Indicator on Access to Green and Blue Spaces. However before 2019, even though the list of spaces included riversides and beaches, the question text used the term”green or open space“. In 2019 for one half of the sample this was changed slightly to”green, blue or open spaces&quot; to check if including the word “blue” made any difference to the response given to the question about walking distance or the biennial follow-up questions asking about satisfaction with and frequency of use of nearest green or blue space. No statistically significant difference was found.&quot;</p>
-<p>This explanation is provided for two out of the three datasets, although somewhat confusingly these are not the same two datesets that make reference to only green space. With these caveats in mind, I am happy to go ahead and use both variables as common indicators for the same theme.</p>
-<p>So with all of this in mind, pending our checks on whether all the datasets relate to the same individuals, our first quantitative data definition will be:</p>
-<p><em>Are there certain groups, more than others, who report having access to green or blue spaces within 10 minutes of their homes.</em></p>
-<ol start="2" style="list-style-type: decimal">
-<li>Are there groups that are lacking access?</li>
-</ol>
-<p>In light of the above breakdown, I’d say that we should find the groups that are particularly likely to have green space more than 10 minutes walk away, once again with the same caveats and measures applied. So, just to be strict about this, the following definitin will apply:</p>
-<p><em>Are there certain groups, more than others, who report having access to green or blue spaces further than 10 minutes away from their homes.</em></p>
-<ol start="3" style="list-style-type: decimal">
-<li>Are there big differences in how far people have to walk to access their green space?</li>
-</ol>
-<p>To answer this one, my immediate thoughts are that we should take the population as a whole (i.e All in a lot of the variables) and then compare the difference between regions. If we have managed to gain insights into certain groups in the opening two questions, we could perhaps shed a bit more light on differences in the regions within the context of these differences. In a generally sense, this question could be considered a little bit tricky considering we only really have, at most, three categories representing a short, medium and long walk to green spaces, along with a don’t know. We should perhaps consider renaming these categories as short, medium or long, although this would necessarily mean only using the first dataset which has thise level of granularity. Fundamentally, we’ll want to show the following:</p>
-<p><em>Is the data on the overall sample very skewed towards one out of the three categories or is it relatively evenly dispersed amongst small, medium and long walks to green spaces.</em></p>
-<p><em>Are similar skews replicated across different regions or are they consistent with the national average.</em></p>
-<ol start="4" style="list-style-type: decimal">
-<li>Are there any differences between rural and urban areas?</li>
-</ol>
-<p>This can probably be linked quite well into comparisons between other variables. In particular, since this is a binary classification, it would be great to take other variables and then just split these by rural and urban. Not quite sure how to word this at this stage but basically we should try and keep in the urban and rural classifier wherever we can during the analysis process.</p>
-<ol start="5" style="list-style-type: decimal">
-<li><p>How do people in neighbourhoods with good access to green space differ from those who have no good access? Are there differences in how they rate their neighbourhoods? Are there differences in how they rate their communities?</p></li>
-<li><p>Is there any way to predict which households would have higher ratings?</p></li>
-</ol>
-<p><strong>Other Considerations to Remember</strong></p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSh0aWR5dmVyc2UpXG5gYGAifQ== -->
+<pre class="r"><code>library(tidyverse)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUmVnaXN0ZXJlZCBTMyBtZXRob2RzIG92ZXJ3cml0dGVuIGJ5ICdkYnBseXInOlxuICBtZXRob2QgICAgICAgICBmcm9tXG4gIHByaW50LnRibF9sYXp5ICAgICBcbiAgcHJpbnQudGJsX3NxbCAgICAgIFxu4pSA4pSAIEF0dGFjaGluZyBwYWNrYWdlcyDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIAgdGlkeXZlcnNlIDEuMy4wIOKUgOKUgFxu4pyTIGdncGxvdDIgMy4zLjIgICAgIOKckyBwdXJyciAgIDAuMy40XG7inJMgdGliYmxlICAzLjAuNCAgICAg4pyTIGRwbHlyICAgMS4wLjJcbuKckyB0aWR5ciAgIDEuMS4yICAgICDinJMgc3RyaW5nciAxLjQuMFxu4pyTIHJlYWRyICAgMS40LjAgICAgIOKckyBmb3JjYXRzIDAuNS4wXG5wYWNrYWdlIOKAmGdncGxvdDLigJkgd2FzIGJ1aWx0IHVuZGVyIFIgdmVyc2lvbiAzLjYuMnBhY2thZ2Ug4oCYdGliYmxl4oCZIHdhcyBidWlsdCB1bmRlciBSIHZlcnNpb24gMy42LjJwYWNrYWdlIOKAmHRpZHly4oCZIHdhcyBidWlsdCB1bmRlciBSIHZlcnNpb24gMy42LjJwYWNrYWdlIOKAmHJlYWRy4oCZIHdhcyBidWlsdCB1bmRlciBSIHZlcnNpb24gMy42LjJwYWNrYWdlIOKAmHB1cnJy4oCZIHdhcyBidWlsdCB1bmRlciBSIHZlcnNpb24gMy42LjJwYWNrYWdlIOKAmGRwbHly4oCZIHdhcyBidWlsdCB1bmRlciBSIHZlcnNpb24gMy42LjLilIDilIAgQ29uZmxpY3RzIOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgCB0aWR5dmVyc2VfY29uZmxpY3RzKCkg4pSA4pSAXG54IGRwbHlyOjpmaWx0ZXIoKSBtYXNrcyBzdGF0czo6ZmlsdGVyKClcbnggZHBseXI6OmxhZygpICAgIG1hc2tzIHN0YXRzOjpsYWcoKVxuIn0= -->
+<pre><code>Registered S3 methods overwritten by &#39;dbplyr&#39;:
+  method         from
+  print.tbl_lazy     
+  print.tbl_sql      
+── Attaching packages ──────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
+✓ ggplot2 3.3.2     ✓ purrr   0.3.4
+✓ tibble  3.0.4     ✓ dplyr   1.0.2
+✓ tidyr   1.1.2     ✓ stringr 1.4.0
+✓ readr   1.4.0     ✓ forcats 0.5.0
+package ‘ggplot2’ was built under R version 3.6.2package ‘tibble’ was built under R version 3.6.2package ‘tidyr’ was built under R version 3.6.2package ‘readr’ was built under R version 3.6.2package ‘purrr’ was built under R version 3.6.2package ‘dplyr’ was built under R version 3.6.2── Conflicts ─────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+x dplyr::filter() masks stats::filter()
+x dplyr::lag()    masks stats::lag()</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShqYW5pdG9yKVxuYGBgIn0= -->
+<pre class="r"><code>library(janitor)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoicGFja2FnZSDigJhqYW5pdG9y4oCZIHdhcyBidWlsdCB1bmRlciBSIHZlcnNpb24gMy42LjJcbkF0dGFjaGluZyBwYWNrYWdlOiDigJhqYW5pdG9y4oCZXG5cblRoZSBmb2xsb3dpbmcgb2JqZWN0cyBhcmUgbWFza2VkIGZyb20g4oCYcGFja2FnZTpzdGF0c+KAmTpcblxuICAgIGNoaXNxLnRlc3QsIGZpc2hlci50ZXN0XG4ifQ== -->
+<pre><code>package ‘janitor’ was built under R version 3.6.2
+Attaching package: ‘janitor’
+
+The following objects are masked from ‘package:stats’:
+
+    chisq.test, fisher.test</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ3JlZW5fYmx1ZV9jb21wX2RhdGEgPC0gcmVhZF9jc3YoXCJkYXRhL2NvbXBsZXRlX2Rpc3RfYmx1ZV9ncmVlbi5jc3ZcIikgJT4lIGNsZWFuX25hbWVzKClcbmBgYCJ9 -->
+<pre class="r"><code>green_blue_comp_data &lt;- read_csv(&quot;data/complete_dist_blue_green.csv&quot;) %&gt;% clean_names()</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG7ilIDilIAgQ29sdW1uIHNwZWNpZmljYXRpb24g4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAXG5jb2xzKFxuICBGZWF0dXJlQ29kZSA9IGNvbF9jaGFyYWN0ZXIoKSxcbiAgRGF0ZUNvZGUgPSBjb2xfZG91YmxlKCksXG4gIE1lYXN1cmVtZW50ID0gY29sX2NoYXJhY3RlcigpLFxuICBVbml0cyA9IGNvbF9jaGFyYWN0ZXIoKSxcbiAgVmFsdWUgPSBjb2xfZG91YmxlKCksXG4gIGBEaXN0YW5jZSB0byBOZWFyZXN0IEdyZWVuIG9yIEJsdWUgU3BhY2VgID0gY29sX2NoYXJhY3RlcigpLFxuICBBZ2UgPSBjb2xfY2hhcmFjdGVyKCksXG4gIEdlbmRlciA9IGNvbF9jaGFyYWN0ZXIoKSxcbiAgYFVyYmFuIFJ1cmFsIENsYXNzaWZpY2F0aW9uYCA9IGNvbF9jaGFyYWN0ZXIoKSxcbiAgYFNJTUQgcXVpbnRpbGVzYCA9IGNvbF9jaGFyYWN0ZXIoKSxcbiAgYFR5cGUgT2YgVGVudXJlYCA9IGNvbF9jaGFyYWN0ZXIoKSxcbiAgYEhvdXNlaG9sZCBUeXBlYCA9IGNvbF9jaGFyYWN0ZXIoKSxcbiAgRXRobmljaXR5ID0gY29sX2NoYXJhY3RlcigpXG4pXG4ifQ== -->
+<pre><code>
+── Column specification ─────────────────────────────────────────────────────────────────────────────────
+cols(
+  FeatureCode = col_character(),
+  DateCode = col_double(),
+  Measurement = col_character(),
+  Units = col_character(),
+  Value = col_double(),
+  `Distance to Nearest Green or Blue Space` = col_character(),
+  Age = col_character(),
+  Gender = col_character(),
+  `Urban Rural Classification` = col_character(),
+  `SIMD quintiles` = col_character(),
+  `Type Of Tenure` = col_character(),
+  `Household Type` = col_character(),
+  Ethnicity = col_character()
+)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubmVpZ2hib3VyaG9vZF9jb21wX2RhdGEgPC0gcmVhZF9jc3YoXCJkYXRhL2NvbXBsZXRlX25laWdoYm91cmhvb2RfcmF0aW5nLmNzdlwiKSAlPiUgY2xlYW5fbmFtZXMoKVxuYGBgIn0= -->
+<pre class="r"><code>neighbourhood_comp_data &lt;- read_csv(&quot;data/complete_neighbourhood_rating.csv&quot;) %&gt;% clean_names()</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG7ilIDilIAgQ29sdW1uIHNwZWNpZmljYXRpb24g4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAXG5jb2xzKFxuICBGZWF0dXJlQ29kZSA9IGNvbF9jaGFyYWN0ZXIoKSxcbiAgRGF0ZUNvZGUgPSBjb2xfZG91YmxlKCksXG4gIE1lYXN1cmVtZW50ID0gY29sX2NoYXJhY3RlcigpLFxuICBVbml0cyA9IGNvbF9jaGFyYWN0ZXIoKSxcbiAgVmFsdWUgPSBjb2xfZG91YmxlKCksXG4gIGBOZWlnaGJvdXJob29kIHJhdGluZ2AgPSBjb2xfY2hhcmFjdGVyKCksXG4gIEdlbmRlciA9IGNvbF9jaGFyYWN0ZXIoKSxcbiAgYFVyYmFuIFJ1cmFsIENsYXNzaWZpY2F0aW9uYCA9IGNvbF9jaGFyYWN0ZXIoKSxcbiAgYFNJTUQgcXVpbnRpbGVzYCA9IGNvbF9jaGFyYWN0ZXIoKSxcbiAgYFR5cGUgT2YgVGVudXJlYCA9IGNvbF9jaGFyYWN0ZXIoKSxcbiAgYEhvdXNlaG9sZCBUeXBlYCA9IGNvbF9jaGFyYWN0ZXIoKSxcbiAgRXRobmljaXR5ID0gY29sX2NoYXJhY3RlcigpLFxuICBgV2Fsa2luZyBkaXN0YW5jZSB0byBuZWFyZXN0IGdyZWVuc3BhY2VgID0gY29sX2NoYXJhY3RlcigpXG4pXG4ifQ== -->
+<pre><code>
+── Column specification ─────────────────────────────────────────────────────────────────────────────────
+cols(
+  FeatureCode = col_character(),
+  DateCode = col_double(),
+  Measurement = col_character(),
+  Units = col_character(),
+  Value = col_double(),
+  `Neighbourhood rating` = col_character(),
+  Gender = col_character(),
+  `Urban Rural Classification` = col_character(),
+  `SIMD quintiles` = col_character(),
+  `Type Of Tenure` = col_character(),
+  `Household Type` = col_character(),
+  Ethnicity = col_character(),
+  `Walking distance to nearest greenspace` = col_character()
+)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tbXVuaXR5X2NvbXBfZGF0YSA8LSByZWFkX2NzdihcImRhdGEvY29tcGxldGVfY29tbXVuaXR5X2JlbG9uZ2luZy5jc3ZcIikgJT4lIGNsZWFuX25hbWVzKClcbmBgYCJ9 -->
+<pre class="r"><code>community_comp_data &lt;- read_csv(&quot;data/complete_community_belonging.csv&quot;) %&gt;% clean_names()</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG7ilIDilIAgQ29sdW1uIHNwZWNpZmljYXRpb24g4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAXG5jb2xzKFxuICBGZWF0dXJlQ29kZSA9IGNvbF9jaGFyYWN0ZXIoKSxcbiAgRGF0ZUNvZGUgPSBjb2xfZG91YmxlKCksXG4gIE1lYXN1cmVtZW50ID0gY29sX2NoYXJhY3RlcigpLFxuICBVbml0cyA9IGNvbF9jaGFyYWN0ZXIoKSxcbiAgVmFsdWUgPSBjb2xfZG91YmxlKCksXG4gIGBDb21tdW5pdHkgYmVsb25naW5nYCA9IGNvbF9jaGFyYWN0ZXIoKSxcbiAgR2VuZGVyID0gY29sX2NoYXJhY3RlcigpLFxuICBgVXJiYW4gUnVyYWwgQ2xhc3NpZmljYXRpb25gID0gY29sX2NoYXJhY3RlcigpLFxuICBgU0lNRCBxdWludGlsZXNgID0gY29sX2NoYXJhY3RlcigpLFxuICBgVHlwZSBPZiBUZW51cmVgID0gY29sX2NoYXJhY3RlcigpLFxuICBgSG91c2Vob2xkIFR5cGVgID0gY29sX2NoYXJhY3RlcigpLFxuICBFdGhuaWNpdHkgPSBjb2xfY2hhcmFjdGVyKCksXG4gIGBXYWxraW5nIGRpc3RhbmNlIHRvIG5lYXJlc3QgZ3JlZW5zcGFjZWAgPSBjb2xfY2hhcmFjdGVyKClcbilcbiJ9 -->
+<pre><code>
+── Column specification ─────────────────────────────────────────────────────────────────────────────────
+cols(
+  FeatureCode = col_character(),
+  DateCode = col_double(),
+  Measurement = col_character(),
+  Units = col_character(),
+  Value = col_double(),
+  `Community belonging` = col_character(),
+  Gender = col_character(),
+  `Urban Rural Classification` = col_character(),
+  `SIMD quintiles` = col_character(),
+  `Type Of Tenure` = col_character(),
+  `Household Type` = col_character(),
+  Ethnicity = col_character(),
+  `Walking distance to nearest greenspace` = col_character()
+)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>I really want to work out if we can get all these bound together in one big dataset.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ3JlZW5fYmx1ZV9jb21wX2RhdGEgJT4lIFxuICBnbGltcHNlKClcbmBgYCJ9 -->
+<pre class="r"><code>green_blue_comp_data %&gt;% 
+  glimpse()</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUm93czogMzgsNDUxXG5Db2x1bW5zOiAxM1xuJCBmZWF0dXJlX2NvZGUgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGNocj4gXCJTMTIwMDAwMzBcIiwgXCJTMTIwMDAwNTBcIiwgXCJTOTIwMDAwMDNcIiwgXCJTMTIwMDAwMzRcIiwgXCJT4oCmXG4kIGRhdGVfY29kZSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGJsPiAyMDEzLCAyMDE5LCAyMDE1LCAyMDEzLCAyMDE3LCAyMDE0LCAyMDE4LCAyMDE2LCAyMDE0LCDigKZcbiQgbWVhc3VyZW1lbnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxjaHI+IFwiUGVyY2VudFwiLCBcIlBlcmNlbnRcIiwgXCI5NSUgVXBwZXIgQ29uZmlkZW5jZSBMaW1pdCwgUGVy4oCmXG4kIHVuaXRzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8Y2hyPiBcIlBlcmNlbnQgT2YgQWR1bHRzXCIsIFwiUGVyY2VudCBPZiBBZHVsdHNcIiwgXCJQZXJjZW50IE9mIOKAplxuJCB2YWx1ZSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRibD4gMjAuMCwgMjEuMCwgMTkuMCwgMi4wLCAxNC4wLCAyLjgsIDEwLjgsIDguNywgNzkuNCwgNjEu4oCmXG4kIGRpc3RhbmNlX3RvX25lYXJlc3RfZ3JlZW5fb3JfYmx1ZV9zcGFjZSA8Y2hyPiBcIldpdGhpbiBhIDYtMTAgbWludXRlIHdhbGtcIiwgXCJBbiAxMSBtaW51dGUgd2FsayBvciBtb3LigKZcbiQgYWdlICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxjaHI+IFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCLigKZcbiQgZ2VuZGVyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxjaHI+IFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCLigKZcbiQgdXJiYW5fcnVyYWxfY2xhc3NpZmljYXRpb24gICAgICAgICAgICAgIDxjaHI+IFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCLigKZcbiQgc2ltZF9xdWludGlsZXMgICAgICAgICAgICAgICAgICAgICAgICAgIDxjaHI+IFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCLigKZcbiQgdHlwZV9vZl90ZW51cmUgICAgICAgICAgICAgICAgICAgICAgICAgIDxjaHI+IFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCLigKZcbiQgaG91c2Vob2xkX3R5cGUgICAgICAgICAgICAgICAgICAgICAgICAgIDxjaHI+IFwiV2l0aCBDaGlsZHJlblwiLCBcIldpdGggQ2hpbGRyZW5cIiwgXCJXaXRoIENoaWxkcmVuXCIsIFwiV2nigKZcbiQgZXRobmljaXR5ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxjaHI+IFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCLigKZcbiJ9 -->
+<pre><code>Rows: 38,451
+Columns: 13
+$ feature_code                            &lt;chr&gt; &quot;S12000030&quot;, &quot;S12000050&quot;, &quot;S92000003&quot;, &quot;S12000034&quot;, &quot;S…
+$ date_code                               &lt;dbl&gt; 2013, 2019, 2015, 2013, 2017, 2014, 2018, 2016, 2014, …
+$ measurement                             &lt;chr&gt; &quot;Percent&quot;, &quot;Percent&quot;, &quot;95% Upper Confidence Limit, Per…
+$ units                                   &lt;chr&gt; &quot;Percent Of Adults&quot;, &quot;Percent Of Adults&quot;, &quot;Percent Of …
+$ value                                   &lt;dbl&gt; 20.0, 21.0, 19.0, 2.0, 14.0, 2.8, 10.8, 8.7, 79.4, 61.…
+$ distance_to_nearest_green_or_blue_space &lt;chr&gt; &quot;Within a 6-10 minute walk&quot;, &quot;An 11 minute walk or mor…
+$ age                                     &lt;chr&gt; &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;…
+$ gender                                  &lt;chr&gt; &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;…
+$ urban_rural_classification              &lt;chr&gt; &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;…
+$ simd_quintiles                          &lt;chr&gt; &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;…
+$ type_of_tenure                          &lt;chr&gt; &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;…
+$ household_type                          &lt;chr&gt; &quot;With Children&quot;, &quot;With Children&quot;, &quot;With Children&quot;, &quot;Wi…
+$ ethnicity                               &lt;chr&gt; &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;…</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubmVpZ2hib3VyaG9vZF9jb21wX2RhdGEgJT4lIFxuICBnbGltcHNlKClcbmBgYCJ9 -->
+<pre class="r"><code>neighbourhood_comp_data %&gt;% 
+  glimpse()</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUm93czogMzgsMDU1XG5Db2x1bW5zOiAxM1xuJCBmZWF0dXJlX2NvZGUgICAgICAgICAgICAgICAgICAgICAgICAgICA8Y2hyPiBcIlMxMjAwMDAwOFwiLCBcIlMxMjAwMDAyNlwiLCBcIlMxMjAwMDAyMFwiLCBcIlMxMjAwMDAxMFwiLCBcIlMx4oCmXG4kIGRhdGVfY29kZSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkYmw+IDIwMTQsIDIwMTQsIDIwMTQsIDIwMTcsIDIwMTcsIDIwMTksIDIwMTcsIDIwMTcsIDIwMTQsIDLigKZcbiQgbWVhc3VyZW1lbnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGNocj4gXCI5NSUgVXBwZXIgQ29uZmlkZW5jZSBMaW1pdCwgUGVyY2VudFwiLCBcIjk1JSBVcHBlciBDb25maeKAplxuJCB1bml0cyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8Y2hyPiBcIlBlcmNlbnQgT2YgQWR1bHRzXCIsIFwiUGVyY2VudCBPZiBBZHVsdHNcIiwgXCJQZXJjZW50IE9mIEHigKZcbiQgdmFsdWUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRibD4gNjAuNywgNTEuOCwgMC4wLCA2NC4wLCA1NS40LCA4OS45LCA3MS42LCA4OS4wLCAxLjAsIDczLuKAplxuJCBuZWlnaGJvdXJob29kX3JhdGluZyAgICAgICAgICAgICAgICAgICA8Y2hyPiBcIlZlcnkgZ29vZFwiLCBcIkZhaXJseSBnb29kXCIsIFwiTm8gb3BpbmlvblwiLCBcIlZlcnkgZ29vZFwiLCDigKZcbiQgZ2VuZGVyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGNocj4gXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIizigKZcbiQgdXJiYW5fcnVyYWxfY2xhc3NpZmljYXRpb24gICAgICAgICAgICAgPGNocj4gXCJVcmJhblwiLCBcIlVyYmFuXCIsIFwiVXJiYW5cIiwgXCJVcmJhblwiLCBcIlVyYmFuXCIsIFwiVXJiYW5cIiwgXCLigKZcbiQgc2ltZF9xdWludGlsZXMgICAgICAgICAgICAgICAgICAgICAgICAgPGNocj4gXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIizigKZcbiQgdHlwZV9vZl90ZW51cmUgICAgICAgICAgICAgICAgICAgICAgICAgPGNocj4gXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIizigKZcbiQgaG91c2Vob2xkX3R5cGUgICAgICAgICAgICAgICAgICAgICAgICAgPGNocj4gXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIizigKZcbiQgZXRobmljaXR5ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGNocj4gXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIizigKZcbiQgd2Fsa2luZ19kaXN0YW5jZV90b19uZWFyZXN0X2dyZWVuc3BhY2UgPGNocj4gXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIizigKZcbiJ9 -->
+<pre><code>Rows: 38,055
+Columns: 13
+$ feature_code                           &lt;chr&gt; &quot;S12000008&quot;, &quot;S12000026&quot;, &quot;S12000020&quot;, &quot;S12000010&quot;, &quot;S1…
+$ date_code                              &lt;dbl&gt; 2014, 2014, 2014, 2017, 2017, 2019, 2017, 2017, 2014, 2…
+$ measurement                            &lt;chr&gt; &quot;95% Upper Confidence Limit, Percent&quot;, &quot;95% Upper Confi…
+$ units                                  &lt;chr&gt; &quot;Percent Of Adults&quot;, &quot;Percent Of Adults&quot;, &quot;Percent Of A…
+$ value                                  &lt;dbl&gt; 60.7, 51.8, 0.0, 64.0, 55.4, 89.9, 71.6, 89.0, 1.0, 73.…
+$ neighbourhood_rating                   &lt;chr&gt; &quot;Very good&quot;, &quot;Fairly good&quot;, &quot;No opinion&quot;, &quot;Very good&quot;, …
+$ gender                                 &lt;chr&gt; &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;,…
+$ urban_rural_classification             &lt;chr&gt; &quot;Urban&quot;, &quot;Urban&quot;, &quot;Urban&quot;, &quot;Urban&quot;, &quot;Urban&quot;, &quot;Urban&quot;, &quot;…
+$ simd_quintiles                         &lt;chr&gt; &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;,…
+$ type_of_tenure                         &lt;chr&gt; &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;,…
+$ household_type                         &lt;chr&gt; &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;,…
+$ ethnicity                              &lt;chr&gt; &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;,…
+$ walking_distance_to_nearest_greenspace &lt;chr&gt; &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;,…</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tbXVuaXR5X2NvbXBfZGF0YSAlPiUgXG4gIGdsaW1wc2UoKVxuYGBgIn0= -->
+<pre class="r"><code>community_comp_data %&gt;% 
+  glimpse()</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiUm93czogNDMsNjExXG5Db2x1bW5zOiAxM1xuJCBmZWF0dXJlX2NvZGUgICAgICAgICAgICAgICAgICAgICAgICAgICA8Y2hyPiBcIlMxMjAwMDAzMFwiLCBcIlMxMjAwMDAzM1wiLCBcIlMxMjAwMDAyOVwiLCBcIlMxMjAwMDAyOVwiLCBcIlMx4oCmXG4kIGRhdGVfY29kZSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkYmw+IDIwMTQsIDIwMTQsIDIwMTQsIDIwMTgsIDIwMTUsIDIwMTQsIDIwMTksIDIwMTUsIDIwMTksIDLigKZcbiQgbWVhc3VyZW1lbnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGNocj4gXCJQZXJjZW50XCIsIFwiOTUlIFVwcGVyIENvbmZpZGVuY2UgTGltaXQsIFBlcmNlbnRcIiwgXCI5NSUg4oCmXG4kIHVuaXRzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxjaHI+IFwiUGVyY2VudCBPZiBBZHVsdHNcIiwgXCJQZXJjZW50IE9mIEFkdWx0c1wiLCBcIlBlcmNlbnQgT2YgQeKAplxuJCB2YWx1ZSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGJsPiA0NC4wLCAzNS43LCAzOS4zLCAyLjAsIDAuMCwgNTAuMiwgOC4wLCAzMy4zLCA3LjAsIDcuMCwg4oCmXG4kIGNvbW11bml0eV9iZWxvbmdpbmcgICAgICAgICAgICAgICAgICAgIDxjaHI+IFwiVmVyeSBzdHJvbmdseVwiLCBcIlZlcnkgc3Ryb25nbHlcIiwgXCJWZXJ5IHN0cm9uZ2x5XCIsIFwiRG9u4oCmXG4kIGdlbmRlciAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxjaHI+IFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCIsIFwiQWxsXCIsIFwiTWFsZVwiLCBcIk1hbGXigKZcbiQgdXJiYW5fcnVyYWxfY2xhc3NpZmljYXRpb24gICAgICAgICAgICAgPGNocj4gXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIizigKZcbiQgc2ltZF9xdWludGlsZXMgICAgICAgICAgICAgICAgICAgICAgICAgPGNocj4gXCJBbGxcIiwgXCJBbGxcIiwgXCJBbGxcIiwgXCI4MCUgbGVhc3QgZGVwcml2ZWRcIiwgXCJBbGxcIiwgXCJBbGxcIuKAplxuJCB0eXBlX29mX3RlbnVyZSAgICAgICAgICAgICAgICAgICAgICAgICA8Y2hyPiBcIkFsbFwiLCBcIkFsbFwiLCBcIkFsbFwiLCBcIkFsbFwiLCBcIkFsbFwiLCBcIkFsbFwiLCBcIkFsbFwiLCBcIkFsbFwiLOKAplxuJCBob3VzZWhvbGRfdHlwZSAgICAgICAgICAgICAgICAgICAgICAgICA8Y2hyPiBcIkFsbFwiLCBcIkFsbFwiLCBcIkFsbFwiLCBcIkFsbFwiLCBcIkFsbFwiLCBcIkFsbFwiLCBcIkFsbFwiLCBcIkFsbFwiLOKAplxuJCBldGhuaWNpdHkgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8Y2hyPiBcIkFsbFwiLCBcIkFsbFwiLCBcIkFsbFwiLCBcIkFsbFwiLCBcIkFsbFwiLCBcIkFsbFwiLCBcIkFsbFwiLCBcIkFsbFwiLOKAplxuJCB3YWxraW5nX2Rpc3RhbmNlX3RvX25lYXJlc3RfZ3JlZW5zcGFjZSA8Y2hyPiBcIkFsbFwiLCBcIkFsbFwiLCBcIkFsbFwiLCBcIkFsbFwiLCBcIkFsbFwiLCBcIkFsbFwiLCBcIkFsbFwiLCBcIkFsbFwiLOKAplxuIn0= -->
+<pre><code>Rows: 43,611
+Columns: 13
+$ feature_code                           &lt;chr&gt; &quot;S12000030&quot;, &quot;S12000033&quot;, &quot;S12000029&quot;, &quot;S12000029&quot;, &quot;S1…
+$ date_code                              &lt;dbl&gt; 2014, 2014, 2014, 2018, 2015, 2014, 2019, 2015, 2019, 2…
+$ measurement                            &lt;chr&gt; &quot;Percent&quot;, &quot;95% Upper Confidence Limit, Percent&quot;, &quot;95% …
+$ units                                  &lt;chr&gt; &quot;Percent Of Adults&quot;, &quot;Percent Of Adults&quot;, &quot;Percent Of A…
+$ value                                  &lt;dbl&gt; 44.0, 35.7, 39.3, 2.0, 0.0, 50.2, 8.0, 33.3, 7.0, 7.0, …
+$ community_belonging                    &lt;chr&gt; &quot;Very strongly&quot;, &quot;Very strongly&quot;, &quot;Very strongly&quot;, &quot;Don…
+$ gender                                 &lt;chr&gt; &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;Male&quot;, &quot;Male…
+$ urban_rural_classification             &lt;chr&gt; &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;,…
+$ simd_quintiles                         &lt;chr&gt; &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;80% least deprived&quot;, &quot;All&quot;, &quot;All&quot;…
+$ type_of_tenure                         &lt;chr&gt; &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;,…
+$ household_type                         &lt;chr&gt; &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;,…
+$ ethnicity                              &lt;chr&gt; &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;,…
+$ walking_distance_to_nearest_greenspace &lt;chr&gt; &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;, &quot;All&quot;,…</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29kZXNfZ2IgPC1cbmdyZWVuX2JsdWVfY29tcF9kYXRhICU+JSBcbiAgZGlzdGluY3QoZmVhdHVyZV9jb2RlKVxuXG5jb2Rlc19nYlxuYGBgIn0= -->
+<pre class="r"><code>codes_gb &lt;-
+green_blue_comp_data %&gt;% 
+  distinct(feature_code)
+
+codes_gb</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6MzMsIm5jb2wiOjF9LCJyZGYiOiJINHNJQUFBQUFBQUFBMldUN1U2RE1CU0dEMnpNUVB4S3ZBSXZBRUtCemUyLzhRS21KdnRuS25SS3hMTHdFZjNwblhvbnd3T1dMSGtoYVdtZm52T2VqN1RiKzEzczdUd2ltdEZzd2JQRFMzS2VueDc4TmRIYzVvMUZjM0w3L3pjZjN3eUE2SnJIclRsd0gwVVU4aGVIQUpZbnNCbEFHS05MZ21CaXNRUWdCSUFJUWJ4Qml6V0FKRUp3aHdBMUVveVNZTFVSYW9TWWVvU2lNU1ltMEVKTUdyVENQQ1lOd2hhR0dDVkNEVEd4UUkxa2tpbFdLeWI5UUJDdTRFWTVXbjZxMnR5bUVaN3ZsV3phU3Iya1phYkF3YTNLcjJCMHV1QmgvL0RVZGQwdktxZUZyRkhaeTJRamczM0Yvcnc3Z3N0WmVXanlVck9UM1Y5eUI1eXRDc0JWcS90TU1qOTliL1dISC9jQnpPTWdrNTAxUEpMVDJ2b1BhWGRHeWpGU0M2WGZjcTNHM0F2NXFncXp1ZVNLaDRLRFE1WHJacXlFYVIwMFpTTkhPeTh0aTVFTXRkSHhENEVKUHJuYkF3QUEifQ== -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["feature_code"],"name":[1],"type":["chr"],"align":["left"]}],"data":[{"1":"S12000030"},{"1":"S12000050"},{"1":"S92000003"},{"1":"S12000034"},{"1":"S12000033"},{"1":"S12000035"},{"1":"S12000011"},{"1":"S12000021"},{"1":"S12000039"},{"1":"S12000028"},{"1":"S12000042"},{"1":"S12000047"},{"1":"S12000049"},{"1":"S12000041"},{"1":"S12000040"},{"1":"S12000027"},{"1":"S12000005"},{"1":"S12000029"},{"1":"S12000038"},{"1":"S12000019"},{"1":"S12000014"},{"1":"S12000036"},{"1":"S12000045"},{"1":"S12000013"},{"1":"S12000008"},{"1":"S12000026"},{"1":"S12000018"},{"1":"S12000023"},{"1":"S12000048"},{"1":"S12000017"},{"1":"S12000010"},{"1":"S12000020"},{"1":"S12000006"}],"options":{"columns":{"min":{},"max":[10],"total":[1]},"rows":{"min":[10],"max":[10],"total":[33]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5ncmVlbl9ibHVlX2NvbXBfZGF0YSAlPiUgXG4gIGRpc3RpbmN0KHVuaXRzKVxuYGBgIn0= -->
+<pre class="r"><code>
+green_blue_comp_data %&gt;% 
+  distinct(units)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6MSwibmNvbCI6MX0sInJkZiI6Ikg0c0lBQUFBQUFBQUEyVlBTd3JDTUJDZFZxTlk4SWNYOEFMdHhvMWJRZHdxb3VBMnRsR0xjU0pwaWk0OXVUb3BDVWdNekdSKzc4Mjg3Zkl3U3c0SkFMU2cxU0hQS0FTMjM2M1NPVUE3cGlTQ052VHMvNlQycENrQWpINGE0NDNRdVVBelhaK21pNktXcGdxUURQbE5WQUdLMVZqK1RmYTBlbVIrdWs4V3Y4aDk2SVdVdWVSVlNKa1UzUERzcEFsUDJUdUFkTlhkbEFvSkZGc1ZMQUJIT2lnTWE3U1hGR2wrcWZHYXp1d0NweDdjZFpHem45aXVqRCtPaWptcWpzQnppY0xmTHZsUlNKY01TSEVqT0x2ckVvMVhRdFVxTThwd1A1ZmtTdnBLb3czZVgzQWx0THk4QVFBQSJ9 -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["units"],"name":[1],"type":["chr"],"align":["left"]}],"data":[{"1":"Percent Of Adults"}],"options":{"columns":{"min":{},"max":[10],"total":[1]},"rows":{"min":[10],"max":[10],"total":[1]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29kZXNfbmVpZ2ggPC1cbm5laWdoYm91cmhvb2RfY29tcF9kYXRhICU+JSBcbiAgZGlzdGluY3QoZmVhdHVyZV9jb2RlKVxuXG5jb2Rlc19uZWlnaFxuYGBgIn0= -->
+<pre class="r"><code>codes_neigh &lt;-
+neighbourhood_comp_data %&gt;% 
+  distinct(feature_code)
+
+codes_neigh</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6MzMsIm5jb2wiOjF9LCJyZGYiOiJINHNJQUFBQUFBQUFBMldUN1U2RE1CU0dEMnpNUVB4S3ZBSXZBRUlwMCsyLzhRS21KdnRuS25SS3hMTHdFZjNwblhvbnc4TGFMSGtoS2JSUHovdjJuTkp1SHJZODJBWkVOS1BaUXI4OTNTWHY1Zmt4WEJITlhUMXdhRTcrOFAzUjB6Y2pJTHJXN2RaTStFOHNpWWRuQlNDNVF4QURZQWo0R2lVY0pRajRKSUtoQjVxeWU0eEFrRTRTdzFvNFJzUVl3VkkwWFNMQXhEaEsyR1Evc0xqNFpMbytBdHlQRkl2amt6end6Nlc0Q3NNSVBwRWtBSmE0UVFtZUtFK0pMOW1ZMDJUaCtVNkt0cXZsYTFibEVnUitYWDFIVm5TaG0vdXJYMzNmLzZGelZvb0duWU5jdENMYTFWcXZSd2VRbkZYN3RxaVVGcm5ESWZkQTdOUUFyam8xWkpLSDJVZW5Qc04wV01CY0RqTFpPZU1sT2ZXZDQ1SnViNnc4WTdXUTZyMVEwdVplaWpkWm1zR2xybmdzT05yWGhXcHRKWm8yVVZ1MXdzWUZXVlZhTXRaR2gzL3RTbjZTMndNQUFBPT0ifQ== -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["feature_code"],"name":[1],"type":["chr"],"align":["left"]}],"data":[{"1":"S12000008"},{"1":"S12000026"},{"1":"S12000020"},{"1":"S12000010"},{"1":"S12000039"},{"1":"S12000023"},{"1":"S12000013"},{"1":"S12000033"},{"1":"S12000011"},{"1":"S12000029"},{"1":"S12000017"},{"1":"S12000027"},{"1":"S12000040"},{"1":"S12000036"},{"1":"S12000030"},{"1":"S12000006"},{"1":"S12000014"},{"1":"S12000045"},{"1":"S12000049"},{"1":"S12000034"},{"1":"S12000019"},{"1":"S12000021"},{"1":"S12000005"},{"1":"S92000003"},{"1":"S12000047"},{"1":"S12000035"},{"1":"S12000048"},{"1":"S12000041"},{"1":"S12000018"},{"1":"S12000038"},{"1":"S12000042"},{"1":"S12000050"},{"1":"S12000028"}],"options":{"columns":{"min":{},"max":[10],"total":[1]},"rows":{"min":[10],"max":[10],"total":[33]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5uZWlnaGJvdXJob29kX2NvbXBfZGF0YSAlPiUgXG4gIGRpc3RpbmN0KHVuaXRzKVxuYGBgIn0= -->
+<pre class="r"><code>
+neighbourhood_comp_data %&gt;% 
+  distinct(units)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6MSwibmNvbCI6MX0sInJkZiI6Ikg0c0lBQUFBQUFBQUEyVlBUWXZDTUJDZFZ1UFN3dnJCL29IK2dmYWloNzB1TEY0VlVmQWEyM1MzR0NlU3B1alJYNjVPU2dJU0F6T1pyL2RtM3VaM1AwLzNLUUFNWURBaXp5Z0V0dHN1ODIrQVlVeEpCRU5JN0grbDlsZGZBSmkrTkdacm9VdUJKbHZWMlUvVlNkTUdTSWI4Sk5vQXhUcHMzaVlUclM2Rm4vNGtpMi9rSHZSQ3lsTHlOcVJNSzI1NFVXdkNVM1lQSUIvcWJCcUZCSXF0Q2hhQUl4MFVKaDNhUzZxOC9PL3dtQy9zQXFjZTNIV1JzNWZZcm93ZmpvbzVxcEhBdndhRnYxM3lnNUF1R1pQaVhuQngxZzBhcjRTcWJXR1U0WDR1TFpYMGxWNGIzSi9melY5UHZBRUFBQT09In0= -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["units"],"name":[1],"type":["chr"],"align":["left"]}],"data":[{"1":"Percent Of Adults"}],"options":{"columns":{"min":{},"max":[10],"total":[1]},"rows":{"min":[10],"max":[10],"total":[1]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29kZXNfY29tbXVuaXR5IDwtXG5jb21tdW5pdHlfY29tcF9kYXRhICU+JSBcbiAgZGlzdGluY3QoZmVhdHVyZV9jb2RlKVxuXG5jb21tdW5pdHlfY29tcF9kYXRhICU+JSBcbiAgZGlzdGluY3QodW5pdHMpXG5gYGAifQ== -->
+<pre class="r"><code>codes_community &lt;-
+community_comp_data %&gt;% 
+  distinct(feature_code)
+
+community_comp_data %&gt;% 
+  distinct(units)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6MSwibmNvbCI6MX0sInJkZiI6Ikg0c0lBQUFBQUFBQUEyVlAyNHJDTUJDZFZ1UFN3bnBoZjZBLzBMNklzSzhMaTYrS0tQZ2EyM1MzR0NlU3B1aWpYNjVPU2dJU0F6T1oyemt6Wi9PN242ZjdGQUFHTUJpUlp4UUMyMjJYK1RmQU1LWWtnaUVrOXI5Uys2c3ZBRXhmR3JPMTBLVkFrNjNxN0tmcXBHa0RKRU4rRW0yQVloMDJiNU9KVnBmQ1QzK1N4VGR5RDNvaFpTbDVHMUttRlRlOHFEWGhLYnNIa0E5MU5vMUNBc1ZXQlF2QWtRNEtrdzd0SlZWZS9uZDR6QmQyZ1ZNUDdyckkyVXRzVjhZUFI4VWMxVWpnWDRQQzN5NzVRVWlYakVseEw3ZzQ2d2FOVjBMVnRqREtjRCtYbGtyNlNxOE43ay85N3dFc3ZBRUFBQT09In0= -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["units"],"name":[1],"type":["chr"],"align":["left"]}],"data":[{"1":"Percent Of Adults"}],"options":{"columns":{"min":{},"max":[10],"total":[1]},"rows":{"min":[10],"max":[10],"total":[1]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Cool, so all three datasets seem to have the same amount of variables, altough there will be a slight difference in the measure of each. The thing I want to get checking is that feature codes refer to regions or, more likely, council areas. I also just want to double check that these are all the same in each dataset. I’m pretty sure we actually have the codes down for this in the previous report which would be super handy.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYWxsX2VxdWFsKGNvZGVzX2NvbW11bml0eSwgY29kZXNfZ2IsIGNvZGVzX25laWdoKVxuYGBgIn0= -->
+<pre class="r"><code>all_equal(codes_community, codes_gb, codes_neigh)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFRSVUVcbiJ9 -->
+<pre><code>[1] TRUE</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Sweet, it looks like all the codes match which I’m hoping means we can just do a join on all these. Not sure whether to change the codes now or after. Think I might just do now so the join is a bit clearer for me, although I’m guessing it would be best practice to do it after.</p>
+<p>My mistake earlier, just realised those were NHS codes not council ones.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubG9jYWxfYXV0aG9yaXR5X2NvZGVzIDwtIHJlYWRfY3N2KFwiZGF0YS9Mb2NhbF9BdXRob3JpdHlfRGlzdHJpY3RzX0NvZGVzLmNzdlwiKSAlPiUgY2xlYW5fbmFtZXMoKVxuYGBgIn0= -->
+<pre class="r"><code>local_authority_codes &lt;- read_csv(&quot;data/Local_Authority_Districts_Codes.csv&quot;) %&gt;% clean_names()</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2NvdF9sb2NhbF9hdXRoX2NvZGVzIDwtXG5sb2NhbF9hdXRob3JpdHlfY29kZXMgJT4lIFxuICBmaWx0ZXIoc3RyX2RldGVjdChsYWQxOWNkLCBcIlMxMlwiKSlcbmBgYCJ9 -->
+<pre class="r"><code>scot_local_auth_codes &lt;-
+local_authority_codes %&gt;% 
+  filter(str_detect(lad19cd, &quot;S12&quot;))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKKipEZWZpbmluZyB0aGUgUXVlc3Rpb25zKioKClRoaXMgZG9jdW1lbnQgaXMgbWVhbnQgYXMgYSByZWZlcmVuY2UgcG9pbnQgZm9yIHF1ZXN0aW9ucyB0byBiZSBhbnN3ZXJlZCBkdXJpbmcgdGhlIHByb2plY3QuIEZvciB0aGUgZnVuZGFtZW50YWwgcXVlc3Rpb25zIGhpZ2hsaWdodGVkIGluIHRoZSBwcm9qZWN0IGJyaWVmLCB0aGVzZSBzaG91bGQgcmVtYWluIGNvbnNpc3RlbnQgZnJvbSB0aGUgYmVnaW5uaW5nIG9mIHRoZSBwcm9qZWN0IGFuZCBzaG91bGQgbm90IGJlIGVkaXRlZCB0byBhIHNpZ25pZmljYW50IGRlZ3JlZS4gSG93ZXZlciwgYXMgdGltZSBhbmQgaW5zaWdodHMgYWxsb3csIHN1cHBsZW1lbnRhcnkgcXVlc3Rpb25zIHRvIGJlIGFuc3dlcmVkIGNhbiBiZSBhZGRlZCBpbiBhZGRpdGlvbiB0byB0aGUgY29yZSA2LgoKKipUaGUgb3JpZ2luYWwgcXVlc3Rpb25zIHdpdGggZnVydGhlciBjb21tZW50IGFuZCBjbGFyaWZpY2F0aW9uKioKCldlIHdvdWxkIGxpa2UgdG8gdG8gaGVscCB1cyBnYWluIGluc2lnaHRzIGludG8gaG93IHBlb3BsZSBmZWVsIGFib3V0IHRoZWlyIGxvY2FsIGNvbW11bml0aWVzIGluIFNjb3RsYW5kLiBJbiBwYXJ0aWN1bGFyLCB3ZSBhcmUgaW50ZXJlc3RlZCBpbiB0aGUgcmVsYXRpb25zaGlwIGJldHdlZW4gZGlzdGFuY2UgdG8gb3V0ZG9vciBzcGFjZSwgYW5kIG5laWdoYm91cmhvb2QgcmF0aW5ncy4KCipBIGxvdCBvZiBpbmZvIHNob3VsZCBiZSBhYmxlIHRvIGJlIGdhcm5lcmVkIGZhaXJseSBzaW1wbHkgZnJvbSB0aGUgZGlzdGFuY2UgdG8gZ3JlZW4gb3IgYmx1ZSBzcGFjZSBkYXRhc2V0IGluY2x1ZGVkIHdpdGhpbiB0aGUgaG91c2Vob2xkIHN1cnZleSBhbmQgdGhlIGJyaWVmIChbbGluayBoZXJlXShodHRwczovL3N0YXRpc3RpY3MuZ292LnNjb3QvcmVzb3VyY2U/dXJpPWh0dHAlM0ElMkYlMkZzdGF0aXN0aWNzLmdvdi5zY290JTJGZGF0YSUyRmdyZWVuLW9yLWJsdWUtc3BhY2Utc2hzKSkuIFRoZSB2YXJpYWJsZSB0aGF0IGNvdWxkIGJlIGluY2x1ZGVkIGluIHRoZSAiY2VydGFpbiBncm91cHMiIGNhdGVnb3J5IG1lbnRpb25lZCBhYm92ZSBhcmUgYXMgZm9sbG93czoqCgoqKkFnZSoqOiAzIGRpZmZlcmVudCBkaXN0aW5jdCBncm91cHMgdG8gZXhwbG9yZSBoZXJlOgoKMTYtMzQgCjM1LTY0CjY1IHllYXJzIGFuZCBvbGRlcgoKKipEaXN0YW5jZSB0byBuZWFyZXN0IEdyZWVuIG9yIEJsdWUgc3BhY2UqKjogVGhpcyB3aWxsLCBJIGd1ZXNzLCBiZSB0aGUgbWFpbiB0YXJnZXQgdmFyaWFibGUgZm9yIHRoaXMgcGFydGljdWxhciBxdWVzdGlvbi4gVGhlcmUgYXJlIDQgZGlmZmVyZW50IGdyb3VwcyBhbmQgd2Ugd2lsbCBuZWVkIHRvIGRlZmluZSB3aGF0IGl0IG1lYW5zIHRvIGhhdmUgImxvY2FsIGFjY2VzcyIgYmFzZWQgb24gdGhlc2U6CgpBIDUgbWludXRlIHdhbGsgb3IgbGVzcyAKQW4gMTEgbWludXRlIHdhbGsgb3IgbW9yZSAKRG9uJ3QgS25vdyAKV2l0aGluIGEgNi0xMCBtaW51dGUgd2FsayAKCioqRXRobmljaXR5Kio6IFNsaWdodGx5IGRpc2FwcG9pbnRpbmcgdGhhdCB0aGVyZSBpcyBub3QgYSBncmVhdGVyIGJyZWFrZG93biBvZiBncm91cHMgaW4gdGVybXMgb2YgdGhpcyB2YXJpYWJsZS4gQXMgaXQgaXMsIHRoZSBncm91cHMgYXJlIGFzIGZvbGxvd3M6CgpPdGhlciAKV2hpdGUKCioqR2VuZGVyKio6IFNwbGl0IGJ5IE1hbGUgYW5kIEZlbWFsZSwgYWx0aG91Z2ggdGhlcmUgaXMgYW4gYWxsIGNhdGVnb3J5IHdoaWNoIG1heSBhbGxvdyBhbiAiT3RoZXIiIGdyb3VwIHRvIGJlIGNyZWF0ZWQKCipDaGVja2luZyB0aGUgYWJvdmUhKiAtIGl0IHNlZW1zIHRoZXJlJ3MgYSBub3RlIG9uIHRoaXM6CgoiSW4gdGhlIDIwMTggU2NvdHRpc2ggSG91c2Vob2xkIFN1cnZleSB0aGUgZ2VuZGVyIHF1ZXN0aW9uIHdhcyByZXZpc2VkLiBJbiBwcmV2aW91cyB5ZWFycyBpbnRlcnZpZXdlcnMgYXNrZWQgaWYgaG91c2Vob2xkIG1lbWJlcnMgd2VyZSAnbWFsZScgb3IgJ2ZlbWFsZScuIEluIHRoZSAyMDE4IHN1cnZleSB0aGUgb3B0aW9ucyBnaXZlbiB3ZXJlOiAnbWFuL2JveScsICd3b21hbi9naXJsJyBhbmQgdHdvIGFkZGl0aW9uYWwgcmVzcG9uc2VzOiDigJhpZGVudGlmaWVkIGluIGFub3RoZXIgd2F54oCZIGFuZCDigJhyZWZ1c2Vk4oCZLiBJbiBvcmRlciB0byByZW1haW4gaGFybW9uaXNlZCB3aXRoIG90aGVyIHN0YXRpc3RpY3MuZ292LnNjb3QgZGF0YXNldHMsIHRoZSBwcmV2aW91cyByZXNwb25zZSBvcHRpb25zICdtYWxlJyBhbmQgJ2ZlbWFsZScgd2lsbCBiZSBtYWludGFpbmVkLiIKCioqSG91c2Vob2xkIFR5cGUqKjogV2UgaGF2ZSBhIGJyZWFrZG93biBvZiB0aHJlZSBkaXN0aW5jdCBncm91cHM6CgpBZHVsdHMKUGVuc2lvbmVycyAKV2l0aCBDaGlsZHJlbiAKCioqTWVhc3VyZSBUeXBlKiogVGhpcyBpcyBhbiBpbnRlcmVzdGluZyBvbmUgdGhhdCBuZWVkcyB0byBiZSBleHBsb3JlZCBmdXJ0aGVyIGVhcmx5IG9uIGluIHRoZSBwcm9qZWN0LiBUaGVyZSBhcmUgdGhyZWUgb3B0aW9uczoKCjk1JSBMb3dlciBDb25maWRlbmNlIExpbWl0LCBQZXJjZW50IAo5NSUgVXBwZXIgQ29uZmlkZW5jZSBMaW1pdCwgUGVyY2VudCAKUGVyY2VudCAKCioqUmVmZXJlbmNlIFBlcmlvZCoqIDIwMTMgLSAyMDE5IGF2YWlsYWJsZS4gV2lsbCBiZSBwYXJ0aWN1bGFybHkgaW1wb3J0YW50IHRvIGNoZWNrIG1pc3NpbmcgdmFsdWVzLiAKCioqU0lNRCBRdWludGlsZXMqKiBBIHJlYWxseSBpbnRlcnNlc3RpbmcgdmFyaWFibGUgaWYgd2UgYXJlIHRvIHRvdWNoIG9uIHNvY2lvLWVjb25vbWljIGxpbmtzLiBPbmx5IHR3byBncm91cHMgdGhvdWdoOgoKMjAlIG1vc3QgZGVwcml2ZWQgCjgwJSBsZWFzdCBkZXByaXZlZCAKCioqVHlwZSBPZiBUZW51cmUqKiBUaGlzIGNvdWxkIGJlIGludGVyZXN0aW5nIGFzIGl0IHN1Z2dlc3RzIGluIGl0c2VsZiBhIGNlcnRhaW4gc29jaW8tZWNvbm9taWMgZGltZW5zaW9uLCBhbHRob3VnaCB0aGlzIG1heSBub3QgbmVjZXNzYXJpbHkgYmUgdGhlIGNhc2UgaW4gaXNvbGF0aW9uLCBidXQgcmF0aGVyIHdoZW4gY29tYmluZWQgd2l0aCBhbm90aGVyIGVsZW1lbnQgc3VjaCBhcyBhZ2UuIEEgbGFyZ2VyIGxpc3Qgb2YgZ3JvdXBzIGluY2x1ZGU6CgpPd25lZCBNb3J0Z2FnZS9Mb2FuIApPd25lZCBPdXRyaWdodCAKUHJpdmF0ZSBSZW50ZWQgClNvY2lhbCBSZW50ZWQgCgoqKlVyYmFuIFJ1cmFsIENsYXNzaWZpY2F0aW9uKiogQSBuaWNlIG9uZSB0byBsb29rIGF0LCBhbHRob3VnaCBpdCBtYXkgYmUgZmFpcmx5IHByZWRpY3RhYmxlOgoKUnVyYWwKVXJiYW4KCioqUmVmZXJlbmNlIEFyZWEqKiBUaGlzIHNheXMgdGhhdCBpdCBpcyBwcm92aWRlZCBieSBjb3VudHJ5IGFuZCBieSBjb3VuY2lsIGFyZWEgYnkgZGVmYXVsdCwgd2hpY2ggYWRkcyBhbiBpbnRlcmVzdGluZyBnZW9ncmFwaGljYWwgZGltZW5zaW9uIHRvIHRoaXMuIEknbGwgbmVlZCB0byBzZWUgd2hhdCB0aGUgZGF0YSBsb29rcyBsaWtlIGJlZm9yZSB0aGlzIHRvIGNoZWNrIGhvdyByb2J1c3Qgc3VjaCBhbiBhbmFseXNpcyB3b3VsZCBiZS4gCgoKKipUaGlzIGlzIHRoZSBmaXJzdCBkYXRhc2V0IHRvIGJlIGxvb2tlZCBhdCwgd2l0aCB0aGUgZnVydGhlciB0d28gZGF0YXNldHMgY29udGFpbmluZyBtdWNoIHRoZSBzYW1lIGJyZWFrZG93biwgd2l0aCBvbmUgb3IgdHdvIGNydWNpYWwgY2F2ZWF0czoqKgoKKipOZWlnaGJvdXJob29kIHJhdGluZyBkYXRhc2V0KiogLSBUaGlzIGRhdGFzZXQgY29udGFpbnMgb25lIGFkZGl0aW9uYWwgdmFyaWFibGUgYW5kIG9uZSBhZGp1c3RlZCBvbmU6IAoKKk5laWdoYm91cmhvb2QgcmF0aW5nKiAtIFByb3ZpZGUgb24gYSA0IHBvaW50IHNjYWxlIChWZXJ5IFBvb3IgdG8gVmVyeSBHb29kKSwgd2l0aCBhICJObyBvcGluaW9uIiBvcHRpb24gYWxzbyBpbmNsdWRlZC4KCipXYWxraW5nIERpc3RhbmNlIHRvIG5lYXJlc3QgR3JlZW5zcGFjZSogLSBTbyBjcnVjaWFsbHksIHRoaXMgaXMgZGlmZmVyZW50IGZyb20gdGhlIGFib3ZlIGRhdGEgc2V0IHdpdGggb25seSBncmVlbiBzcGFjZSBpbmNsdWRlZCAoaS5lLiBubyBibHVlIHNwYWNlKS4gQWx0aG91Z2ggdGhlIGRpc3RhbmNlIGlzIHN0aWxsIG1lYXN1cmVkIGluIHRlcm1zIG9mIGEgdGltZSBlc3RpbWF0ZSwgaXQgaXMgYWxzbyBkaWZmZXJlbnQgZnJvbSB0aGUgYWJvdmUgd2l0aCBvbmx5IG1vcmUvbGVzcyB0aGFuIDEwIG1pbnV0ZXMgd2Fsa2luZyBkaXN0YW5jZSBvciBhIERvbid0IGtub3cgYXMgb3B0aW9ucy4gCgoKKipDb21tdW5pdHkgYmVsb25naW5nIGRhdGFzZXQqKiAtIE9uY2UgYWdhaW4sIHNhbWUgZ2VuZXJhbCB2YXJpYWJsZXMsIGJ1dCB3aXRoIHRoZSBzYW1lICJXYWxraW5nIERpc3RhbmNlIiB2YXJpYWJsZSBtZW50aW9uZWQgaW4gdGhlIE5laWdoYm91cmhvb2QgcmF0aW5nIGRhdGFzZXQsIGFuZCBvbmUgdW5pcXVlIHZhcmlhYmxlOgoKKkNvbW11bml0eSBiZWxvbmdpbmcqIC0gVGhpcyBsb29rcyBsaWtlIGl0IGlzIGFjY2Vzc2VkIG9uIGEgc2NhbGUgc2hvd2luZyBzdHJlbmd0aCBvZiBzZW50aW1lbnQuIE9uY2UgYWdhaW4gZm91ciBwb2ludHMgKE5vdCBhdCBhbGwgc3Ryb25nbHkgdG8gVmVyeSBTdHJvbmdseSkgd2l0aCBhICJEb24ndCBrbm93IiBvcHRpb24gYWxzbyBpbmNsdWRlZC4gCgoKKipUaGUgbWFpbiB0aGluZyB0aGF0IEkgd2FudCB0byBlc3RhYmxpc2ggYXQgdGhpcyBzdGFnZSBpcyB3aGV0aGVyIG9yIG5vdCB0aGVzZSBkaWZmZXJlbnQgZGF0YXNldHMgY29udGFpbiBvYnNlcnZhdGlvbnMgZnJvbSB0aGUgc2FtZSBzb3VyY2UuIEluIG90aGVyIHdvcmRzLCBpcyB0aGVyZSBhbnl0aGluZyB0byBsaW5rIGluZGl2aWR1YWxzIGJldHdlZW4gdGhlIHR3byBkYXRhc2V0cy4qKgoKSW4gdHJhbnNsYXRpbmcgdGhlIGZvbGxvd2luZyBidXNpbmVzcyBxdWVzdGlvbnMgaW50byBkYXRhIHF1ZXN0aW9ucywgSSB0aGluayBJIG5lZWQgdG8gZGVmaW5lIGhvdyBlYWNoIHZhcmlhYmxlIGNhbiBiZSBtZWFzdXJlZCBpbiBhIHF1YW50aXRhdGl2ZSB3YXkgdG8gc2hlZCBsaWdodCBvbiB0aGUgb3JpZ2luYWwgcXVlc3Rpb24uIFRob3VnaHRzIGFuZCBmaW5hbCBkZWZpbml0aW9ucyBiZWxvdy4gSXQgd2FzIHJlY29tbWVuZGVkIHRoYXQgSSB0cnkgdG8gYW5zd2VyIGVhY2ggb2YgdGhlc2UgcXVlc3Rpb25zIGluZGl2aWR1YWxseSBpbnN0ZWFkIG9mIGFuc3dlcmluZyB0aGVtIGFsbCBpbiBzdGFnZXMuIFdpdGggdGhpcyBpbiBtaW5kLCBJIHRoaW5rIEkgY2FuIHNhZmVseSBnZXQgdGhlIGRhdGEgdG9nZXRoZXIgZm9yIHRoZSBmaXJzdCBmb3VyIHF1ZXN0aW9ucyBhbmQgdGhlbiBhbnN3ZXIgZWFjaCBvZiB0aGVzZSBpbmRpdmlkdWFsbHkgYWZ0ZXIgdGhpcy4gCgoKMS4gQXJlIHRoZXJlIGNlcnRhaW4gZ3JvdXBzIHRoYXQgaGF2ZSBsb2NhbCBhY2Nlc3MgdG8gZ3JlZW4gc3BhY2U/CgoqRmlyc3Qgb2YgYWxsLCB3ZSBuZWVkIHRvIGRlZmluZSB0aGUgZWxlbWVudHMgaW4gdGhlIHNlY29uZCBjbGF1c2UgaGVyZS4qIAoKTG9jYWwgYWNjZXNzIHdlIGNhbiBkZWZpbmUgYXMgYmVpbmcgd2l0aGluIGEgdGVuIG1pbnV0ZSB3YWxrIG9mIGFuIGluZGl2aWR1YWxzIGhvbWUuIFRoaXMgc2hvdWxkIGFsbG93IHVzIHRvIGRlYWwgdG8gdXNlIGJvdGggdmFyaWFibGVzIG1lbnRpb25lZCBhYm92ZSwgYWx0aG91Z2ggd2UgbWlnaHQgaGF2ZSB0byBleHRlbmQgdGhpcyBkZWZpbml0aW9uIHRvIGluY2x1ZGUgdXAgdG8gMTEgbWludXRlcyBnaXZlbiB0aGUgc2Vjb25kIG9mIHRoZSB0d28gdmFyaWFibGVzLiBTdHJpY3RseSBzcGVha2luZywgdGhpcyB3b3VsZCBtZWFuIHRoYXQgYSBjZXJ0YWluIG51bWJlciBvZiBwZW9wbGUgd2hvIHRob3VnaHQgdGhhdCB0aGV5IGxpdmVkIDExIG1pbnV0ZXMgYXdheSBmcm9tIGEgZ3JlZW4gc3BhY2UgbWF5IGJlIG1pc2NsYXNzaWZpZWQsIGJ1dCBnaXZlbiBpdCBpcyBhIHN1YmplY3RpdmUgdGltZSBlc3RpbWF0ZSBhbnl3YXkgSSB0aGluayB0aGF0IHdlIGNhbiBkZWFsIHdpdGggdGhpcyBwYXJ0aWN1bGFyIGVycm9yLiAKCkZvciB0aGUgc2Vjb25kIGRlZmluaXRpb24gaGVyZSwgd2UgbmVlZCB0byB0aGluayBvZiB3aGV0aGVyIHdlIHVzZSBncmVlbiBzcGFjZSBmcm9tIHRoZSBsYXN0IHR3byBkYXRhc2V0cyBvciBpbmNsdWRlIHRoZSBmaXJzdCBkYXRhc2V0IHdoaWNoIHNlZW1zIHRvIGhhdmUgImdyZWVuIGFuZCBibHVlIHNwYWNlcyIuIENoZWNraW5nIGluIHRoZSBub3RlcyBmb3IgdGhlIGRhdGFzZXRzLCB0aGUgZm9sbG93aW5nIGlzIHN0YXRlZDoKCiJUaGUgcXVlc3Rpb24gYXNraW5nIGFib3V0IHdhbGtpbmcgZGlzdGFuY2UgdG8gbmVhcmVzdCBncmVlbnNwYWNlIGluZm9ybXMgdGhlIE5hdGlvbmFsIEluZGljYXRvciBvbiBBY2Nlc3MgdG8gR3JlZW4gYW5kIEJsdWUgU3BhY2VzLiBIb3dldmVyIGJlZm9yZSAyMDE5LCBldmVuIHRob3VnaCB0aGUgbGlzdCBvZiBzcGFjZXMgaW5jbHVkZWQgcml2ZXJzaWRlcyBhbmQgYmVhY2hlcywgdGhlIHF1ZXN0aW9uIHRleHQgdXNlZCB0aGUgdGVybSAiZ3JlZW4gb3Igb3BlbiBzcGFjZSIuIEluIDIwMTkgZm9yIG9uZSBoYWxmIG9mIHRoZSBzYW1wbGUgdGhpcyB3YXMgY2hhbmdlZCBzbGlnaHRseSB0byAiZ3JlZW4sIGJsdWUgb3Igb3BlbiBzcGFjZXMiIHRvIGNoZWNrIGlmIGluY2x1ZGluZyB0aGUgd29yZCAiYmx1ZSIgbWFkZSBhbnkgZGlmZmVyZW5jZSB0byB0aGUgcmVzcG9uc2UgZ2l2ZW4gdG8gdGhlIHF1ZXN0aW9uIGFib3V0IHdhbGtpbmcgZGlzdGFuY2Ugb3IgdGhlIGJpZW5uaWFsIGZvbGxvdy11cCBxdWVzdGlvbnMgYXNraW5nIGFib3V0IHNhdGlzZmFjdGlvbiB3aXRoIGFuZCBmcmVxdWVuY3kgb2YgdXNlIG9mIG5lYXJlc3QgZ3JlZW4gb3IgYmx1ZSBzcGFjZS4gTm8gc3RhdGlzdGljYWxseSBzaWduaWZpY2FudCBkaWZmZXJlbmNlIHdhcyBmb3VuZC4iCgpUaGlzIGV4cGxhbmF0aW9uIGlzIHByb3ZpZGVkIGZvciB0d28gb3V0IG9mIHRoZSB0aHJlZSBkYXRhc2V0cywgYWx0aG91Z2ggc29tZXdoYXQgY29uZnVzaW5nbHkgdGhlc2UgYXJlIG5vdCB0aGUgc2FtZSB0d28gZGF0ZXNldHMgdGhhdCBtYWtlIHJlZmVyZW5jZSB0byBvbmx5IGdyZWVuIHNwYWNlLiBXaXRoIHRoZXNlIGNhdmVhdHMgaW4gbWluZCwgSSBhbSBoYXBweSB0byBnbyBhaGVhZCBhbmQgdXNlIGJvdGggdmFyaWFibGVzIGFzIGNvbW1vbiBpbmRpY2F0b3JzIGZvciB0aGUgc2FtZSB0aGVtZS4gCgpTbyB3aXRoIGFsbCBvZiB0aGlzIGluIG1pbmQsIHBlbmRpbmcgb3VyIGNoZWNrcyBvbiB3aGV0aGVyIGFsbCB0aGUgZGF0YXNldHMgcmVsYXRlIHRvIHRoZSBzYW1lIGluZGl2aWR1YWxzLCBvdXIgZmlyc3QgcXVhbnRpdGF0aXZlIGRhdGEgZGVmaW5pdGlvbiB3aWxsIGJlOgoKKkFyZSB0aGVyZSBjZXJ0YWluIGdyb3VwcywgbW9yZSB0aGFuIG90aGVycywgd2hvIHJlcG9ydCBoYXZpbmcgYWNjZXNzIHRvIGdyZWVuIG9yIGJsdWUgc3BhY2VzIHdpdGhpbiAxMCBtaW51dGVzIG9mIHRoZWlyIGhvbWVzLioKCgoyLiBBcmUgdGhlcmUgZ3JvdXBzIHRoYXQgYXJlIGxhY2tpbmcgYWNjZXNzPwoKSW4gbGlnaHQgb2YgdGhlIGFib3ZlIGJyZWFrZG93biwgSSdkIHNheSB0aGF0IHdlIHNob3VsZCBmaW5kIHRoZSBncm91cHMgdGhhdCBhcmUgcGFydGljdWxhcmx5IGxpa2VseSB0byBoYXZlIGdyZWVuIHNwYWNlIG1vcmUgdGhhbiAxMCBtaW51dGVzIHdhbGsgYXdheSwgb25jZSBhZ2FpbiB3aXRoIHRoZSBzYW1lIGNhdmVhdHMgYW5kIG1lYXN1cmVzIGFwcGxpZWQuIFNvLCBqdXN0IHRvIGJlIHN0cmljdCBhYm91dCB0aGlzLCB0aGUgZm9sbG93aW5nIGRlZmluaXRpbiB3aWxsIGFwcGx5OgoKKkFyZSB0aGVyZSBjZXJ0YWluIGdyb3VwcywgbW9yZSB0aGFuIG90aGVycywgd2hvIHJlcG9ydCBoYXZpbmcgYWNjZXNzIHRvIGdyZWVuIG9yIGJsdWUgc3BhY2VzIGZ1cnRoZXIgdGhhbiAxMCBtaW51dGVzIGF3YXkgZnJvbSB0aGVpciBob21lcy4qCgoKMy4gQXJlIHRoZXJlIGJpZyBkaWZmZXJlbmNlcyBpbiBob3cgZmFyIHBlb3BsZSBoYXZlIHRvIHdhbGsgdG8gYWNjZXNzIHRoZWlyIGdyZWVuIHNwYWNlPwoKVG8gYW5zd2VyIHRoaXMgb25lLCBteSBpbW1lZGlhdGUgdGhvdWdodHMgYXJlIHRoYXQgd2Ugc2hvdWxkIHRha2UgdGhlIHBvcHVsYXRpb24gYXMgYSB3aG9sZSAoaS5lIEFsbCBpbiBhIGxvdCBvZiB0aGUgdmFyaWFibGVzKSBhbmQgdGhlbiBjb21wYXJlIHRoZSBkaWZmZXJlbmNlIGJldHdlZW4gcmVnaW9ucy4gSWYgd2UgaGF2ZSBtYW5hZ2VkIHRvIGdhaW4gaW5zaWdodHMgaW50byBjZXJ0YWluIGdyb3VwcyBpbiB0aGUgb3BlbmluZyB0d28gcXVlc3Rpb25zLCB3ZSBjb3VsZCBwZXJoYXBzIHNoZWQgYSBiaXQgbW9yZSBsaWdodCBvbiBkaWZmZXJlbmNlcyBpbiB0aGUgcmVnaW9ucyB3aXRoaW4gdGhlIGNvbnRleHQgb2YgdGhlc2UgZGlmZmVyZW5jZXMuIEluIGEgZ2VuZXJhbGx5IHNlbnNlLCB0aGlzIHF1ZXN0aW9uIGNvdWxkIGJlIGNvbnNpZGVyZWQgYSBsaXR0bGUgYml0IHRyaWNreSBjb25zaWRlcmluZyB3ZSBvbmx5IHJlYWxseSBoYXZlLCBhdCBtb3N0LCB0aHJlZSBjYXRlZ29yaWVzIHJlcHJlc2VudGluZyBhIHNob3J0LCBtZWRpdW0gYW5kIGxvbmcgd2FsayB0byBncmVlbiBzcGFjZXMsIGFsb25nIHdpdGggYSBkb24ndCBrbm93LiBXZSBzaG91bGQgcGVyaGFwcyBjb25zaWRlciByZW5hbWluZyB0aGVzZSBjYXRlZ29yaWVzIGFzIHNob3J0LCBtZWRpdW0gb3IgbG9uZywgYWx0aG91Z2ggdGhpcyB3b3VsZCBuZWNlc3NhcmlseSBtZWFuIG9ubHkgdXNpbmcgdGhlIGZpcnN0IGRhdGFzZXQgd2hpY2ggaGFzIHRoaXNlIGxldmVsIG9mIGdyYW51bGFyaXR5LiBGdW5kYW1lbnRhbGx5LCB3ZSdsbCB3YW50IHRvIHNob3cgdGhlIGZvbGxvd2luZzoKCipJcyB0aGUgZGF0YSBvbiB0aGUgb3ZlcmFsbCBzYW1wbGUgdmVyeSBza2V3ZWQgdG93YXJkcyBvbmUgb3V0IG9mIHRoZSB0aHJlZSBjYXRlZ29yaWVzIG9yIGlzIGl0IHJlbGF0aXZlbHkgZXZlbmx5IGRpc3BlcnNlZCBhbW9uZ3N0IHNtYWxsLCBtZWRpdW0gYW5kIGxvbmcgd2Fsa3MgdG8gZ3JlZW4gc3BhY2VzLioKCipBcmUgc2ltaWxhciBza2V3cyByZXBsaWNhdGVkIGFjcm9zcyBkaWZmZXJlbnQgcmVnaW9ucyBvciBhcmUgdGhleSBjb25zaXN0ZW50IHdpdGggdGhlIG5hdGlvbmFsIGF2ZXJhZ2UuKgoKCjQuIEFyZSB0aGVyZSBhbnkgZGlmZmVyZW5jZXMgYmV0d2VlbiBydXJhbCBhbmQgdXJiYW4gYXJlYXM/CgpUaGlzIGNhbiBwcm9iYWJseSBiZSBsaW5rZWQgcXVpdGUgd2VsbCBpbnRvIGNvbXBhcmlzb25zIGJldHdlZW4gb3RoZXIgdmFyaWFibGVzLiBJbiBwYXJ0aWN1bGFyLCBzaW5jZSB0aGlzIGlzIGEgYmluYXJ5IGNsYXNzaWZpY2F0aW9uLCBpdCB3b3VsZCBiZSBncmVhdCB0byB0YWtlIG90aGVyIHZhcmlhYmxlcyBhbmQgdGhlbiBqdXN0IHNwbGl0IHRoZXNlIGJ5IHJ1cmFsIGFuZCB1cmJhbi4gTm90IHF1aXRlIHN1cmUgaG93IHRvIHdvcmQgdGhpcyBhdCB0aGlzIHN0YWdlIGJ1dCBiYXNpY2FsbHkgd2Ugc2hvdWxkIHRyeSBhbmQga2VlcCBpbiB0aGUgdXJiYW4gYW5kIHJ1cmFsIGNsYXNzaWZpZXIgd2hlcmV2ZXIgd2UgY2FuIGR1cmluZyB0aGUgYW5hbHlzaXMgcHJvY2Vzcy4gCgoKCgoKCgoKCgoKNS4gSG93IGRvIHBlb3BsZSBpbiBuZWlnaGJvdXJob29kcyB3aXRoIGdvb2QgYWNjZXNzIHRvIGdyZWVuIHNwYWNlIGRpZmZlciBmcm9tIHRob3NlIHdobyBoYXZlIG5vIGdvb2QgYWNjZXNzPyBBcmUgdGhlcmUgZGlmZmVyZW5jZXMgaW4gaG93IHRoZXkgcmF0ZSB0aGVpciBuZWlnaGJvdXJob29kcz8gQXJlIHRoZXJlIGRpZmZlcmVuY2VzIGluIGhvdyB0aGV5IHJhdGUgdGhlaXIgY29tbXVuaXRpZXM/CgoKCgo2LiBJcyB0aGVyZSBhbnkgd2F5IHRvIHByZWRpY3Qgd2hpY2ggaG91c2Vob2xkcyB3b3VsZCBoYXZlIGhpZ2hlciByYXRpbmdzPwoKCgoqKk90aGVyIENvbnNpZGVyYXRpb25zIHRvIFJlbWVtYmVyKioKCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKYGBge3J9CmxpYnJhcnkodGlkeXZlcnNlKQpsaWJyYXJ5KGphbml0b3IpCgpncmVlbl9ibHVlX2NvbXBfZGF0YSA8LSByZWFkX2NzdigiZGF0YS9jb21wbGV0ZV9kaXN0X2JsdWVfZ3JlZW4uY3N2IikgJT4lIGNsZWFuX25hbWVzKCkKbmVpZ2hib3VyaG9vZF9jb21wX2RhdGEgPC0gcmVhZF9jc3YoImRhdGEvY29tcGxldGVfbmVpZ2hib3VyaG9vZF9yYXRpbmcuY3N2IikgJT4lIGNsZWFuX25hbWVzKCkKY29tbXVuaXR5X2NvbXBfZGF0YSA8LSByZWFkX2NzdigiZGF0YS9jb21wbGV0ZV9jb21tdW5pdHlfYmVsb25naW5nLmNzdiIpICU+JSBjbGVhbl9uYW1lcygpCmBgYAoKSSByZWFsbHkgd2FudCB0byB3b3JrIG91dCBpZiB3ZSBjYW4gZ2V0IGFsbCB0aGVzZSBib3VuZCB0b2dldGhlciBpbiBvbmUgYmlnIGRhdGFzZXQuCgpgYGB7cn0KZ3JlZW5fYmx1ZV9jb21wX2RhdGEgJT4lIAogIGdsaW1wc2UoKQoKbmVpZ2hib3VyaG9vZF9jb21wX2RhdGEgJT4lIAogIGdsaW1wc2UoKQoKY29tbXVuaXR5X2NvbXBfZGF0YSAlPiUgCiAgZ2xpbXBzZSgpCmBgYAoKYGBge3J9CmNvZGVzX2diIDwtCmdyZWVuX2JsdWVfY29tcF9kYXRhICU+JSAKICBkaXN0aW5jdChmZWF0dXJlX2NvZGUpCgpjb2Rlc19nYgoKZ3JlZW5fYmx1ZV9jb21wX2RhdGEgJT4lIAogIGRpc3RpbmN0KHVuaXRzKQpgYGAKCmBgYHtyfQpjb2Rlc19uZWlnaCA8LQpuZWlnaGJvdXJob29kX2NvbXBfZGF0YSAlPiUgCiAgZGlzdGluY3QoZmVhdHVyZV9jb2RlKQoKY29kZXNfbmVpZ2gKCm5laWdoYm91cmhvb2RfY29tcF9kYXRhICU+JSAKICBkaXN0aW5jdCh1bml0cykKYGBgCgpgYGB7cn0KY29kZXNfY29tbXVuaXR5IDwtCmNvbW11bml0eV9jb21wX2RhdGEgJT4lIAogIGRpc3RpbmN0KGZlYXR1cmVfY29kZSkKCmNvbW11bml0eV9jb21wX2RhdGEgJT4lIAogIGRpc3RpbmN0KHVuaXRzKQpgYGAKCkNvb2wsIHNvIGFsbCB0aHJlZSBkYXRhc2V0cyBzZWVtIHRvIGhhdmUgdGhlIHNhbWUgYW1vdW50IG9mIHZhcmlhYmxlcywgYWx0b3VnaCB0aGVyZSB3aWxsIGJlIGEgc2xpZ2h0IGRpZmZlcmVuY2UgaW4gdGhlIG1lYXN1cmUgb2YgZWFjaC4gVGhlIHRoaW5nIEkgd2FudCB0byBnZXQgY2hlY2tpbmcgaXMgdGhhdCBmZWF0dXJlIGNvZGVzIHJlZmVyIHRvIHJlZ2lvbnMgb3IsIG1vcmUgbGlrZWx5LCBjb3VuY2lsIGFyZWFzLiBJIGFsc28ganVzdCB3YW50IHRvIGRvdWJsZSBjaGVjayB0aGF0IHRoZXNlIGFyZSBhbGwgdGhlIHNhbWUgaW4gZWFjaCBkYXRhc2V0LiBJJ20gcHJldHR5IHN1cmUgd2UgYWN0dWFsbHkgaGF2ZSB0aGUgY29kZXMgZG93biBmb3IgdGhpcyBpbiB0aGUgcHJldmlvdXMgcmVwb3J0IHdoaWNoIHdvdWxkIGJlIHN1cGVyIGhhbmR5LiAKCmBgYHtyfQphbGxfZXF1YWwoY29kZXNfY29tbXVuaXR5LCBjb2Rlc19nYiwgY29kZXNfbmVpZ2gpCmBgYAoKU3dlZXQsIGl0IGxvb2tzIGxpa2UgYWxsIHRoZSBjb2RlcyBtYXRjaCB3aGljaCBJJ20gaG9waW5nIG1lYW5zIHdlIGNhbiBqdXN0IGRvIGEgam9pbiBvbiBhbGwgdGhlc2UuIE5vdCBzdXJlIHdoZXRoZXIgdG8gY2hhbmdlIHRoZSBjb2RlcyBub3cgb3IgYWZ0ZXIuIFRoaW5rIEkgbWlnaHQganVzdCBkbyBub3cgc28gdGhlIGpvaW4gaXMgYSBiaXQgY2xlYXJlciBmb3IgbWUsIGFsdGhvdWdoIEknbSBndWVzc2luZyBpdCB3b3VsZCBiZSBiZXN0IHByYWN0aWNlIHRvIGRvIGl0IGFmdGVyLgoKTXkgbWlzdGFrZSBlYXJsaWVyLCBqdXN0IHJlYWxpc2VkIHRob3NlIHdlcmUgTkhTIGNvZGVzIG5vdCBjb3VuY2lsIG9uZXMuIAoKYGBge3J9CmxvY2FsX2F1dGhvcml0eV9jb2RlcyA8LSByZWFkX2NzdigiZGF0YS9Mb2NhbF9BdXRob3JpdHlfRGlzdHJpY3RzX0NvZGVzLmNzdiIpICU+JSBjbGVhbl9uYW1lcygpCmBgYAoKYGBge3J9CnNjb3RfbG9jYWxfYXV0aF9jb2RlcyA8LQpsb2NhbF9hdXRob3JpdHlfY29kZXMgJT4lIAogIGZpbHRlcihzdHJfZGV0ZWN0KGxhZDE5Y2QsICJTMTIiKSkKYGBgCgo=</div>
 
 
 
@@ -1910,7 +2120,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("defining_questions.Rmd");
+  window.initializeSourceEmbed("first_data_explore.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>

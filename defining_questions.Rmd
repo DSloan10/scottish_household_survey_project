@@ -33,6 +33,10 @@ White
 
 **Gender**: Split by Male and Female, although there is an all category which may allow an "Other" group to be created
 
+*Checking the above!* - it seems there's a note on this:
+
+"In the 2018 Scottish Household Survey the gender question was revised. In previous years interviewers asked if household members were 'male' or 'female'. In the 2018 survey the options given were: 'man/boy', 'woman/girl' and two additional responses: ‘identified in another way’ and ‘refused’. In order to remain harmonised with other statistics.gov.scot datasets, the previous response options 'male' and 'female' will be maintained."
+
 **Household Type**: We have a breakdown of three distinct groups:
 
 Adults
@@ -139,3 +143,8 @@ This can probably be linked quite well into comparisons between other variables.
 
 
 6. Is there any way to predict which households would have higher ratings?
+
+
+
+**Other Considerations to Remember**
+
