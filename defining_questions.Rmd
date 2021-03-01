@@ -1,0 +1,58 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+**Defining the Questions**
+
+This document is meant as a reference point for questions to be answered during the project. For the fundamental questions highlighted in the project brief, these should remain consistent from the beginning of the project and should not be edited to a significant degree. However, as time and insights allow, supplementary questions to be answered can be added in addition to the core 6.
+
+**The original questions with further comment and clarification**
+
+We would like to to help us gain insights into how people feel about their local communities in Scotland. In particular, we are interested in the relationship between distance to outdoor space, and neighbourhood ratings.
+
+1. Are there certain groups that have local access to green space?
+
+*This info should be able to be garnered fairly simply from the distance to green or blue space dataset included within the household survey and the brief ([link here](https://statistics.gov.scot/resource?uri=http%3A%2F%2Fstatistics.gov.scot%2Fdata%2Fgreen-or-blue-space-shs)). The variable that could be included in the "certain groups" category mentioned above are as follows:*
+
+*Age*: 3 different distinct groups to explore here:
+
+16-34 
+35-64
+65 years and older
+
+*Distance to nearest Green or Blue space*: This will, I guess, be the main target variable for this particular question. There are 4 different groups and we will need to define what it means to have "local access" based on these:
+
+A 5 minute walk or less 
+An 11 minute walk or more 
+Don't Know 
+Within a 6-10 minute walk 
+
+*Ethnicity*: Slightly disappointing that there is not a greater breakdown of groups in terms of this variable. As it is, the groups are as follows:
+
+Other 
+White
+
+
+
+2. Are there groups that are lacking access?
+
+
+
+
+3. What there big differences in how far people have to walk to access their green space?
+
+
+
+
+4. Are there any differences between rural and urban areas?
+
+
+
+
+5. How do people in neighbourhoods with good access to green space differ from those who have no good access? Are there differences in how they rate their neighbourhoods? Are there differences in how they rate their communities?
+
+
+
+
+6. Is there any way to predict which households would have higher ratings?

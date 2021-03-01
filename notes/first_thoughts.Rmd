@@ -3,3 +3,91 @@ title: "R Notebook"
 output: html_notebook
 ---
 
+All the data sources seem to derive from scot.gov which we've used before in the group project so this is quite handy. In terms of the data, my immediate thoughts are:
+
+1. I need to check which data sources relate to eachother and what sort of joining process needs to take place. 
+
+2. Once the general structure of the data has been established an finalized, I need to think about splitting the data into test and train as early as possible. There is a predictive element involved in the questioning so some sort of model building will be required. Even if I don't quite know the structure of this modeling, it would be better to split the data earlier before any early conclusions are drawn. 
+
+3. The brief appears as if it originates from the Scottish government. With this in mind, the project should be designed around with a civil servant and/or committee audience in mind. In terms of ultimate conclusions and the presentation for the project, I think it would be best to proceed with these two audiences in mind.
+
+4. Usual deal, as with the group project. I've got to focus on the original questions presented first, and then think about other areas of interest/embellishment. I do want to experiment a bit with data viz techniques so this should be factored into the overall project schedule. 
+
+
+**With this in mind, it seems appropriate to think about how I plan on answering the core questions at the heart of the project, and to build the strategy, workplan and schedule around these elements:**
+
+
+a) Are there certain groups that have local access to green space?
+
+
+
+
+b) Are there groups that are lacking access?
+
+
+
+
+c) What there big differences in how far people have to walk to access their green space?
+
+
+
+
+d) Are there any differences between rural and urban areas?
+
+
+
+
+e) How do people in neighbourhoods with good access to green space differ from those who have no good access? Are there differences in how they rate their neighbourhoods? Are there differences in how they rate their communities?
+
+
+
+
+f) Is there any way to predict which households would have higher ratings?
+
+
+**Also, going back to the theoretical audience, I should keep in mind throughout the analysis what the audience may use the conclusions for i.e. policy development, accountability checks??**
+
+*It is also integral that progress in terms of the project be documented using R notebooks/markdowns.*
+
+*I also think it's going to be very important to keep and open mind on this project. I think there are certain conclusions that are brought to mind without any evidence in terms of the subjects addressed (i.e. deprivation, especially in urban areas, will influence access). I think I'll need to stay mindful of not pre-supposing.*
+
+
+Ideas to carry forward further into the project:
+
+1. Think about the suggestion in the notes to create two versions of the slides, one with minimal text and the other with notes. 
+
+2. Are there any ethical considerations related to either the data itself or the conclusions that may be drawn from the project. Keep in mind throughout. 
+
+3. Sustainability of the research. Will you be able to demonstrate that, with fresh data, the process of analysis involved in the project will be easily reproducible. 
+
+4. Try to practice branching off and merging back with the main branch just as you would in a group project. 
+
+
+
+
+Once again, looking at the project brief, it seems pertinent to make sure that the presentation is kept in mind and that content is readily available to meet the following criteria:
+
+1. Talk through your approach to the business question
+
+
+
+2. Discuss any challenges encountered and how you addressed these
+
+
+
+3. Present a story of your final insights which compels your client to action
+
+
+
+
+4. If your solution would require implementation, discuss how this could be done
+
+
+
+
+5. Any enhancements you would pick up if you’d had more time
+
+
+
+
+6. Any lessons for the future
