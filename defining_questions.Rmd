@@ -45,7 +45,7 @@ With Children
 95% Upper Confidence Limit, Percent 
 Percent 
 
-**Reference Period** 2013 - 2014 available. Will be particularly important to check missing values. 
+**Reference Period** 2013 - 2019 available. Will be particularly important to check missing values. 
 
 **SIMD Quintiles** A really intersesting variable if we are to touch on socio-economic links. Only two groups though:
 
@@ -81,24 +81,54 @@ Urban
 *Community belonging* - This looks like it is accessed on a scale showing strength of sentiment. Once again four points (Not at all strongly to Very Strongly) with a "Don't know" option also included. 
 
 
+**The main thing that I want to establish at this stage is whether or not these different datasets contain observations from the same source. In other words, is there anything to link individuals between the two datasets.**
 
-
+In translating the following business questions into data questions, I think I need to define how each variable can be measured in a quantitative way to shed light on the original question. Thoughts and final definitions below. It was recommended that I try to answer each of these questions individually instead of answering them all in stages. With this in mind, I think I can safely get the data together for the first four questions and then answer each of these individually after this. 
 
 
 1. Are there certain groups that have local access to green space?
 
+*First of all, we need to define the elements in the second clause here.* 
+
+Local access we can define as being within a ten minute walk of an individuals home. This should allow us to deal to use both variables mentioned above, although we might have to extend this definition to include up to 11 minutes given the second of the two variables. Strictly speaking, this would mean that a certain number of people who thought that they lived 11 minutes away from a green space may be misclassified, but given it is a subjective time estimate anyway I think that we can deal with this particular error. 
+
+For the second definition here, we need to think of whether we use green space from the last two datasets or include the first dataset which seems to have "green and blue spaces". Checking in the notes for the datasets, the following is stated:
+
+"The question asking about walking distance to nearest greenspace informs the National Indicator on Access to Green and Blue Spaces. However before 2019, even though the list of spaces included riversides and beaches, the question text used the term "green or open space". In 2019 for one half of the sample this was changed slightly to "green, blue or open spaces" to check if including the word "blue" made any difference to the response given to the question about walking distance or the biennial follow-up questions asking about satisfaction with and frequency of use of nearest green or blue space. No statistically significant difference was found."
+
+This explanation is provided for two out of the three datasets, although somewhat confusingly these are not the same two datesets that make reference to only green space. With these caveats in mind, I am happy to go ahead and use both variables as common indicators for the same theme. 
+
+So with all of this in mind, pending our checks on whether all the datasets relate to the same individuals, our first quantitative data definition will be:
+
+*Are there certain groups, more than others, who report having access to green or blue spaces within 10 minutes of their homes.*
 
 
 2. Are there groups that are lacking access?
 
+In light of the above breakdown, I'd say that we should find the groups that are particularly likely to have green space more than 10 minutes walk away, once again with the same caveats and measures applied. So, just to be strict about this, the following definitin will apply:
+
+*Are there certain groups, more than others, who report having access to green or blue spaces further than 10 minutes away from their homes.*
 
 
-3. What there big differences in how far people have to walk to access their green space?
+3. Are there big differences in how far people have to walk to access their green space?
 
+To answer this one, my immediate thoughts are that we should take the population as a whole (i.e All in a lot of the variables) and then compare the difference between regions. If we have managed to gain insights into certain groups in the opening two questions, we could perhaps shed a bit more light on differences in the regions within the context of these differences. In a generally sense, this question could be considered a little bit tricky considering we only really have, at most, three categories representing a short, medium and long walk to green spaces, along with a don't know. We should perhaps consider renaming these categories as short, medium or long, although this would necessarily mean only using the first dataset which has thise level of granularity. Fundamentally, we'll want to show the following:
 
+*Is the data on the overall sample very skewed towards one out of the three categories or is it relatively evenly dispersed amongst small, medium and long walks to green spaces.*
+
+*Are similar skews replicated across different regions or are they consistent with the national average.*
 
 
 4. Are there any differences between rural and urban areas?
+
+This can probably be linked quite well into comparisons between other variables. In particular, since this is a binary classification, it would be great to take other variables and then just split these by rural and urban. Not quite sure how to word this at this stage but basically we should try and keep in the urban and rural classifier wherever we can during the analysis process. 
+
+
+
+
+
+
+
 
 
 
