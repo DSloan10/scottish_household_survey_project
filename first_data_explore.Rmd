@@ -71,8 +71,125 @@ local_authority_codes <- read_csv("data/Local_Authority_Districts_Codes.csv") %>
 ```
 
 ```{r}
-scot_local_auth_codes <-
-local_authority_codes %>% 
-  filter(str_detect(lad19cd, "S12"))
+local_authority_codes %>%
+  distinct(lad19cd)
 ```
 
+
+```{r}
+scot_local_auth_codes <-
+local_authority_codes %>% 
+  filter(str_detect(lad19cd, "S12")) %>% 
+  select(lad19cd, lad19nm) %>% 
+  rename(feature_code = lad19cd,
+         local_authority = lad19nm)
+```
+
+```{r}
+#Adding a local authority column to each of the datasets
+gb_with_las_data <-
+full_join(green_blue_comp_data, scot_local_auth_codes, "feature_code")
+
+gb_with_las_data <-
+gb_with_las_data %>% 
+  mutate(local_authority = if_else(feature_code == "S92000003", "Scotland", local_authority))
+
+gb_with_las_data
+```
+
+```{r}
+neigh_with_las_data <-
+full_join(neighbourhood_comp_data, scot_local_auth_codes, "feature_code")
+
+neigh_with_las_data <-
+neigh_with_las_data %>% 
+  mutate(local_authority = if_else(feature_code == "S92000003", "Scotland", local_authority))
+
+neigh_with_las_data
+```
+
+```{r}
+commun_with_las_data <-
+full_join(community_comp_data, scot_local_auth_codes, "feature_code")
+
+commun_with_las_data <-
+commun_with_las_data %>% 
+  mutate(local_authority = if_else(feature_code == "S92000003", "Scotland", local_authority))
+
+commun_with_las_data
+```
+
+I think that now would be a good time to decide on which variables we can think about ditching which will not help us with our analysis. Basically anything that we don't want to immediately look at. I think we should look at the NAs and then work out which variables to ditch in each spreadsheet.
+
+```{r}
+gb_with_las_data %>% 
+summarise(across(.fns = ~sum(is.na(.x))))
+
+neigh_with_las_data %>% 
+summarise(across(.fns = ~sum(is.na(.x))))
+
+commun_with_las_data %>%
+summarise(across(.fns = ~sum(is.na(.x))))
+```
+
+Wow, we have no missing values across our data!! For three datasets, that's pretty cool. Don't quite know why it would be the case but will just double check that this was the case for the original datasets.
+
+```{r}
+green_blue_comp_data %>%
+  summarise(across(.fns = ~sum(is.na(.x))))
+
+```
+
+Looks all good. Right let's get cracking on those variables. So here's a list for all three datasets that I feel like we can ditch (for now):
+
+1. Feature_code - This now seems redundant considering I've made the local authority column.
+
+2. Measuremnt - **Important** - for now I want to filter out anything but percent and then drop this variable entirely. **This is something I definitely want to come back to if I have time, but for now it will drop so many rows. Might leave this until last so it's easier to go back to.*
+
+3. Units - from what I can see, this is redundant and we can just change the name of the "value" variable to take the fact that it is a percentage into account. 
+
+
+Think that may be it for now. Going to do this in a couple of stages and then try and make the join. Hoping the joins will actually work but it's still screwing with my head to work out how they should be behaving. I can't quite seem to work out how many variables we should end up with and what they should refer to. To be honest, I think that it might be best to just draw this out on a piece of paper or in excalidraw!
+
+```{r}
+gb_filtered <-
+gb_with_las_data %>%
+  filter(measurement == "Percent") %>% 
+  select(-c(feature_code, units, measurement))
+```
+
+```{r}
+commun_filtered <-
+commun_with_las_data %>%
+  filter(measurement == "Percent") %>% 
+  select(-c(feature_code, units, measurement))
+```
+
+```{r}
+neigh_filtered <-
+neigh_with_las_data %>%
+  filter(measurement == "Percent") %>% 
+  select(-c(feature_code, units, measurement))
+```
+
+```{r}
+gb_filtered
+
+neigh_filtered
+
+commun_filtered
+```
+
+Ok so let's try a wee pivot wider with the values and the distances. 
+
+```{r}
+gb_filtered %>% 
+  pivot_wider(names_from = distance_to_nearest_green_or_blue_space,
+              values_from = value)
+
+neigh_filtered %>% 
+  pivot_wider(names_from = neighbourhood_rating,
+              values_from = )
+```
+
+Right, so we seem to have hit a bit of a brick wall with the pivot for the neighbourhood and community 
