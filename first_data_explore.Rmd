@@ -6,6 +6,7 @@ output: html_notebook
 ```{r}
 library(tidyverse)
 library(janitor)
+library(ggplot2)
 
 green_blue_comp_data <- read_csv("data/complete_dist_blue_green.csv") %>% clean_names()
 neighbourhood_comp_data <- read_csv("data/complete_neighbourhood_rating.csv") %>% clean_names()
@@ -263,4 +264,74 @@ gb_scotland_2019 %>%
 ```
 
 Ok, so in this case we seem to have a reasonably significant gap of four percentage points between those living in "Rural" settings and all other groups. Not too surprising a conclusion, but slightly interesting to see how this is gap is diluted to the point once we move up to 10 minutes as our threshold. 
+
+I feel like it's time to take a look at this over multiple regions and over a greater time frame. We are still, however, focussing on the first question, namely, are there any groups that have particularly high access to green or blue spaces. 
+
+```{r}
+gb_pivot_plus_less_11 <-
+gb_pivot %>% 
+mutate(less_than_11_mins = a_5_minute_walk_or_less + within_a_6_10_minute_walk)
+```
+
+```{r}
+gb_pivot_plus_less_11 %>% 
+  arrange(desc(less_than_11_mins))
+  
+```
+So what we are seeing here is a significant amount of regions having all or a majority respondents from across different years with access to green or blue space within 10 minutes of their households. I think we need to look at a few more groups in more detail. But how to establish which groups have consistently higher access?
+
+Let's just take it back a stage and try to get some groupings on the go:
+
+```{r}
+all_la_percents <-
+gb_pivot_plus_less_11 %>% 
+  filter(age == "All", 
+         gender == "All",
+         urban_rural_classification == "All",
+         simd_quintiles == "All",
+         type_of_tenure == "All",
+         household_type == "All",
+         ethnicity == "All") %>% 
+  arrange(local_authority, date_code)
+
+all_la_percents
+```
+
+Just going to do another check that these figures are accurate by looking at the original dataset:
+
+```{r}
+green_blue_comp_data %>% 
+    filter(age == "All", 
+         gender == "All",
+         urban_rural_classification == "All",
+         simd_quintiles == "All",
+         type_of_tenure == "All",
+         household_type == "All",
+         ethnicity == "All",
+         measurement == "Percent") %>% 
+arrange(feature_code, date_code)
+```
+
+Right all good, but this is getting really messy!
+
+I feel like we should be able to just drop the rest of the columns. Maybe we can even do another pivot. Trying to imagine this in mind mind. Could we take everything that isn't an All and then have the values somehow pivot into these categories. Not sure that really makes any sense. But the alternative of literally pulling out all the other data doesn't really make any sense either. 
+
+Let's plot some differences between the regions over the last few years:
+
+```{r}
+all_la_percents %>%
+  ggplot() +
+  aes(x = date_code, y = less_than_11_mins, colour = local_authority) +
+  geom_line()
+```
+
+```{r}
+#Might have another go at a pivot to see if we can get multiple things on the board. 
+
+
+gb_pivot_plus_less_11 %>% 
+  pivot_longer(c(age, gender, urban_rural_classification, simd_quintiles, type_of_tenure, household_type, ethnicity), names_to = "type", values_to = "class") %>% 
+  filter(class != "All")
+
+```
 
