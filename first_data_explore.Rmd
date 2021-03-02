@@ -187,9 +187,80 @@ gb_filtered %>%
   pivot_wider(names_from = distance_to_nearest_green_or_blue_space,
               values_from = value)
 
-neigh_filtered %>% 
-  pivot_wider(names_from = neighbourhood_rating,
-              values_from = )
+#neigh_filtered %>% 
+ # pivot_wider(names_from = neighbourhood_rating,
+    #          values_from = )
 ```
 
-Right, so we seem to have hit a bit of a brick wall with the pivot for the neighbourhood and community 
+Right, so we seem to have hit a bit of a brick wall with the pivot for the neighbourhood and community datasets. As is my understanding, these figures all come from the same dataset. I think I've got a couple of options right now. 
+
+First, I'm thinking I could do a couple of pivots on each of these datasets, adding in both the extra green_space_distance and the community belonging values. But when I think about doing this, I'm seriously starting to wonder what any join would look like with the other datasets and how massive it would be. Firstly, as shown below, we have a categorical variable applied for those that live more or less than 10 minutes to their nearest green_space. We couldn't pivot these wider because there would not be any values to input. Similarly, if we were to add in the "All" group then this would seriously not work since there are previously established variables that apply to different categories.
+
+I'm starting to think that the way that we would be able to combine the datasets would be to select all on this particular category within the neighbourhood and commun datasets. But now I'm trying to work out the data would refer to in the columns marked with each different distance. The more I think about it, the more I'm acutally losing data and insights my tring to pivot and join these datasets.
+
+```{r}
+neigh_filtered %>%
+  distinct(walking_distance_to_nearest_greenspace)
+```
+
+I'm thinking of starting a quick new tactic. Actually just performing a provisional analysis using the datasets separately. Looking at the above debacle and, more importantly the questions, I think that I can have a good go just using these datasets separtely. Worse comes to worse, we've had a bit more practice using the data wrangling techniques we may have to use later on.
+
+So let's just get the questions up one by one. Original business questions and artificial data questions as well.
+
+1. Are there certain groups that have local access to green space?
+
+*Are there certain groups, more than others, who report having access to green or blue spaces within 10 minutes of their homes.*
+
+
+```{r}
+# Right, so I think we can get some answers to this one using the gb datasets. Let's try with the original and then pivot if required. 
+
+#Also let's first do a static take on the state of play in the most recent year (2019) and then do one looking at the differences across the recorded time. 
+
+#Again I think it would be better just to go with the whole of Scotland for now and then to drill down into the regional figures a bit more after this. 
+
+gb_pivot <-
+gb_filtered %>% 
+  pivot_wider(names_from = distance_to_nearest_green_or_blue_space,
+              values_from = value) %>% 
+  clean_names()
+
+gb_scotland_2019 <-
+gb_pivot %>%
+  filter(local_authority == "Scotland",
+         date_code == 2019)
+
+#Let's find out which groups has the highest percentage of individuals living within 5 minutes, 10 minutes and a combination of the two. 
+
+gb_scotland_2019 %>%
+  mutate(less_than_11_mins = a_5_minute_walk_or_less + within_a_6_10_minute_walk) %>%
+  arrange(desc(less_than_11_mins))
+  
+```
+
+To be honest, it feels like this data isn't as helpful answering these questions as first expected. I was thinking that there would be a little bit more granularity and mixing of variables (i.e what is the percentage breakdown in distances of people who have a mortgage and are female, for example). I think I just need to check that nothing has happened in terms of the pivot. 
+
+Wow, looks like it's the case that there is not real breakdown of the relationships between the groups. Pretty dissapointing. I wonder if there is a way to get the original dataset. Unless these sort of relationships are covered for some sort of confidentiality reasons??
+
+Maybe it's also the fact that that would be quite a large datset. Anyway, we can go back to a quite base analysis of our data
+
+
+```{r}
+gb_scotland_2019 %>%
+  mutate(less_than_11_mins = a_5_minute_walk_or_less + within_a_6_10_minute_walk) %>%
+  arrange(desc(less_than_11_mins))
+```
+**So it looks like the group most likely to live less than a 10 minute walk away from green or blue space are individuals with a mortgage, with 88% of this group reporting as such. Several other groups fall with 2-3 percentage points of this group however, and, given the fact that we are looking at a large percentage of the population with what is in essence a subjective estimate, I'd say that no significant insight can be drawn from this particular piece of analysis**
+
+What will be more useful will be checking those that live within a five minute walk of green space. This means that we are necessarily having to transform our the data question, adjusting what we define as local access. A final note on this, I've tried to search for a stable definition of "local access", even just in the context of Scotland. This, however, has been confounded by the fact that definition of local access seems to be dictated signficantly by other factors such as access to private or public forms of transport. Trying to find a definition related strictly to walking distance has proved difficult. However, in most of the Scottish and international references made to green spaces, 10 minutes seems to be the standard barometer. With this in mind, we maybe shouldn't change the actual data question here, but merely add a supplementary one with the shorter distance. 
+
+*Are there certain groups, more than others, who report having access to green or blue spaces within * 5 *minutes of their homes.*
+
+```{r}
+gb_scotland_2019 %>%
+  arrange(desc(a_5_minute_walk_or_less))
+
+```
+
+Ok, so in this case we seem to have a reasonably significant gap of four percentage points between those living in "Rural" settings and all other groups. Not too surprising a conclusion, but slightly interesting to see how this is gap is diluted to the point once we move up to 10 minutes as our threshold. 
+
