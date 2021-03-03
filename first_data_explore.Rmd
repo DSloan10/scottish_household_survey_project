@@ -341,13 +341,20 @@ Think I need another quick check on whether this has worked. Will go back to the
 
 ```{r}
 gb_pivot_plus_less_11 %>% 
-  filter(local_authority == "City of Edinburgh") 
+  filter(local_authority == "Scotland",
+         household_type == "With Children") %>% 
+  select(-c(type_of_tenure, ethnicity, age, gender, urban_rural_classification, simd_quintiles))
+```
+```{r}
+gb_long_pivot_back %>% 
+  filter(local_authority == "Scotland",
+         class == "With Children")
 ```
 
 
 ```{r}
 gb_long_pivot_back %>%
-  filter(local_authority == "Dundee City") %>% 
+  filter(local_authority == "Scotland") %>% 
   ggplot() +
   aes(x = date_code, y = less_than_11_mins, colour = class) +
   geom_line()
@@ -355,6 +362,34 @@ gb_long_pivot_back %>%
 
 Think about what else we could do with means over the date covered.
 
+```{r}
+all_la_percents_filtered <-
+all_la_percents %>% 
+  select(c(date_code, local_authority, less_than_11_mins, an_11_minute_walk_or_more, a_5_minute_walk_or_less, within_a_6_10_minute_walk, dont_know)) %>% 
+  rename(year = date_code)
+```
+
+```{r}
+gb_long_back_ordered <-
+gb_long_pivot_back %>% 
+  select(c(date_code, local_authority, type, class, less_than_11_mins, an_11_minute_walk_or_more, a_5_minute_walk_or_less, within_a_6_10_minute_walk, dont_know)) %>% 
+  rename(year = date_code) %>% 
+  mutate(class = if_else((type == "ethnicity") &
+                           (class == "Other"), 
+                         "Non_White_Ethnicity", class)) %>% 
+  mutate(class = if_else((type == "type_of_tenure") &
+                           (class == "Other"),
+                         "Other Tenure", class)) %>% 
+  mutate(class = recode(class, Adults = "Adults (non pension, no children)")) %>% 
+  arrange(local_authority, type, class, year)
+
+gb_long_back_ordered
 
 
+```
+
+```{r}
+write_csv(all_la_percents_filtered, "gb_local_authority_walk_dist_percent_shs.csv")
+write_csv(gb_long_back_ordered, "gb_walk_dist_long_pivot_shs.csv")
+```
 
