@@ -19,7 +19,12 @@ read_csv(here::here("data/clean_data/gb_walk_dist_long_pivot_shs.csv")) %>% clea
 
 BQ: 1. Are there certain groups that have local access to green space?
 
-DQ: *Are there certain groups, more than others, who report having access to green or blue spaces within 10 minutes of their homes.*
+DQ: 1. *Are there certain groups, more than others, who report having access to green or blue spaces within 10 minutes of their homes.*
+
+BQ: 2. Are there groups that are lacking access?
+
+DQ: 2. *Are there certain groups, more than others, who report having access to green or blue spaces further than 10 minutes away from their homes.*
+
 
 First, we will take a broad overview of the population of Scotland and isolate whether there are any particular groups that had a high percentage of respondents reporting having green or blue space within 10 minutes of their homes:
 
@@ -161,3 +166,50 @@ all_means_scot_groups_less_11 %>%
   scale_x_continuous(breaks = seq(from = 0, to = 100, by = 10))
 ```
 
+Looking at these graphs, the following conclusions spring to mind which require further analysis:
+
+1. It looks like there is a sustained gap between people with a mortgage and other types of tenure. This is quite curios, especially considering one of these alternative groups is owned outright. Equally, it appears that individuals who reported having an other form of tenure apart from those provided were less likely to have local access. 
+2. Although there is a gap between the two SIMD groups, this is perhaps not as large as I would have expected. 3. Pensioners seem to lag behind other household groups. 
+4. Males report closer access, but not by a large margin. 
+5. 65 year-olds and older seem to lag to a significant level behind other age groups.
+6. Perhaps most strikingly of all, those of White ethnicity are far more likely to report having local access to green space when compared to all other individuals of Non-White Ethnicity.
+
+Now that we have some conclusions that may answer our first two questions, I'd like to move on and address the regional element within the brief and in turn perhaps partly answer question 4 namely:
+
+BQ & DQ 4: *Are there any differences between rural and urban areas?*
+
+So to begin with, it looks like urban areas only slightly lag behind rural areas. This is in itself quite interesting as I would expect this to be the variable that had the largest effect on access to green space. For a bit more illumination on the matter, I think it would be good to take a look at the regional figures. Firstly, let's look at the levels of access across all groups, but split by region.
+
+```{r}
+
+local_means <-
+local_authority_only_data %>% 
+  group_by(local_authority) %>% 
+  summarise(mean = round(mean(less_than_11_mins))) %>% 
+  arrange(desc(mean))
+
+local_means
+```
+
+```{r}
+local_means %>% 
+  ggplot() +
+  aes(x = mean, y = local_authority) +
+  geom_col() +
+  scale_x_continuous(breaks = seq(from = 0, to = 100, by = 10))
+```
+
+So this ends up throwing up some genuinely interesting and surprising figures. Who, for example, would think that on average an individual living in the City of Edinburgh would be almost ten percentage points more likely to report having local access to green space when compared to someone from Orkney!! Now it seems like we can see why the Urban vs Rural divide is not as large as would have first been anticipated. Like the groups addressed earlier, it seems that in general a vast majority of people live with local access to green spaces as I have defined it. 
+
+What could be interesting is to see what sort of change in figures we get if this definition is adjusted. Equally, it would be be informative to start combining the local_authority data with the groups. Although not all combinations will have data available, it will be interested to compare these nonetheless. 
+
+
+
+
+
+
+3. Are there big differences in how far people have to walk to access their green space?
+
+*Is the data on the overall sample very skewed towards one out of the three categories or is it relatively evenly dispersed amongst small, medium and long walks to green spaces.*
+
+*Are similar skews replicated across different regions or are they consistent with the national average.*
