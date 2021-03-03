@@ -46,6 +46,16 @@ all_walk_dist_categories %>%
 all_means_scot_groups_less_11
 ```
 
+```{r}
+all_cats_2019 <-
+all_walk_dist_categories %>% 
+  filter(local_authority == "Scotland",
+         year == "2019") %>% 
+  group_by(type, class) %>% 
+  summarise(less_than_11_mins) %>% 
+  arrange(desc(less_than_11_mins))
+```
+
 **Means has been taken across the two different data frames. The first shows the average for different groups across the available years (2013 - 2019) based on all percentages reported individually by local_authorities. The second shows averages for different groups across the same years but with percentages reported for Scotland in total. Given that the totals for both datasets were originally provided in round numbers, the means have also been rounded.**
 
 Also, given that there are a number of gaps in the regional datasets for certain groups across the years, it has been concluded that the overall Scotland-wide figures would be more robust in terms of analysis. This is especially the case for classes such as "Non-White_Ethnicity" and "Other Tenures", which in the case of the former we only have Scottish and Glasgow-wide percentages and in the case of the latter only Scotland. 
@@ -61,10 +71,93 @@ all_means_scot_groups_less_11 %>%
   ggplot() + 
   aes(x = mean, y = class, fill = type) +
   geom_col() +
-  scale_x_continuous( , 100)
+  scale_x_continuous(breaks = seq(from = 0, to = 100, by = 10))
   
+```
+
+```{r}
+#And this shows just 2019 figures, once again just for Scotland
+all_cats_2019 %>%
+  ggplot() + 
+  aes(x = less_than_11_mins, y = class, fill = type) +
+  geom_col() +
+  scale_x_continuous(breaks = seq(from = 0, to = 100, by = 10))
+
 ```
 
 With all these caveats in mind, looking at our data we see relatively high levels across the different groups. Nominally, the groups with the largest mean percentage were individuals with children and individuals who a mortgage or other substantial domestic loan. The margins between all the different categories are fairly marginal and therefore it makes it relatively difficult to say that for example males are, in general, more likely to live within 10 minutes of a green space when compared to the 80% least deprived in the population, with only 1 percentage point between them. However, what their does appear to be is some clear differences within the different type categories:
 
 What follows is a breakdown of these different types, which is hoped will shed further light on the question at hand. 
+
+```{r}
+all_means_scot_groups_less_11 %>%
+  distinct(type)
+```
+
+
+```{r}
+all_means_scot_groups_less_11 %>% 
+  filter(type == "age") %>% 
+  ggplot() +
+  aes(x = mean, y = class, fill = class) +
+  geom_col() +
+  scale_x_continuous(breaks = seq(from = 0, to = 100, by = 10))
+```
+
+```{r}
+all_means_scot_groups_less_11 %>% 
+  filter(type == "ethnicity") %>% 
+  ggplot() +
+  aes(x = mean, y = class, fill = class) +
+  geom_col() +
+  scale_x_continuous(breaks = seq(from = 0, to = 100, by = 10))
+
+```
+
+```{r}
+all_means_scot_groups_less_11 %>% 
+  filter(type == "gender") %>% 
+  ggplot() +
+  aes(x = mean, y = class, fill = class) +
+  geom_col() +
+  scale_x_continuous(breaks = seq(from = 0, to = 100, by = 10))
+
+```
+
+```{r}
+all_means_scot_groups_less_11 %>% 
+  filter(type == "household_type") %>% 
+  ggplot() +
+  aes(x = mean, y = class, fill = class) +
+  geom_col() +
+  scale_x_continuous(breaks = seq(from = 0, to = 100, by = 10))
+```
+
+```{r}
+all_means_scot_groups_less_11 %>% 
+  filter(type == "simd_quintiles") %>% 
+  ggplot() +
+  aes(x = mean, y = class, fill = class) +
+  geom_col() +
+  scale_x_continuous(breaks = seq(from = 0, to = 100, by = 10))
+```
+
+```{r}
+all_means_scot_groups_less_11 %>% 
+  filter(type == "type_of_tenure") %>% 
+  ggplot() +
+  aes(x = mean, y = class, fill = class) +
+  geom_col() +
+  scale_x_continuous(breaks = seq(from = 0, to = 100, by = 10))
+
+```
+
+```{r}
+all_means_scot_groups_less_11 %>% 
+  filter(type == "urban_rural_classification") %>% 
+  ggplot() +
+  aes(x = mean, y = class, fill = class) +
+  geom_col() +
+  scale_x_continuous(breaks = seq(from = 0, to = 100, by = 10))
+```
+
