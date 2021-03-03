@@ -1,0 +1,70 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+library(janitor)
+library(here)
+
+```
+
+```{r}
+local_authority_only_data <- read_csv(here::here("data/clean_data/gb_local_authority_walk_dist_percent_shs.csv")) %>% clean_names()
+
+all_walk_dist_categories <-
+read_csv(here::here("data/clean_data/gb_walk_dist_long_pivot_shs.csv")) %>% clean_names()
+```
+
+BQ: 1. Are there certain groups that have local access to green space?
+
+DQ: *Are there certain groups, more than others, who report having access to green or blue spaces within 10 minutes of their homes.*
+
+First, we will take a broad overview of the population of Scotland and isolate whether there are any particular groups that had a high percentage of respondents reporting having green or blue space within 10 minutes of their homes:
+
+```{r}
+all_walk_dist_categories %>% 
+  filter(local_authority == "Scotland")
+```
+
+
+```{r}
+all_walk_dist_categories %>% 
+  filter(local_authority != "Scotland") %>% 
+  group_by(type, class) %>% 
+  summarise(mean = round(mean(less_than_11_mins))) %>% 
+  arrange(desc(mean))
+
+all_means_scot_groups_less_11 <-
+all_walk_dist_categories %>% 
+  filter(local_authority == "Scotland") %>% 
+  group_by(type, class) %>% 
+  summarise(mean = round(mean(less_than_11_mins))) %>% 
+  arrange(desc(mean))
+
+all_means_scot_groups_less_11
+```
+
+**Means has been taken across the two different data frames. The first shows the average for different groups across the available years (2013 - 2019) based on all percentages reported individually by local_authorities. The second shows averages for different groups across the same years but with percentages reported for Scotland in total. Given that the totals for both datasets were originally provided in round numbers, the means have also been rounded.**
+
+Also, given that there are a number of gaps in the regional datasets for certain groups across the years, it has been concluded that the overall Scotland-wide figures would be more robust in terms of analysis. This is especially the case for classes such as "Non-White_Ethnicity" and "Other Tenures", which in the case of the former we only have Scottish and Glasgow-wide percentages and in the case of the latter only Scotland. 
+
+The level of significance that can be drawn from such data is questionable. Firstly, the walking time-distance categories are very much estimates. It is interesting to consider other real-world and hypothetical ways in which estimates such as these could be made more accurate, including using more precise census data and/or polygon map analyses to more adequately measure the distance from an individuals home to a place of green space. In the case of the former, confidentiality issues would more than like raise they're head. In the case of the former, it is almost certain that a large degree on granularity in terms of individuals personally characteristics would be lost, especially in terms of more built up urban areas with multiple occupants in high rises. Finally, there is actually a large argument to suggest that accuracy in terms of home to green space measurements is not the key attribute to be focussed in on. 
+
+However, it is my understanding that the impact of green space is being explored mainly as a force for the improvement of individuals mental, as well as physical, well-being. With this in mind, it seems entirely appropriate that it is a subjective estimate being explored which suggests the psychological rather than exact physical distance of green spaces to individual homes. Using a categorical estimate actually adds a great deal of subjective relevance to the measures, rather than drawing away from them. A ninety year old with a zimmer-frame may have a very different understanding of a 10-minute walk when compared to an 18 year-old. The estimate also gets us over the tricky issue of what access actually means. When using an estimate, access is quickly defined as what people themselves feel is available to them which ultimately dictates whether they make use of any real or perceived access. 
+
+
+```{r}
+#To clarify, this is a graph for the whole of Scotland showing the mean values across from 2013 to 2019. 
+all_means_scot_groups_less_11 %>%
+  ggplot() + 
+  aes(x = mean, y = class, fill = type) +
+  geom_col() +
+  scale_x_continuous( , 100)
+  
+```
+
+With all these caveats in mind, looking at our data we see relatively high levels across the different groups. Nominally, the groups with the largest mean percentage were individuals with children and individuals who a mortgage or other substantial domestic loan. The margins between all the different categories are fairly marginal and therefore it makes it relatively difficult to say that for example males are, in general, more likely to live within 10 minutes of a green space when compared to the 80% least deprived in the population, with only 1 percentage point between them. However, what their does appear to be is some clear differences within the different type categories:
+
+What follows is a breakdown of these different types, which is hoped will shed further light on the question at hand. 
