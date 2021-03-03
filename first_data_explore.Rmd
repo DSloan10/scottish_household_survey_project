@@ -328,10 +328,33 @@ all_la_percents %>%
 ```{r}
 #Might have another go at a pivot to see if we can get multiple things on the board. 
 
-
+gb_long_pivot_back <-
 gb_pivot_plus_less_11 %>% 
   pivot_longer(c(age, gender, urban_rural_classification, simd_quintiles, type_of_tenure, household_type, ethnicity), names_to = "type", values_to = "class") %>% 
   filter(class != "All")
 
+
+gb_long_pivot_back
 ```
+
+Think I need another quick check on whether this has worked. Will go back to the original:
+
+```{r}
+gb_pivot_plus_less_11 %>% 
+  filter(local_authority == "City of Edinburgh") 
+```
+
+
+```{r}
+gb_long_pivot_back %>%
+  filter(local_authority == "Dundee City") %>% 
+  ggplot() +
+  aes(x = date_code, y = less_than_11_mins, colour = class) +
+  geom_line()
+```
+
+Think about what else we could do with means over the date covered.
+
+
+
 
