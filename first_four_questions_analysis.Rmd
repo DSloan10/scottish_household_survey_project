@@ -387,7 +387,6 @@ local_means %>%
 ```
 
 
-
 3. Are there big differences in how far people have to walk to access their green space?
 
 *Is the data on the overall sample very skewed towards one out of the three categories or is it relatively evenly dispersed amongst small, medium and long walks to green spaces.*

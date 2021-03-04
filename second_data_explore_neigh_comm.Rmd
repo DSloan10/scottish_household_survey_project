@@ -1,0 +1,163 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+library(janitor)
+library(ggplot2)
+library(here)
+
+neighbourhood_comp_data <- read_csv("data/complete_neighbourhood_rating.csv") %>% clean_names()
+community_comp_data <- read_csv("data/complete_community_belonging.csv") %>% clean_names()
+local_authority_codes <- read_csv("data/Local_Authority_Districts_Codes.csv") %>% clean_names()
+green_blue_comp_data <- read_csv("data/complete_dist_blue_green.csv") %>% clean_names()
+
+
+```
+
+```{r}
+scot_local_auth_codes <-
+local_authority_codes %>% 
+  filter(str_detect(lad19cd, "S12")) %>% 
+  select(lad19cd, lad19nm) %>% 
+  rename(feature_code = lad19cd,
+         local_authority = lad19nm)
+```
+
+```{r}
+neigh_with_las_data <-
+full_join(neighbourhood_comp_data, scot_local_auth_codes, "feature_code")
+
+neigh_with_las_data <-
+neigh_with_las_data %>% 
+  mutate(local_authority = if_else(feature_code == "S92000003", "Scotland", local_authority))
+
+neigh_with_las_data
+```
+
+```{r}
+commun_with_las_data <-
+full_join(community_comp_data, scot_local_auth_codes, "feature_code")
+
+commun_with_las_data <-
+commun_with_las_data %>% 
+  mutate(local_authority = if_else(feature_code == "S92000003", "Scotland", local_authority))
+
+commun_with_las_data
+```
+
+```{r}
+commun_filtered <-
+commun_with_las_data %>%
+  filter(measurement == "Percent") %>% 
+  select(-c(feature_code, units, measurement))
+
+neigh_filtered <-
+neigh_with_las_data %>%
+  filter(measurement == "Percent") %>% 
+  select(-c(feature_code, units, measurement))
+```
+
+```{r}
+neigh_filtered
+
+commun_filtered
+```
+```{r}
+neigh_pivot_wide <-
+neigh_filtered %>% 
+pivot_wider(names_prefix = "nr_", names_from = neighbourhood_rating, values_from = value)
+
+commun_pivot_wide <-
+commun_filtered %>% 
+pivot_wider(names_prefix = "com_bel_", names_from = community_belonging, values_from = value)
+```
+
+```{r}
+#This may be slightly dodgy since we're not completely sure that the two data sets refer to the same individuals. We're probably going to end up with quite a lot of missing values as well
+
+neigh_comm_original_join <-
+full_join(neigh_pivot_wide, commun_pivot_wide) %>% 
+  clean_names()
+```
+
+```{r}
+just_walking_distance_neigh_comm <-
+neigh_comm_original_join %>% 
+  filter(walking_distance_to_nearest_greenspace != "All")
+
+just_walking_distance_neigh_comm
+```
+
+```{r}
+neigh_comm_original_join %>%
+  ggplot() +
+  aes(x = nr_very_good, y = com_bel_very_strongly, color = walking_distance_to_nearest_greenspace) +
+  geom_point()
+```
+
+```{r}
+just_walking_distance_neigh_comm %>% 
+  ggplot() +
+  aes(x = nr_very_good, y = com_bel_very_strongly, color = walking_distance_to_nearest_greenspace) +
+  geom_point()
+```
+
+```{r}
+just_walking_distance_neigh_comm %>% 
+  ggplot() +
+  aes(x = nr_fairly_good, y = com_bel_fairly_strongly, color = walking_distance_to_nearest_greenspace) +
+  geom_point()
+```
+
+```{r}
+just_walking_distance_neigh_comm %>% 
+  ggplot() +
+  aes(x = nr_fairly_poor, y = com_bel_not_very_strongly, color = walking_distance_to_nearest_greenspace) +
+  geom_point()
+```
+
+```{r}
+just_walking_distance_neigh_comm %>% 
+  ggplot() +
+  aes(x = nr_very_poor, y = com_bel_not_at_all_strongly, color = walking_distance_to_nearest_greenspace) +
+  geom_point()
+```
+
+Cool, so we've plotted some of the relationships between the the neighbourhood ratings and the community belonging ratings, based on the fact that they both pretty much exist on a evenly spaced four-point scale (with an extra don't know section each). 
+
+Now let's see if we can add the green/blue space data and even if we can use all of this to start forming a model. 
+
+```{r}
+gb_full_clean <-
+full_join(green_blue_comp_data, scot_local_auth_codes, "feature_code") %>% 
+  mutate(local_authority = if_else(feature_code == "S92000003", 
+                                   "Scotland", 
+                                   local_authority)) %>% 
+  filter(measurement == "Percent") %>% 
+  select(-c(feature_code, units, measurement)) %>% 
+    pivot_wider(names_from = distance_to_nearest_green_or_blue_space,
+              values_from = value) %>% 
+  clean_names() %>% 
+  mutate(less_than_11_mins = a_5_minute_walk_or_less + within_a_6_10_minute_walk)
+
+gb_full_clean
+```
+```{r}
+# There must be something going on with the extra walking_distance_column which might effect any join. I'm guessing it would just mean gaps though. 
+setdiff(gb_full_clean$date_code:local_authority, neigh_comm_original_join$date_code:)
+```
+
+```{r}
+full_join(gb_full_clean, neigh_comm_original_join) %>% 
+  filter(walking_distance_to_nearest_greenspace == "All")
+```
+
+Need to have a good think what is actually being joined here and in what manner it may be inaccurate.
+
+```{r}
+
+```
+
