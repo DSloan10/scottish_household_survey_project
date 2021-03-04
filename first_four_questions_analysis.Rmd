@@ -185,16 +185,19 @@ So to begin with, it looks like urban areas only slightly lag behind rural areas
 local_means <-
 local_authority_only_data %>% 
   group_by(local_authority) %>% 
-  summarise(mean = round(mean(less_than_11_mins))) %>% 
-  arrange(desc(mean))
+  summarise(less_6_mean = round(mean(a_5_minute_walk_or_less)),
+            less_11_mean = round(mean(less_than_11_mins)),
+            plus_11_mean = round(mean(an_11_minute_walk_or_more))) %>% 
+  arrange(desc(less_11_mean))
 
 local_means
 ```
 
 ```{r}
+
 local_means %>% 
   ggplot() +
-  aes(x = mean, y = local_authority) +
+  aes(x = less_11_mean, y = local_authority) +
   geom_col() +
   scale_x_continuous(breaks = seq(from = 0, to = 100, by = 10))
 ```
@@ -203,8 +206,185 @@ So this ends up throwing up some genuinely interesting and surprising figures. W
 
 What could be interesting is to see what sort of change in figures we get if this definition is adjusted. Equally, it would be be informative to start combining the local_authority data with the groups. Although not all combinations will have data available, it will be interested to compare these nonetheless. 
 
+**Definition Adjusted** - Within 5 minutes.
 
+This change definetely has president. Investigating a little further, it seems that a couple of government sources referencing access to green space actually use a 5 minute walk or less as their definition [ref1](https://nationalperformance.gov.scot/access-green-and-blue-space) , [ref2] (https://nationalperformance.gov.scot/measuring-progress/national-indicator-performance).
 
+So, with this in mind, let's run the above analysis again with the adjusted definition:
+
+```{r}
+#First, creating a data frame with means of all the different groups from 2013-2019 for the whole of Scotland.
+
+minus_5_all_means_scot_groups <-
+all_walk_dist_categories %>% 
+  filter(local_authority == "Scotland") %>% 
+  group_by(type, class) %>% 
+  summarise(mean = round(mean(a_5_minute_walk_or_less))) %>% 
+  arrange(desc(mean))
+
+minus_5_all_means_scot_groups
+```
+
+```{r}
+minus_5_all_cats_2019 <-
+all_walk_dist_categories %>% 
+  filter(local_authority == "Scotland",
+         year == "2019") %>% 
+  group_by(type, class) %>% 
+  summarise(a_5_minute_walk_or_less) %>% 
+  arrange(desc(a_5_minute_walk_or_less))
+
+minus_5_all_cats_2019
+```
+
+```{r}
+minus_5_all_means_scot_groups %>%
+  ggplot() + 
+  aes(x = mean, y = class, fill = type) +
+  geom_col() +
+  scale_x_continuous(breaks = seq(from = 0, to = 100, by = 10))
+```
+
+```{r}
+minus_5_all_cats_2019 %>%
+  ggplot() + 
+  aes(x = a_5_minute_walk_or_less, y = class, fill = type) +
+  geom_col() +
+  scale_x_continuous(breaks = seq(from = 0, to = 100, by = 10))
+```
+
+```{r}
+minus_5_all_means_scot_groups %>% 
+  filter(type == "age") %>% 
+  ggplot() +
+  aes(x = mean, y = class, fill = class) +
+  geom_col() +
+  scale_x_continuous(breaks = seq(from = 0, to = 100, by = 10))
+```
+
+```{r}
+minus_5_all_means_scot_groups %>%
+  filter(type == "ethnicity") %>% 
+  ggplot() +
+  aes(x = mean, y = class, fill = class) +
+  geom_col() +
+  scale_x_continuous(breaks = seq(from = 0, to = 100, by = 10))
+
+```
+
+```{r}
+minus_5_all_means_scot_groups %>%
+  filter(type == "gender") %>% 
+  ggplot() +
+  aes(x = mean, y = class, fill = class) +
+  geom_col() +
+  scale_x_continuous(breaks = seq(from = 0, to = 100, by = 10))
+
+```
+
+```{r}
+minus_5_all_means_scot_groups %>% 
+  filter(type == "household_type") %>% 
+  ggplot() +
+  aes(x = mean, y = class, fill = class) +
+  geom_col() +
+  scale_x_continuous(breaks = seq(from = 0, to = 100, by = 10))
+```
+
+```{r}
+minus_5_all_means_scot_groups %>%
+  filter(type == "simd_quintiles") %>% 
+  ggplot() +
+  aes(x = mean, y = class, fill = class) +
+  geom_col() +
+  scale_x_continuous(breaks = seq(from = 0, to = 100, by = 10))
+```
+
+```{r}
+minus_5_all_means_scot_groups %>% 
+  filter(type == "type_of_tenure") %>% 
+  ggplot() +
+  aes(x = mean, y = class, fill = class) +
+  geom_col() +
+  scale_x_continuous(breaks = seq(from = 0, to = 100, by = 10))
+
+```
+
+```{r}
+minus_5_all_means_scot_groups %>%
+  filter(type == "urban_rural_classification") %>% 
+  ggplot() +
+  aes(x = mean, y = class, fill = class) +
+  geom_col() +
+  scale_x_continuous(breaks = seq(from = 0, to = 100, by = 10))
+```
+
+**A quick note: Among the national performance documentation, there are some more excellent definitions and criteria for change noted:**
+
+*Definitions:*
+
+Adults are people resident in Scotland aged over 16.
+
+*Green and Blue Space is described in the Scottish Household Survey as comprising ‘public green or open spaces in your local area, for example a park, countryside, wood, play area, canal path, riverside or beach’.*
+
+*Criteria for Change:*
+
+Any difference in the percentage within +/- 2 percentage points of last year's figure suggests that the position is more likely to be maintaining than showing any change. 
+An increase of 2 percentage points or more suggests the position is improving.
+A decrease of 2 percentage points or more suggests the position is worsening. 
+The threshold of 2 percentage points chosen is based on the data currently, and may be reviewed as more data points become available
+
+*With the above +/- 2 percentage point criteria in mind, I would suggest that the same measure could also be used as a *criteria for significance *. In other words, if there is a difference of +/- 2 percentage points between one group and another, then it is deemed that one class in a type is more likely/less likely than another to have access to green/blue space.*
+
+Looking at a lot of these graphs, it looks like many of the patterns within and between categories have been intensified, whilst others have changed to a significant degree.
+
+1. The gap between those who have a mortgage/other domestic loan and other tenure groups has been maintained. Interestingly, the Social Renting group has dropped below the group Other Tenure. The percentage point gap between mortgage and social renting group was nine points.
+2. The gap between the two SIMD groups has widened significantly. In the 10 or less analysis, it was 4 percentage points. In 5 or less, it is 8 points.
+3. Pensioners once again lagged behind adults with and without children.
+4. Males once again report closer access, with the margin growing only slightly from 2 percentage points to 3.
+5. The gap between 65-year-olds+ was maintained. 
+6. Once again, the headline figure is that the gap in local access between white and non-white ethnicity has been further widened with a gap of 13 percentage points, up from 8. Those classed as non-white ethnicity had the lowest percentage of any group addressed over the last 7 years period looked into, with only 54% having access to green or blue space within 5 minutes walk of there house. **This should be put into context by highlighting the definition again**.
+
+Generate means for all walking distances.
+
+```{r}
+all_walk_dist_means_scot_groups <-
+all_walk_dist_categories %>% 
+  filter(local_authority == "Scotland") %>% 
+  group_by(type, class) %>% 
+  summarise(less_6_mean = round(mean(a_5_minute_walk_or_less)),
+            less_11_mean = round(mean(less_than_11_mins)),
+            plus_11_mean = round(mean(an_11_minute_walk_or_more))) %>% 
+  arrange(desc(less_6_mean))
+
+all_walk_dist_means_scot_groups
+```
+
+```{r}
+all_walk_dist_means_scot_groups %>% 
+  filter(type == "urban_rural_classification")
+```
+
+Another striking insight from the change in definition is the significant change in the urban/rural split. In the less than 11 mean, we had only a slight 1 point difference between the two groups. Yet, once we look at 5 mins of less, we see the gap increase to 12 percentage points in favor of those in a rural setting. 
+
+**It would be interesting to double-check what the definition used is for rural/urban in the survey or whether this is once again just a subjective response**.
+
+**Looks like there is a good source for this created and published in 2016 [ref3](https://www.gov.scot/publications/scottish-government-urban-rural-classification-2016/pages/2/). I think that it is the 2-fold classification currently being used, This states the the rural classification starts with "Areas with a population of less than 3,000 people, and within a drive time of 30 minutes to a Settlement of 10,000 or more". 
+
+Now, let's have a look at regional figures again, this time for less than 5 minutes walk:
+
+```{r}
+local_means %>% 
+  ggplot() +
+  aes(x = less_6_mean, y = local_authority) +
+  geom_col() +
+  scale_x_continuous(breaks = seq(from = 0, to = 100, by = 10))
+```
+```{r}
+#Could do some sort of plus/minus visualization based on Scotland for these types of graphs.
+local_means %>% 
+  arrange(desc(less_6_mean))
+```
 
 
 
