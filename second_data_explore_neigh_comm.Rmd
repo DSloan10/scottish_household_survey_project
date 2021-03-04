@@ -7,6 +7,7 @@ output: html_notebook
 library(tidyverse)
 library(janitor)
 library(ggplot2)
+library(GGally)
 library(here)
 
 neighbourhood_comp_data <- read_csv("data/complete_neighbourhood_rating.csv") %>% clean_names()
@@ -145,17 +146,32 @@ full_join(green_blue_comp_data, scot_local_auth_codes, "feature_code") %>%
 
 gb_full_clean
 ```
+
 ```{r}
 # There must be something going on with the extra walking_distance_column which might effect any join. I'm guessing it would just mean gaps though. 
-setdiff(gb_full_clean$date_code:local_authority, neigh_comm_original_join$date_code:)
+#setdiff(gb_full_clean$date_code:local_authority, neigh_comm_original_join$date_code:)
 ```
 
 ```{r}
+#Pretty sure this won't work. The figures for percentage of people in certain walking distance just wouldn't relate to the neighbourhood and community figures the way we'd want them to.
 full_join(gb_full_clean, neigh_comm_original_join) %>% 
   filter(walking_distance_to_nearest_greenspace == "All")
 ```
 
 Need to have a good think what is actually being joined here and in what manner it may be inaccurate.
+
+Let's just go with making a single model based on the combined neighbourhood and community dataframes. I'm going to first try this with the entire dataset and then try it with the dataset that has no "All's" in the walking_distance category. 
+
+```{r}
+summary(neigh_comm_original_join)
+```
+
+```{r}
+neigh_comm_original_join %>% 
+summarise(across(.fns = ~sum(is.na(.x))))
+```
+
+The NAs are in the ratings columns representing percentage of people who have this opinion. My gut says that we should think about making these have values of either 0 or 1. We could always try both and see what happens I suppose...
 
 ```{r}
 

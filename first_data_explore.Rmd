@@ -97,6 +97,13 @@ gb_with_las_data %>%
 
 gb_with_las_data
 ```
+```{r}
+gb_with_las_data_test <-
+  gb_with_las_data %>% 
+  arrange(feature_code, date_code)
+```
+
+
 
 ```{r}
 neigh_with_las_data <-
