@@ -387,8 +387,84 @@ local_means %>%
 ```
 
 
+
 3. Are there big differences in how far people have to walk to access their green space?
 
 *Is the data on the overall sample very skewed towards one out of the three categories or is it relatively evenly dispersed amongst small, medium and long walks to green spaces.*
 
 *Are similar skews replicated across different regions or are they consistent with the national average.*
+
+
+Back to the graphs that we want to have to illustrate and tell the stories that we've found. Let's start with the Scotland means as the zero point for the less than 5 and, maybe, less that 10 percentages. Let's put a hover on this one as well. 
+
+```{r}
+local_means_plus_minus_scot <-
+local_means %>% 
+  mutate(pl_min_less_6 = less_6_mean - less_6_mean[local_authority == "Scotland"],
+         pl_min_less_11 = less_11_mean - less_11_mean[local_authority == "Scotland"],
+         pl_min_plus_11 = plus_11_mean - plus_11_mean[local_authority == "Scotland"],
+         above_below_less_6 = if_else(pl_min_less_6 < 0, "below", "above"))
+```
+
+
+
+```{r}
+library(plotly)
+```
+
+
+```{r}
+local_means_plus_minus_scot <-
+ local_means_plus_minus_scot %>% 
+  mutate(local_authority = fct_reorder(local_authority, pl_min_less_6))
+
+#Could we do a cheeky bit of normalization here? Like they do in the example. 
+plus_minus_plot <-
+local_means_plus_minus_scot %>%
+  ggplot(aes(x = local_authority, y = pl_min_less_6, label = local_authority)) +
+  geom_bar(stat = 'identity', aes(fill = above_below_less_6), width = .5) +
+  scale_fill_manual(name = "Mean Percentage",
+                    labels = c("Above Scotland", "Below Scotland"),
+                    values = c("above" = "#00ba38", "below"= "#f8766d")) +
+  labs(title = "Percentage of Population Within a 5-minute Walk of Green Space",
+          subtitle = "Mean figures between 2013 - 2019") +
+  coord_flip()
+
+plus_minus_plot
+```
+
+```{r}
+ggplotly(plus_minus_plot)
+```
+
+```{r}
+local_means
+```
+
+
+```{r}
+#These are larger joint boards for electoral registration and the purposes of property valuation for assessing council tax and rates. Seems suitable if we're looking at tenure types. 
+
+#regions_added_all_walks <- 
+all_walk_dist_categories %>%
+  mutate(electoral_region = case_when(local_authority %in% c("East Ayrshire", "North Ayrshire", "South Ayrshire") ~ "Ayrshire",
+                                      local_authority %in% c("Scottish Borders") ~ "Borders",
+                                      local_authority %in% c("Clackmannanshire", "Falkirk", "Stirling") ~ "Central Scotland",
+                                      local_authority %in% c("Dumfries and Galloway") ~ "Dumfries and Galloway",
+                                      local_authority %in% c("Argyll and Bute", "East Dunbartonshire", "West Dunbartonshire") ~ "Dunbartonshire and Argyll & Bute",
+                                      local_authority %in% c("Fife") ~ "Fife",
+                                      local_authority %in% c("Aberdeen City", "Aberdeenshire", "Moray") ~ "Grampian",
+                                      local_authority %in% c("Glasgow City") ~ "Glasgow",
+                                      local_authority %in% c("Highland", "Na h-Eileanan Siar") ~ "Highlands and Western Isles",
+                                      local_authority %in% c("North Lanarkshire", "South Lanarkshire") ~ "Lanarkshire",
+                                      local_authority %in% c("East Lothian", "City of Edinburgh", "Midlothian", "West Lothian") ~ "Lothian",
+                                      local_authority %in% c("Orkney Islands", "Shetland Islands") ~ "Orkney and Shetland",
+                                      local_authority %in% c("East Renfrewshire", "Inverclyde", "Renfrewshire") ~ "Renfrewshire",
+                                      local_authority %in% c("Angus", "Dundee City", "Perth and Kinross") ~ "Tayside"
+  )
+  )
+                                      
+         
+  
+```
+

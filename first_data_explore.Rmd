@@ -103,8 +103,6 @@ gb_with_las_data_test <-
   arrange(feature_code, date_code)
 ```
 
-
-
 ```{r}
 neigh_with_las_data <-
 full_join(neighbourhood_comp_data, scot_local_auth_codes, "feature_code")
@@ -115,6 +113,13 @@ neigh_with_las_data %>%
 
 neigh_with_las_data
 ```
+
+```{r}
+neigh_with_las_data_test <-
+  neigh_with_las_data %>% 
+  arrange(feature_code, date_code, neighbourhood_rating)
+```
+
 
 ```{r}
 commun_with_las_data <-
@@ -400,3 +405,14 @@ write_csv(all_la_percents_filtered, "gb_local_authority_walk_dist_percent_shs.cs
 write_csv(gb_long_back_ordered, "gb_walk_dist_long_pivot_shs.csv")
 ```
 
+Some extra checks for interesting combos with local authorities:
+
+```{r}
+gb_long_back_ordered %>% 
+  group_by(local_authority, class) %>% 
+  summarise(n = n())
+  
+  
+```
+
+So it looks like we've got missing years for different classes, further complicating the analysis. Good to know though. 

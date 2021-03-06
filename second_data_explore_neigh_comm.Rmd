@@ -173,6 +173,14 @@ summarise(across(.fns = ~sum(is.na(.x))))
 
 The NAs are in the ratings columns representing percentage of people who have this opinion. My gut says that we should think about making these have values of either 0 or 1. We could always try both and see what happens I suppose...
 
+**A note on where we are as we start thinking about variable engineering**
+
+Overall, no matter how we wrangle our data, our dependent variables will be our household rating and community rating variables.
+
+In our current dataset, these are split into 5 different categories for each (including "don't know"). These scores are given as percentages and we will therefore be treating them like continuous variables. 
+
+These variables are currently in a wide format. This means that theoretically if we wanted to predict what a particular score for "very good" would look like for a particular group, we would need to make this the single dependent variable in any model.
+
 ```{r}
 
 ```
