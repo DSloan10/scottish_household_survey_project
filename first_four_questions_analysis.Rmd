@@ -427,11 +427,6 @@ local_means_plus_minus_scot %>%
 plus_minus_plot
 ```
 
-```{r}
-ggplotly(plus_minus_plot)
-```
-
-
 
 ```{r}
 local_means
@@ -523,26 +518,6 @@ label_above_below_with_electoral_regions <-
   coord_flip()
 ```
 
-```{r}
-local_means_plus_minus_scot <-
- local_means_plus_minus_scot %>% 
-  mutate(local_authority = fct_reorder(local_authority, pl_min_less_6))
-
-#Could we do a cheeky bit of normalization here? Like they do in the example. 
-plus_minus_plot <-
-local_means_plus_minus_scot %>%
-  ggplot(aes(x = local_authority, y = pl_min_less_6, label = local_authority)) +
-  geom_bar(stat = 'identity', aes(fill = above_below_less_6), width = .5) +
-  scale_fill_manual(name = "Mean Percentage",
-                    labels = c("Above Scotland", "Below Scotland"),
-                    values = c("above" = "#00ba38", "below"= "#f8766d")) +
-  labs(title = "Percentage of Population Within a 5-minute Walk of Green Space",
-          subtitle = "Mean figures between 2013 - 2019") +
-  coord_flip()
-
-plus_minus_plot
-```
-
 
 ```{r}
 regions_added_all_walks %>% 
@@ -585,9 +560,31 @@ regions_distances_pivot_long %>%
   arrange(desc(values))
 ```
 
-Thinking now to look into a city by city comparison of certain areas, with some Dundee centric stuff in their as you'd expect!
+Thinking now to look into a city by city comparison of certain areas, with some Dundee centric stuff in their as you'd expect! The fact that there was a very low score for females in the less than 
 
 ```{r}
-
+regions_distances_pivot_long
 ```
 
+
+```{r}
+regions_distances_pivot_long %>% 
+  filter(local_authority %in% c("Dundee City", "Aberdeen City", "City of Edinburgh", "Glasgow City"),
+         type == "gender",
+         walking_distance == "a_5_minute_walk_or_less") %>% 
+  ggplot(aes(x = year, y = values, colour = class)) +
+  geom_line() +
+  facet_wrap(~local_authority)
+```
+
+```{r}
+regions_distances_pivot_long %>% 
+  filter(electoral_region %in% c("Tayside", "Grampian", "Lothian", "Glasgow"),
+         type == "gender",
+         walking_distance == "a_5_minute_walk_or_less") %>% 
+  ggplot(aes(x = year, y = values, colour = class)) +
+  geom_line() +
+  facet_wrap(~local_authority)
+```
+
+Most recent population density estimates: 
