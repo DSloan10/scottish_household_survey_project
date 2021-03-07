@@ -18,7 +18,40 @@ urban_rural_2019_with_ex_den <- read_csv("data/urban_rural_2019_with_ex_den.csv"
 
 ```{r}
 la <- st_read("https://opendata.arcgis.com/datasets/2698b6825e88404ab6272a5ff7f59ee6_0.geojson")
+
 ```
+
+```{r}
+loc_authority_with_extra_density_2019     #S12000049    #S12000050
+```
+
+
+```{r}
+loc_authority_with_extra_density_2019 %>% 
+  mutate(recode(feature_code, ))
+```
+
+
+```{r}
+loc_authority_with_extra_density_2019 <-
+  loc_authority_with_extra_density_2019 %>% 
+  mutate(feature_code = recode(feature_code,  S12000049 = "S12000046", S12000050 = "S12000044" 
+         )
+  )
+
+urban_rural_2019_with_ex_den <-
+  urban_rural_2019_with_ex_den %>% 
+  mutate(feature_code = recode(feature_code,  S12000049 = "S12000046", S12000050 = "S12000044" 
+         )
+  )
+```
+
+
+```{r}
+la %>% 
+  filter(lad18nm == "North Lanarkshire")  #S12000046 S12000044
+```
+
 
 ```{r}
 la_loc_authority_ex_den <- inner_join(loc_authority_with_extra_density_2019, la, by = c("feature_code" = "lad18cd"))
@@ -32,8 +65,8 @@ la_urban_rural_2019 <- left_join(urban_rural_2019_with_ex_den, la, by = c("featu
 la_urban_rural_2019
 ```
 ```{r}
-ggplot(data = la_loc_authority_ex_den) +
-  geom_sf(aes(geometry = geometry))
+ggplot() +
+  geom_sf(data = la_loc_authority_ex_den, mapping = aes(geometry = geometry, fill = a_5_minute_walk_or_less), colour = "grey")
 ```
 
 
