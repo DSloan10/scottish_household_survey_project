@@ -15,6 +15,7 @@ local_authority_only_data <- read_csv(here::here("data/clean_data/gb_local_autho
 
 all_walk_dist_categories <-
 read_csv(here::here("data/clean_data/gb_walk_dist_long_pivot_shs.csv")) %>% clean_names()
+
 ```
 
 BQ: 1. Are there certain groups that have local access to green space?
@@ -587,5 +588,20 @@ regions_distances_pivot_long %>%
   facet_wrap(~local_authority)
 ```
 
-Most recent population density estimates: 
+Most recent population density estimates:
+
+```{r}
+library(readxl)
+```
+
+```{r}
+pop_dense_data <- read_xlsx("data/original_data/ons_pop_dens_data.xlsx", skip = 1) %>% clean_names()
+```
+
+So I've managed to find these and to get the feature codes back into the main files. I'm going to now try a join and get in some extra pieces of data. Just realised that this is only for mid-2019 and any joins should only include the 2019 figures. In a way, this is just what we need for a potential leaflet graph later on, a nice static dataset only taking in one year. 
+
+```{r}
+pop_dense_data %>% 
+  select()
+```
 
