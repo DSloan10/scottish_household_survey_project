@@ -601,7 +601,30 @@ pop_dense_data <- read_xlsx("data/original_data/ons_pop_dens_data.xlsx", skip = 
 So I've managed to find these and to get the feature codes back into the main files. I'm going to now try a join and get in some extra pieces of data. Just realised that this is only for mid-2019 and any joins should only include the 2019 figures. In a way, this is just what we need for a potential leaflet graph later on, a nice static dataset only taking in one year. 
 
 ```{r}
+pop_dense_select <-
 pop_dense_data %>% 
-  select()
+  select(-c(la_name, age_85_percent, working_age_16_64_percent, dependency_ratio))
+
+loc_authority_2019 <-
+  local_authority_only_data %>%
+  filter(year == 2019)
+
+all_walk_dist_2019 <-
+  all_walk_dist_categories %>% 
+  filter(year == 2019)
+```
+
+```{r}
+loc_authority_with_extra_density_2019 <-
+left_join(loc_authority_2019, pop_dense_select, by = c("feature_code" = "la_code"))
+```
+
+```{r}
+all_walk_with_extra_density_2019 <-
+left_join(all_walk_dist_2019, pop_dense_select, by = c("feature_code" = "la_code"))
+```
+
+```{r}
+
 ```
 
