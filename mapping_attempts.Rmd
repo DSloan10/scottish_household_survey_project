@@ -1,0 +1,39 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(sf)
+library(tidyverse)
+library(ggplot2)
+
+```
+
+```{r}
+loc_authority_with_extra_density_2019 <- read_csv("data/loc_authority_with_extra_density_2019.csv")
+
+urban_rural_2019_with_ex_den <- read_csv("data/urban_rural_2019_with_ex_den.csv") 
+```
+
+```{r}
+la <- st_read("https://opendata.arcgis.com/datasets/2698b6825e88404ab6272a5ff7f59ee6_0.geojson")
+```
+
+```{r}
+la_loc_authority_ex_den <- inner_join(loc_authority_with_extra_density_2019, la, by = c("feature_code" = "lad18cd"))
+
+la_loc_authority_ex_den
+```
+
+```{r}
+la_urban_rural_2019 <- left_join(urban_rural_2019_with_ex_den, la, by = c("feature_code" = "lad18cd"))
+
+la_urban_rural_2019
+```
+```{r}
+ggplot(data = la_loc_authority_ex_den) +
+  geom_sf(aes(geometry = geometry))
+```
+
+

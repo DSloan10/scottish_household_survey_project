@@ -625,6 +625,14 @@ left_join(all_walk_dist_2019, pop_dense_select, by = c("feature_code" = "la_code
 ```
 
 ```{r}
-
+all_walk_with_extra_density_2019 %>% 
+  distinct(type)
 ```
 
+```{r}
+urban_rural_2019_with_ex_den <-
+all_walk_with_extra_density_2019 %>% 
+  filter(type == "urban_rural_classification")
+
+urban_rural_2019_with_ex_den
+```
