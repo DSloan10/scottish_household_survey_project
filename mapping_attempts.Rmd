@@ -65,6 +65,7 @@ la_urban_rural_2019 <- left_join(urban_rural_2019_with_ex_den, la, by = c("featu
 la_urban_rural_2019
 ```
 ```{r}
+# Need to adjust the zoom, angle and color. 
 ggplot() +
   geom_sf(data = la_loc_authority_ex_den, mapping = aes(geometry = geometry, fill = a_5_minute_walk_or_less), colour = "grey")
 ```

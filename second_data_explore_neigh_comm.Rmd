@@ -102,17 +102,21 @@ neigh_comm_original_join %>%
 ```{r}
 #I quite like this particular graph and the next one as well, although the data probably needs to be cleaned up a bit to get Scotland averages out. 
 just_walking_distance_neigh_comm %>% 
+  filter(walking_distance_to_nearest_greenspace != "Don't Know") %>% 
   ggplot() +
   aes(x = nr_very_good, y = com_bel_very_strongly, color = walking_distance_to_nearest_greenspace) +
-  geom_point()
+  geom_point() +
+  geom_smooth(method = lm, se = FALSE, fullrange = TRUE)
 ```
 
 ```{r}
 #I quite like this particular graph, although the data probably needs to be cleaned up a bit to get Scotland averages out. 
 just_walking_distance_neigh_comm %>% 
+  filter(walking_distance_to_nearest_greenspace != "Don't Know") %>% 
   ggplot() +
   aes(x = nr_fairly_good, y = com_bel_fairly_strongly, color = walking_distance_to_nearest_greenspace) +
-  geom_point()
+  geom_point() +
+  geom_smooth(method = lm, se = FALSE, fullrange = TRUE)
 ```
 
 ```{r}
@@ -195,5 +199,29 @@ These variables are currently in a wide format. This means that theoretically if
 
 ```{r}
 
+```
+
+
+Have left the modelling as don't think it is completely acheivable with the current variables. May try later if we have time.
+
+For now, I'm going to have a small go at doing a 3D plot with the previous scatter plot. Will need plotly for this.
+
+```{r}
+library(plotly)
+```
+
+```{r}
+just_walking_distance_neigh_comm %>% 
+  filter(walking_distance_to_nearest_greenspace != "Don't Know") %>% 
+  ggplot() +
+  aes(x = nr_very_good, y = com_bel_very_strongly, color = walking_distance_to_nearest_greenspace) +
+  geom_point() +
+  geom_smooth(method = lm, se = FALSE, fullrange = TRUE)
+```
+
+```{r}
+just_walking_distance_neigh_comm %>% 
+  dplyr::filter(walking_distance_to_nearest_greenspace != "Don't Know") %>%
+  plot_ly( x = ~nr_very_good, y = ~com_bel_very_strongly, z = ~walking_distance_to_nearest_greenspace,type = "scatter3d", mode = "markers", color = ~walking_distance_to_nearest_greenspace)
 ```
 
