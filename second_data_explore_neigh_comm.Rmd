@@ -100,6 +100,7 @@ neigh_comm_original_join %>%
 ```
 
 ```{r}
+#I quite like this particular graph and the next one as well, although the data probably needs to be cleaned up a bit to get Scotland averages out. 
 just_walking_distance_neigh_comm %>% 
   ggplot() +
   aes(x = nr_very_good, y = com_bel_very_strongly, color = walking_distance_to_nearest_greenspace) +
@@ -107,6 +108,7 @@ just_walking_distance_neigh_comm %>%
 ```
 
 ```{r}
+#I quite like this particular graph, although the data probably needs to be cleaned up a bit to get Scotland averages out. 
 just_walking_distance_neigh_comm %>% 
   ggplot() +
   aes(x = nr_fairly_good, y = com_bel_fairly_strongly, color = walking_distance_to_nearest_greenspace) +
@@ -128,6 +130,16 @@ just_walking_distance_neigh_comm %>%
 ```
 
 Cool, so we've plotted some of the relationships between the the neighbourhood ratings and the community belonging ratings, based on the fact that they both pretty much exist on a evenly spaced four-point scale (with an extra don't know section each). 
+
+This is us trying out some of the extra pivots to see if we can shed any further light on the questions. 
+
+
+
+
+
+
+
+
 
 Now let's see if we can add the green/blue space data and even if we can use all of this to start forming a model. 
 

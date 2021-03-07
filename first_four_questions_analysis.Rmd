@@ -445,7 +445,7 @@ local_means
 ```{r}
 #These are larger joint boards for electoral registration and the purposes of property valuation for assessing council tax and rates. Seems suitable if we're looking at tenure types. 
 
-#regions_added_all_walks <- 
+regions_added_all_walks <- 
 all_walk_dist_categories %>%
   mutate(electoral_region = case_when(local_authority %in% c("East Ayrshire", "North Ayrshire", "South Ayrshire") ~ "Ayrshire",
                                       local_authority %in% c("Scottish Borders") ~ "Borders",
@@ -460,11 +460,38 @@ all_walk_dist_categories %>%
                                       local_authority %in% c("East Lothian", "City of Edinburgh", "Midlothian", "West Lothian") ~ "Lothian",
                                       local_authority %in% c("Orkney Islands", "Shetland Islands") ~ "Orkney and Shetland",
                                       local_authority %in% c("East Renfrewshire", "Inverclyde", "Renfrewshire") ~ "Renfrewshire",
+                                      local_authority %in% c("Scotland") ~ "Scotland",
                                       local_authority %in% c("Angus", "Dundee City", "Perth and Kinross") ~ "Tayside"
   )
   )
                                       
-         
-  
 ```
+
+Now to decide exactly what to do with tender considering what we've just added. 
+
+```{r}
+regions_added_all_walks %>% 
+  distinct(type)
+```
+
+
+```{r}
+regions_distances_pivot_long <-
+regions_added_all_walks %>% 
+  pivot_longer(cols = c(less_than_11_mins, an_11_minute_walk_or_more, a_5_minute_walk_or_less, within_a_6_10_minute_walk, dont_know), names_to = "walking_distance", values_to = "values")
+```
+
+
+```{r}
+regions_distances_pivot_long %>% 
+  filter(local_authority == "Scotland",
+         type == "type_of_tenure",
+         walking_distance %in% c("a_5_minute_walk_or_less", "within_a_6_10_minute_walk", "an_11_minute_walk_or_more", "dont_know")) %>% 
+  
+  ggplot(aes(x = year, y = values, fill = walking_distance)) +
+  geom_area() +
+  facet_wrap(~ class)
+```
+That seems like something we could use if all else fails.
+
 
