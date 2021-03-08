@@ -75,9 +75,13 @@ scot_2013_2019_pivot_wide
 ```{r}
 #Think I could probably write a couple of functions for this, maybe something to look into later.
 
+#So I've made a slight adjustment to this formula 
+
 scot_2013_2019_pivot_wide %>% 
-  mutate(signif_1 = if_else(sum(abs(percent_2013-percent_2019))) > sum(combined_interval_2013 + combined_interval_2019/2))   
-  
+  mutate(signif_1 = if_else((sum(abs(percent_2013-percent_2019))) >= sum((combined_interval_2013 + combined_interval_2019)/2), TRUE, FALSE),
+         signif_2 = if_else((sum(abs(percent_2013-percent_2019))) <= pmax(sum(combined_interval_2013/2), sum(combined_interval_2019/2)), FALSE, TRUE),
+         )
+
 ```
 
 
