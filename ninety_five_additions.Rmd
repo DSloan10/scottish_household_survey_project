@@ -1,0 +1,105 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+library(janitor)
+
+green_blue_data <- read_csv("data/complete_dist_blue_green.csv") %>% clean_names()
+neighbour_rate_data <- read_csv("data/complete_neighbourhood_rating.csv") %>% clean_names()
+commun_bel_data <- read_csv("data/complete_community_belonging.csv") %>% clean_names()
+```
+
+We are using the following statement from one of the governement's methodology glossaries to guide this exploration into the provided 95% confidence intervals and how we can use these in our analysis:
+
+There are two different ways of using the estimates: Looking backward and looking forward. The following statement and examples refers to looking backward:
+
+"Quite often in Government, the information we receive is simply the estimate and the relevant CIs. We need to be able to use this information as a rule of thumb to assess whether we think there has been a significant change. If the intervals do not overlap then there is a significant difference between two points, but if they do overlap it does not necessarily mean there is no significant difference."
+
+Here, there seems to be 3 rules to exercise to test significance:
+
+1. The difference between a and b is greater than or equal to the sum of the magnitude of the intervals.
+
+2. If the above statement is not true, The difference between a and b is smaller than the larger interval of the two points.
+
+3. If neither 1 or 2 are true, then The difference between a and b is greater than or equal to the square root of the sum of the squares of the two magnitudes (in this case √(32+42) = √(9+16) = 5)
+
+```{r}
+#Let's just do a bit of a test on these with the Scotland only figures
+scotland_green_blue <-
+green_blue_data %>% 
+  filter(feature_code == "S92000003")
+```
+
+```{r}
+scotland_gb_pivot <-
+scotland_green_blue %>% 
+  pivot_wider(names_from = measurement, values_from = value) %>% 
+  clean_names() %>% 
+  arrange(date_code)
+  
+```
+
+```{r}
+scotland_gb_pivot_with_intervals <-
+scotland_gb_pivot %>% 
+  mutate(upper_interval = x95_percent_upper_confidence_limit_percent - percent,
+         lower_interval = percent - x95_percent_lower_confidence_limit_percent, 
+         combined_interval = upper_interval + lower_interval)
+```
+
+```{r}
+scot_2013_2019 <-
+scotland_gb_pivot_with_intervals %>% 
+  filter(distance_to_nearest_green_or_blue_space == "A 5 minute walk or less",
+         date_code %in% c(2013, 2019))
+```
+
+Now to try and work out if the differences in change amongst certain groups has been significant according to the Scottish Government methodology. Maybe try these one at a time:
+
+1. The difference between a and b is greater than or equal to the sum of the magnitude of the intervals.
+
+```{r}
+scot_2013_2019_pivot_wide <-
+scot_2013_2019 %>% 
+  pivot_wider(names_from = date_code, values_from = x95_percent_upper_confidence_limit_percent:combined_interval)
+  
+```
+
+```{r}
+scot_2013_2019_pivot_wide 
+```
+
+```{r}
+#Think I could probably write a couple of functions for this, maybe something to look into later.
+
+scot_2013_2019_pivot_wide %>% 
+  mutate(signif_1 = if_else(sum(abs(percent_2013-percent_2019))) > sum(combined_interval_2013 + combined_interval_2019/2))   
+  
+```
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+all_gb_pivot_with_intervals <-
+  green_blue_data %>%
+    pivot_wider(names_from = measurement, values_from = value) %>% 
+    clean_names() %>% 
+    mutate(upper_interval = x95_percent_upper_confidence_limit_percent - percent,
+           lower_interval = percent - x95_percent_lower_confidence_limit_percent, 
+           combined_interval = upper_interval + lower_interval) %>% 
+    arrange(date_code)
+  
+```
+
