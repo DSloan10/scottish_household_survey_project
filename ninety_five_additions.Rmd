@@ -78,12 +78,14 @@ scot_2013_2019_pivot_wide
 #So I've made a slight adjustment to this formula whereby because the plus minus figures are not the same, I've just taken the sum of them and then divided by two. Not sure if this is the right thing to do but should be easily changeable if not. 
 
 scot_2013_2019_pivot_wide %>% 
-  mutate(signif_1 = if_else((abs(percent_2013-percent_2019)) >= ((combined_interval_2013 + combined_interval_2019)/2), TRUE, FALSE),
-         signif_2 = if_else((abs(percent_2013-percent_2019)) <= max((combined_interval_2013/2), sum(combined_interval_2019/2)), FALSE, TRUE),
-         )
+    mutate(signif_1 = if_else(abs(percent_2013-percent_2019) >= ((combined_interval_2013 + combined_interval_2019)/2), TRUE, FALSE),
+           signif_2 = if_else((abs(percent_2013-percent_2019)) < (pmax(combined_interval_2013/2, combined_interval_2019/2)), FALSE, TRUE),
+           signif_3 = if_else((abs(percent_2013-percent_2019)) >= (sqrt(((combined_interval_2013/2)^2) + ((combined_interval_2019/2)^2))), TRUE, FALSE)
+    )
+         
 
 ```
-Looking at the table above, I think it makes a relatively interesting point in itself. Basically, amongst the groups that are set out here, there has been no significant change in figures from 2013 to 2019. This suggests a fairly static set of phenomenon. 
+Looking at the table above, I think it makes a relatively interesting point in itself. Basically, amongst the groups that are set out here, there has been no significant change in figures from 2013 to 2019. This suggests a fairly static set of phenomenon. **IGNORE THE ABOVE - FORMULA ADJUSTED!!!**
 
 Worth having a go at the entire data set, filtered for only 2013 and 2019 and once again just for the 5-minute walk grouping. We may have to add the last of the 3 rules to the code if any TRUEs come up amongst the second signifiers. 
 
@@ -160,23 +162,16 @@ all_2013_2019_pivot_wide <-
 ```
 
 ```{r}
+#This is now accurate
+
 all_2013_2019_pivot_wide %>% 
     mutate(signif_1 = if_else(abs(percent_2013-percent_2019) >= ((combined_interval_2013 + combined_interval_2019)/2), TRUE, FALSE),
-           signif_2 = if_else((abs(percent_2013-percent_2019)) < (pmax(combined_interval_2013/2, combined_interval_2019/2)), FALSE, TRUE)
-         )
-```
-
-```{r}
-#This is the accurate one!!!
-all_2013_2019_pivot_wide %>% 
-    mutate(signif_1 = if_else(abs(percent_2013-percent_2019) >= ((combined_interval_2013 + combined_interval_2019)/2), TRUE, FALSE),
-           signif_2 = if_else((abs(percent_2013-percent_2019)) < (pmax(combined_interval_2013/2, combined_interval_2019/2)), FALSE, TRUE)
-         )
+           signif_2 = if_else((abs(percent_2013-percent_2019)) < (pmax(combined_interval_2013/2, combined_interval_2019/2)), FALSE, TRUE),
+           signif_3 = if_else((abs(percent_2013-percent_2019)) >= (sqrt(((combined_interval_2013/2)^2) + ((combined_interval_2019/2)^2))), TRUE, FALSE)
+    )
+         
 ```
 
 
-```{r}
-all_2013_2019_pivot_wide %>% 
-  summarise(sum(abs(percent_2013-percent_2019)))
-```
+
 
