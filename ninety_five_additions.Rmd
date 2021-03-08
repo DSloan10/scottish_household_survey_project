@@ -75,29 +75,54 @@ scot_2013_2019_pivot_wide
 ```{r}
 #Think I could probably write a couple of functions for this, maybe something to look into later.
 
-#So I've made a slight adjustment to this formula 
+#So I've made a slight adjustment to this formula whereby because the plus minus figures are not the same, I've just taken the sum of them and then divided by two. Not sure if this is the right thing to do but should be easily changeable if not. 
 
 scot_2013_2019_pivot_wide %>% 
-  mutate(signif_1 = if_else((sum(abs(percent_2013-percent_2019))) >= sum((combined_interval_2013 + combined_interval_2019)/2), TRUE, FALSE),
-         signif_2 = if_else((sum(abs(percent_2013-percent_2019))) <= pmax(sum(combined_interval_2013/2), sum(combined_interval_2019/2)), FALSE, TRUE),
+  mutate(signif_1 = if_else((abs(percent_2013-percent_2019)) >= ((combined_interval_2013 + combined_interval_2019)/2), TRUE, FALSE),
+         signif_2 = if_else((abs(percent_2013-percent_2019)) <= max((combined_interval_2013/2), sum(combined_interval_2019/2)), FALSE, TRUE),
          )
 
 ```
+Looking at the table above, I think it makes a relatively interesting point in itself. Basically, amongst the groups that are set out here, there has been no significant change in figures from 2013 to 2019. This suggests a fairly static set of phenomenon. 
 
+Worth having a go at the entire data set, filtered for only 2013 and 2019 and once again just for the 5-minute walk grouping. We may have to add the last of the 3 rules to the code if any TRUEs come up amongst the second signifiers. 
 
+We'll need to put these bloody codes in again, should really have done this at the start for all the datasets. 
+```{r}
+local_authority_codes <- read_csv("data/Local_Authority_Districts_Codes.csv") %>% clean_names()
+```
 
+```{r}
+scot_local_auth_codes <-
+local_authority_codes %>% 
+  filter(str_detect(lad19cd, "S12")) %>% 
+  select(lad19cd, lad19nm) %>% 
+  rename(feature_code = lad19cd,
+         local_authority = lad19nm)
+```
 
+```{r}
+gb_with_las_data <-
+full_join(green_blue_data, scot_local_auth_codes, "feature_code")
 
+gb_with_las_data <-
+gb_with_las_data %>% 
+  mutate(local_authority = if_else(feature_code == "S92000003", "Scotland", local_authority))
 
-
-
-
-
+gb_with_las_data
+```
 
 
 ```{r}
-all_gb_pivot_with_intervals <-
-  green_blue_data %>%
+gb_2013_2019_las_5_min <-
+gb_with_las_data %>% 
+  filter(distance_to_nearest_green_or_blue_space == "A 5 minute walk or less",
+         date_code %in% c(2013, 2019))
+```
+
+```{r}
+all_2013_2019_pivot_with_intervals <-
+  gb_2013_2019_las_5_min %>%
     pivot_wider(names_from = measurement, values_from = value) %>% 
     clean_names() %>% 
     mutate(upper_interval = x95_percent_upper_confidence_limit_percent - percent,
@@ -105,5 +130,53 @@ all_gb_pivot_with_intervals <-
            combined_interval = upper_interval + lower_interval) %>% 
     arrange(date_code)
   
+```
+
+```{r}
+all_2013_2019_pivot_with_intervals
+```
+
+```{r}
+all_2013_2019_pivot_wide <-
+all_2013_2019_pivot_with_intervals %>% 
+  pivot_wider(names_from = date_code, values_from = percent:combined_interval)
+```
+
+```{r}
+all_2013_2019_pivot_wide
+```
+
+```{r}
+all_2013_2019_pivot_wide %>% 
+summarise(across(.fns = ~sum(is.na(.x))))
+```
+
+```{r}
+#Thinking I should just drop the nas for this part. No way to tell if there has been a significant change if we don't have start and end points.
+
+all_2013_2019_pivot_wide <-
+  all_2013_2019_pivot_wide %>% 
+  drop_na()
+```
+
+```{r}
+all_2013_2019_pivot_wide %>% 
+    mutate(signif_1 = if_else(abs(percent_2013-percent_2019) >= ((combined_interval_2013 + combined_interval_2019)/2), TRUE, FALSE),
+           signif_2 = if_else((abs(percent_2013-percent_2019)) < (pmax(combined_interval_2013/2, combined_interval_2019/2)), FALSE, TRUE)
+         )
+```
+
+```{r}
+#This is the accurate one!!!
+all_2013_2019_pivot_wide %>% 
+    mutate(signif_1 = if_else(abs(percent_2013-percent_2019) >= ((combined_interval_2013 + combined_interval_2019)/2), TRUE, FALSE),
+           signif_2 = if_else((abs(percent_2013-percent_2019)) < (pmax(combined_interval_2013/2, combined_interval_2019/2)), FALSE, TRUE)
+         )
+```
+
+
+```{r}
+all_2013_2019_pivot_wide %>% 
+  summarise(sum(abs(percent_2013-percent_2019)))
 ```
 
