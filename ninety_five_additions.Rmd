@@ -77,6 +77,7 @@ scot_2013_2019_pivot_wide
 
 #So I've made a slight adjustment to this formula whereby because the plus minus figures are not the same, I've just taken the sum of them and then divided by two. Not sure if this is the right thing to do but should be easily changeable if not. 
 
+scot_13_19_signifiers_less_5 <-
 scot_2013_2019_pivot_wide %>% 
     mutate(signif_1 = if_else(abs(percent_2013-percent_2019) >= ((combined_interval_2013 + combined_interval_2019)/2), TRUE, FALSE),
            signif_2 = if_else((abs(percent_2013-percent_2019)) < (pmax(combined_interval_2013/2, combined_interval_2019/2)), FALSE, TRUE),
@@ -164,6 +165,7 @@ all_2013_2019_pivot_wide <-
 ```{r}
 #This is now accurate
 
+all_13_19_signifiers_less_5 <-
 all_2013_2019_pivot_wide %>% 
     mutate(signif_1 = if_else(abs(percent_2013-percent_2019) >= ((combined_interval_2013 + combined_interval_2019)/2), TRUE, FALSE),
            signif_2 = if_else((abs(percent_2013-percent_2019)) < (pmax(combined_interval_2013/2, combined_interval_2019/2)), FALSE, TRUE),
@@ -172,6 +174,92 @@ all_2013_2019_pivot_wide %>%
          
 ```
 
+Right, so we have managed to get all the formula working for the different looking backward scenarios, which means we can now plot the grou[s that have seen significant change. To acheive this, we might have to do another pivot longer for both datasets. 
+
+First, Scotland-wide:
+
+```{r}
+scot_to_add_13_19_sig_less_5 <-
+scot_13_19_signifiers_less_5 %>% 
+  pivot_longer(c(age, gender, urban_rural_classification, simd_quintiles, type_of_tenure, household_type, ethnicity), names_to = "type", values_to = "class") %>% 
+  filter(class != "All")
+```
+
+```{r}
+extra_scot_to_add_13_19_sig_less_5 <-
+scot_13_19_signifiers_less_5 %>% 
+    filter(age == "All", 
+         gender == "All",
+         urban_rural_classification == "All",
+         simd_quintiles == "All",
+         type_of_tenure == "All",
+         household_type == "All",
+         ethnicity == "All",
+    ) %>% 
+  pivot_longer(c(age, gender, urban_rural_classification, simd_quintiles, type_of_tenure, household_type, ethnicity), names_to = "type", values_to = "class") %>%
+  slice_head(n = 1) %>% 
+  mutate(type = recode(type, age = "All"))
+
+extra_scot_to_add_13_19_sig_less_5
+```
+
+```{r}
+final_scot_13_19_sig_less_5 <-
+bind_rows(scot_to_add_13_19_sig_less_5, extra_scot_to_add_13_19_sig_less_5)
+```
+
+```{r}
+final_scot_13_19_sig_less_5
+```
+
+Now I'll go all the less 5s:
 
 
+```{r}
+all_to_add_13_19_sig_less_5 <-
+all_13_19_signifiers_less_5 %>% 
+  pivot_longer(c(age, gender, urban_rural_classification, simd_quintiles, type_of_tenure, household_type, ethnicity), names_to = "type", values_to = "class") %>% 
+  filter(class != "All")
+
+all_to_add_13_19_sig_less_5
+```
+
+```{r}
+extra_all_to_add_13_19_sig_less_5 <-
+all_13_19_signifiers_less_5 %>%
+  filter(age == "All", 
+         gender == "All",
+         urban_rural_classification == "All",
+         simd_quintiles == "All",
+         type_of_tenure == "All",
+         household_type == "All",
+         ethnicity == "All",
+    ) %>% 
+  pivot_longer(c(age, gender, urban_rural_classification, simd_quintiles, type_of_tenure, household_type, ethnicity), names_to = "type", values_to = "class") %>%
+  mutate(type = recode(type, age = "All")) %>% 
+  filter(type == "All")
+```
+
+```{r}
+final_all_13_19_sig_less_5 <-
+bind_rows(all_to_add_13_19_sig_less_5 , extra_all_to_add_13_19_sig_less_5)
+```
+
+That's done, now we can quickly tag these with significance.
+
+```{r}
+final_scot_13_19_sig_less_5 <-
+final_scot_13_19_sig_less_5 %>% 
+  mutate(sign_change_13_to_19 = if_else(signif_1 | signif_2 | signif_3 == "TRUE", TRUE, FALSE))
+```
+```{r}
+final_all_13_19_sig_less_5 <-
+final_all_13_19_sig_less_5 %>% 
+  mutate(sign_change_13_to_19 = if_else(signif_1 | signif_2 | signif_3 == "TRUE", TRUE, FALSE))
+```
+
+```{r}
+final_all_13_19_sig_less_5 %>% 
+  filter(sign_change_13_to_19 != TRUE)
+```
 
