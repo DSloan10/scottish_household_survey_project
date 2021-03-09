@@ -68,14 +68,100 @@ graph_1_data %>%
   
 ```
 
+1. It looks like there is a sustained gap between people with a mortgage and other types of tenure. This is quite curios, especially considering one of these alternative groups is owned outright. Equally, it appears that individuals who reported having an other form of tenure apart from those provided were less likely to have local access. 
+2. Although there is a gap between the two SIMD groups, this is perhaps not as large as I would have expected. 3. Pensioners seem to lag behind other household groups. 
+4. Males report closer access, but not by a large margin. 
+5. 65 year-olds and older seem to lag to a significant level behind other age groups.
+6. Perhaps most strikingly of all, those of White ethnicity are far more likely to report having local access to green space when compared to all other individuals of Non-White Ethnicity.
+
+**Slide 4**
+
+```{r}
+graph_2_data <- read_csv("data/presentation_data/graph_2_minus_5_all_means_scot_groups.csv") %>% clean_names()
+```
+
+```{r}
+graph_2_data <-
+graph_2_data %>% 
+  arrange(desc(type), desc(mean)) %>% 
+  mutate(class = factor(class, levels = class)) %>% 
+  mutate(class = recode(class, "Adults (non pension, no children)" = "Adults (-psn, -child)"))
+```
+
+```{r}
+graph_2_data %>%
+  ggplot() + 
+  aes(x = class, y = mean, fill = type) +
+  geom_col(colour = "black", size = 0.2) +
+  theme_minimal() +
+  scale_y_continuous(breaks = seq(from = 0, to = 100, by = 10)) +
+  coord_flip() +
+  scale_fill_brewer(palette = "Set3") +
+  labs(title = "Percentage of Population Within a 5-minute Walk of Green Space",
+          subtitle = "Mean figures between 2013 - 2019 - Scotland") +
+  xlab("") +
+  ylab("%") +
+  labs(fill = "Category") +
+  theme(plot.title = element_text(size = 12.0),
+        plot.subtitle = element_text(size = 10.0),
+        legend.key.size = unit(0.4, "cm"),
+        legend.key.width = unit(0.4, "cm"))
+  
+  
+```
+
+**This is the stage to pick out some of our headline changes**
+
+We can do this with the below:
+
+1. The gap between those who have a mortgage/other domestic loan and other tenure groups has been maintained. Interestingly, the Social Renting group has dropped below the group Other Tenure. The percentage point gap between mortgage and social renting group was 9 points.
+2. The gap between the two SIMD groups has widened significantly. In the 10 or less analysis, it was 4 percentage points. In 5 or less, it is 8 points.
+3. Pensioners once again lagged behind adults with and without children.
+4. Males once again report closer access, with the margin growing only slightly from 2 percentage points to 3.
+5. The gap between 65-year-olds+ was maintained. 
+6. Once again, the headline figure is that the gap in local access between white and non-white ethnicity has been further widened with a gap of 13 percentage points, up from 8. Those classed as non-white ethnicity had the lowest percentage of any group addressed over the last 7 years period looked into, with only 54% having access to green or blue space within 5 minutes walk of there house. **This should be put into context by highlighting the definition again**.
+
+**Rather than do any more data wrangling, we can also just show the plus minus figures for certain gaps in categories.**
+
+```{r}
+graph_1_data
+graph_2_data
+```
+
+Infographics saved on flaticon website
+
+**Slide 5**
+
+```{r}
+graph_3_4_5_data <- read_csv("data/presentation_data/graph_3_4_5_final_scot_13_19_sig_less_5.csv") %>% clean_names
+
+graph_3_all_scot_n5s <-read_csv("data/presentation_data/graph_3_final_scot_all_years_sig_less_5.csv")
+```
+
+Start with 
+
+```{r}
+ethnicity_graph_3 <-
+graph_3_all_scot_n5s %>%
+  filter(type == "ethnicity")
 
 
+ethinicity_plot <-
+  ethnicity_graph_3 %>% 
+  ggplot() +
+  aes(x = date_code, y = percent, colour = class) +
+  geom_point() +
+  geom_line()
+  
+ethnicity_plot_n5s <-
+  ethinicity_plot +
+  geom_ribbon(aes(ymin = ethnicity_graph_3$x95_percent_lower_confidence_limit_percent, ymax = ethnicity_graph_3$x95_percent_upper_confidence_limit_percent), linetype = 2, alpha = 0.1)
+  
+```
 
-
-
-
-
-
+```{r}
+ethnicity_plot_n5s
+```
 
 
 
