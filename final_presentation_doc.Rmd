@@ -138,7 +138,7 @@ graph_3_4_5_data <- read_csv("data/presentation_data/graph_3_4_5_final_scot_13_1
 graph_3_all_scot_n5s <-read_csv("data/presentation_data/graph_3_final_scot_all_years_sig_less_5.csv")
 ```
 
-Start with 
+Start with ethnicity
 
 ```{r}
 ethnicity_graph_3 <-
@@ -172,6 +172,82 @@ ethnicity_plot_n5s <-
 ethnicity_plot_n5s  
 ```
 
+Now for tenure:
+
+```{r}
+graph_3_all_scot_n5s %>%
+  distinct(type)
+```
+
+
+```{r}
+tenure_graph_4 <-
+graph_3_all_scot_n5s %>%
+  filter(type == "type_of_tenure",
+         class %in% c("Owned Mortgage/Loan", "Social Rented"))
+
+
+tenure_plot <-
+  tenure_graph_4 %>% 
+  ggplot() +
+  aes(x = date_code, y = percent, colour = class) +
+  geom_point() +
+  geom_line() +
+  theme_minimal() 
+
+  
+tenure_plot_n5s <-
+  tenure_plot +
+  geom_ribbon(aes(ymin = tenure_graph_4$x95_percent_lower_confidence_limit_percent, ymax = tenure_graph_4$x95_percent_upper_confidence_limit_percent), linetype = 2, alpha = 0.1) +
+  labs(title = "Percentage of Population Within a 5-minute Walk of Green Space",
+          subtitle = "By Type of Tenure") +
+  xlab("Year") +
+  ylab("%") +
+  labs(color = "Type of Tenure") +
+  theme(plot.title = element_text(size = 12.0),
+        plot.subtitle = element_text(size = 10.0),
+        axis.title.y = element_text(angle = 0, vjust = 0.5),
+        legend.title = element_text(size = 10.0)
+  )
+  
+tenure_plot_n5s  
+```
+
+And by Scottish Index of Multiple Definition groupings:
+
+```{r}
+simd_graph_5 <-
+graph_3_all_scot_n5s %>%
+  filter(type == "simd_quintiles")
+
+
+simd_plot <-
+  simd_graph_5 %>% 
+  ggplot() +
+  aes(x = date_code, y = percent, colour = class) +
+  geom_point() +
+  geom_line() +
+  theme_minimal() 
+
+  
+simd_plot_n5s <-
+  simd_plot +
+  geom_ribbon(aes(ymin = simd_graph_5$x95_percent_lower_confidence_limit_percent, ymax = simd_graph_5$x95_percent_upper_confidence_limit_percent), linetype = 2, alpha = 0.1) +
+  labs(title = "Percentage of Population Within a 5-minute Walk of Green Space",
+          subtitle = "By SIMD Group") +
+  xlab("Year") +
+  ylab("%") +
+  labs(color = "SIMD Group") +
+  theme(plot.title = element_text(size = 12.0),
+        plot.subtitle = element_text(size = 10.0),
+        axis.title.y = element_text(angle = 0, vjust = 0.5),
+        legend.title = element_text(size = 10.0)
+  )
+  
+simd_plot_n5s  
+```
+
+**Slide 6**
 
 
 
