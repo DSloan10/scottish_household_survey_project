@@ -133,7 +133,7 @@ Infographics saved on flaticon website
 **Slide 5**
 
 ```{r}
-graph_3_4_5_data <- read_csv("data/presentation_data/graph_3_4_5_final_scot_13_19_sig_less_5.csv") %>% clean_names
+graph_6_data <- read_csv("data/presentation_data/graph_3_4_5_final_scot_13_19_sig_less_5.csv") %>% clean_names
 
 graph_3_all_scot_n5s <-read_csv("data/presentation_data/graph_3_final_scot_all_years_sig_less_5.csv")
 ```
@@ -249,6 +249,56 @@ simd_plot_n5s
 
 **Slide 6**
 
+```{r}
+graph_6_select <-
+graph_6_data %>% 
+  mutate(class = if_else((type == "ethnicity") &
+                           (class == "Other"), 
+                         "Non_White_Ethnicity", class)) %>% 
+  mutate(class = if_else((type == "type_of_tenure") &
+                           (class == "Other"),
+                         "Other Tenure", class)) %>% 
+  select(-c(units, x95_percent_upper_confidence_limit_percent_2013: x95_percent_upper_confidence_limit_percent_2019, x95_percent_lower_confidence_limit_percent_2013:signif_3))
+ 
+
+graph_6_pivot <-  
+graph_6_select %>% 
+pivot_longer(cols = percent_2013:percent_2019, names_to = "year", values_to = "percent") %>% 
+  mutate(year = str_remove(year, "percent_"))
+
+graph_6_pivot
+```
+
+```{r}
+graph_6_pivot_test <-
+  graph_6_pivot %>% 
+  arrange(desc(type)) %>%
+  mutate(class = factor(class, levels = unique(class), order = TRUE))
+
+graph_6_pivot_test
+```
+
+
+```{r}
+#Need to switch years and also change titles. 
+graph_6_pivot_test %>% 
+  ggplot() + 
+  aes(x = class, y = percent, fill = year) +
+  geom_col(alpha = if_else(graph_6_pivot$sign_change_13_to_19 == TRUE, 1, 0.1),  colour = "black", size = 0.2, position = "dodge") +
+  theme_minimal() +
+  scale_y_continuous(breaks = seq(from = 0, to = 100, by = 10)) +
+  coord_flip() +
+  scale_fill_brewer(palette = "Set3") +
+  labs(title = "Percentage of Population Within a 5-minute Walk of Green Space",
+          subtitle = "Mean figures between 2013 - 2019 - Scotland") +
+  xlab("") +
+  ylab("%") +
+  labs(fill = "Category") +
+  theme(plot.title = element_text(size = 12.0),
+        plot.subtitle = element_text(size = 10.0),
+        legend.key.size = unit(0.4, "cm"),
+        legend.key.width = unit(0.4, "cm"))
+```
 
 
 **Slide 7**
