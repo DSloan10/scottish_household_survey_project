@@ -339,7 +339,7 @@ The threshold of 2 percentage points chosen is based on the data currently, and 
 
 Looking at a lot of these graphs, it looks like many of the patterns within and between categories have been intensified, whilst others have changed to a significant degree.
 
-1. The gap between those who have a mortgage/other domestic loan and other tenure groups has been maintained. Interestingly, the Social Renting group has dropped below the group Other Tenure. The percentage point gap between mortgage and social renting group was nine points.
+1. The gap between those who have a mortgage/other domestic loan and other tenure groups has been maintained. Interestingly, the Social Renting group has dropped below the group Other Tenure. The percentage point gap between mortgage and social renting group was 9 points.
 2. The gap between the two SIMD groups has widened significantly. In the 10 or less analysis, it was 4 percentage points. In 5 or less, it is 8 points.
 3. Pensioners once again lagged behind adults with and without children.
 4. Males once again report closer access, with the margin growing only slightly from 2 percentage points to 3.
@@ -636,3 +636,9 @@ all_walk_with_extra_density_2019 %>%
 
 urban_rural_2019_with_ex_den
 ```
+```{r}
+#write_csv(loc_authority_with_extra_density_2019, "loc_authority_with_extra_density_2019.csv")
+
+#write_csv(urban_rural_2019_with_ex_den, "urban_rural_2019_with_ex_den.csv")
+```
+
