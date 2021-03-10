@@ -159,7 +159,7 @@ ethnicity_plot_n5s <-
   ethinicity_plot +
   geom_ribbon(aes(ymin = ethnicity_graph_3$x95_percent_lower_confidence_limit_percent, ymax = ethnicity_graph_3$x95_percent_upper_confidence_limit_percent), linetype = 2, alpha = 0.1) +
   labs(title = "Percentage of Population Within a 5-minute Walk of Green Space",
-          subtitle = "By Ethnicity") +
+          subtitle = "By Ethnicity - with 95% confidence intervals") +
   xlab("Year") +
   ylab("%") +
   labs(color = "Ethnicity") +
@@ -200,7 +200,7 @@ tenure_plot_n5s <-
   tenure_plot +
   geom_ribbon(aes(ymin = tenure_graph_4$x95_percent_lower_confidence_limit_percent, ymax = tenure_graph_4$x95_percent_upper_confidence_limit_percent), linetype = 2, alpha = 0.1) +
   labs(title = "Percentage of Population Within a 5-minute Walk of Green Space",
-          subtitle = "By Type of Tenure") +
+          subtitle = "By Type of Tenure - with 95% confidence intervals") +
   xlab("Year") +
   ylab("%") +
   labs(color = "Type of Tenure") +
@@ -234,7 +234,7 @@ simd_plot_n5s <-
   simd_plot +
   geom_ribbon(aes(ymin = simd_graph_5$x95_percent_lower_confidence_limit_percent, ymax = simd_graph_5$x95_percent_upper_confidence_limit_percent), linetype = 2, alpha = 0.1) +
   labs(title = "Percentage of Population Within a 5-minute Walk of Green Space",
-          subtitle = "By SIMD Group") +
+          subtitle = "By SIMD Group - with 95% confidence intervals") +
   xlab("Year") +
   ylab("%") +
   labs(color = "SIMD Group") +
@@ -248,6 +248,10 @@ simd_plot_n5s
 ```
 
 **Slide 6**
+
+```{r}
+graph_6_data
+```
 
 ```{r}
 graph_6_select <-
@@ -273,27 +277,28 @@ graph_6_pivot
 graph_6_pivot_test <-
   graph_6_pivot %>% 
   arrange(desc(type)) %>%
-  mutate(class = factor(class, levels = unique(class), order = TRUE))
+  mutate(class = factor(class, levels = unique(class), order = TRUE)) %>% 
+  mutate(year = factor(year, levels = unique(year), order = TRUE))
 
 graph_6_pivot_test
 ```
 
 
 ```{r}
-#Need to switch years and also change titles. 
+#Need to switch years!!!. 
 graph_6_pivot_test %>% 
   ggplot() + 
   aes(x = class, y = percent, fill = year) +
-  geom_col(alpha = if_else(graph_6_pivot$sign_change_13_to_19 == TRUE, 1, 0.1),  colour = "black", size = 0.2, position = "dodge") +
+  geom_col(alpha = if_else(graph_6_pivot_test$sign_change_13_to_19 == TRUE, 1, 0.1),  colour = "black", size = 0.2, position = "dodge") +
   theme_minimal() +
   scale_y_continuous(breaks = seq(from = 0, to = 100, by = 10)) +
   coord_flip() +
   scale_fill_brewer(palette = "Set3") +
   labs(title = "Percentage of Population Within a 5-minute Walk of Green Space",
-          subtitle = "Mean figures between 2013 - 2019 - Scotland") +
+          subtitle = "2013 and 2019 - Scotland") +
   xlab("") +
   ylab("%") +
-  labs(fill = "Category") +
+  labs(fill = "") +
   theme(plot.title = element_text(size = 12.0),
         plot.subtitle = element_text(size = 10.0),
         legend.key.size = unit(0.4, "cm"),
@@ -304,3 +309,112 @@ graph_6_pivot_test %>%
 **Slide 7**
 
 [Graph 7] - maybe just try and use the other datasets or, worse comes to worse, the original gb_data_set 
+
+**LEAVING SLIDE 7 AND Q3 FOR NOW. IF WE REALLY WANT THIS, WE CAN ADD IT RIGHT IN AT THE END**
+
+**Slide 8**
+
+**I think this would be best just to do in the other notepad. I really don't want to end up screwing up my git pushes with a massive file. 
+
+Can still do some of the intro charts though. 
+
+graph_3_all_scot_n5s
+
+```{r}
+graph_3_all_scot_n5s %>% 
+  distinct(type)
+
+```
+
+```{r}
+rm(urban_rural_extra_graph_)
+```
+
+
+```{r}
+urban_rural_extra_graph <-
+graph_3_all_scot_n5s %>%
+  filter(type == "urban_rural_classification")
+
+
+urban_rural_extra_plot <-
+  urban_rural_extra_graph %>% 
+  ggplot() +
+  aes(x = date_code, y = percent, colour = class) +
+  geom_point() +
+  geom_line() +
+  theme_minimal() 
+
+  
+urban_rural_extra_plo_n5s <-
+  urban_rural_extra_plot +
+  geom_ribbon(aes(ymin = urban_rural_extra_graph$x95_percent_lower_confidence_limit_percent, ymax = urban_rural_extra_graph$x95_percent_upper_confidence_limit_percent), linetype = 2, alpha = 0.1) +
+  labs(title = "Percentage of Population Within a 5-minute Walk of Green Space",
+          subtitle = "Split by Urban and Rural (2-Fold) - with 95% confidence intervals") +
+  xlab("Year") +
+  ylab("%") +
+  labs(color = "") +
+  theme(plot.title = element_text(size = 12.0),
+        plot.subtitle = element_text(size = 10.0),
+        axis.title.y = element_text(angle = 0, vjust = 0.5),
+        legend.title = element_text(size = 10.0)
+  )
+  
+urban_rural_extra_plo_n5s  
+```
+
+```{r}
+graph_9_data <- read_csv("data/presentation_data/graph_8a_local_means_plus_minus_scot.csv") %>% clean_names()
+```
+
+```{r}
+graph_9_data <-
+ graph_9_data %>% 
+  mutate(local_authority = fct_reorder(local_authority, pl_min_less_6))
+
+graph_9_plot <-
+graph_9_data %>%
+  ggplot(aes(x = local_authority, y = pl_min_less_6, label = local_authority)) +
+  geom_bar(stat = 'identity', aes(fill = above_below_less_6), width = .5) +
+  scale_fill_manual(name = "Mean Percentage",
+                    labels = c("Above Scotland", "Below Scotland"),
+                    values = c("above" = "#00ba38", "below"= "#f8766d")) +
+  labs(title = "Percentage of Population Within a 5-minute Walk of Green Space",
+          subtitle = "Mean figures between 2013 - 2019 - By Local Authority") +
+  coord_flip() +
+  xlab("") +
+  ylab("± %") +
+  theme(axis.text.y = element_text(size = 8),
+        plot.title = element_text(size = 12),
+        plot.subtitle = element_text(size = 10))
+
+graph_9_plot
+```
+
+```{r}
+graph_9_b_electoral_regions_data <- read_csv("data/presentation_data/graph_8b_label_above_below_with_electoral_regions.csv") %>% clean_names()
+  
+```
+
+```{r}
+graph_9_b_electoral_regions_data <-
+  graph_9_b_electoral_regions_data %>% 
+  mutate(electoral_region = fct_reorder(electoral_region, mean_above_below),
+         above_below_less_6 = if_else(mean_above_below < 0, "below", "above"))
+           
+  graph_9_b_electoral_regions_data %>%
+  ggplot(aes(x = electoral_region, y = mean_above_below, label = electoral_region)) +
+  geom_bar(stat = 'identity', aes(fill = above_below_less_6), width = .5) +
+  scale_fill_manual(name = "Mean Percentage",
+                    labels = c("Above Scotland", "Below Scotland"),
+                    values = c("above" = "#00ba38", "below"= "#f8766d")) +
+  labs(title = "Percentage of Population Within a 5-minute Walk of Green Space",
+          subtitle = "Mean figures between 2013 - 2019 - By Electoral Region") +
+  coord_flip() +
+  xlab("") +
+  ylab("± %") +
+  theme(axis.text.y = element_text(size = 8),
+        plot.title = element_text(size = 12),
+        plot.subtitle = element_text(size = 10))
+```
+
