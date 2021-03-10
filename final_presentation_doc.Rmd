@@ -47,6 +47,7 @@ graph_1_data %>%
 ```{r}
 # Need to work out how to separate types 
 
+graph_1_final <-
 graph_1_data %>%
   ggplot() + 
   aes(x = class, y = mean, fill = type) +
@@ -65,7 +66,7 @@ graph_1_data %>%
         legend.key.size = unit(0.4, "cm"),
         legend.key.width = unit(0.4, "cm"))
   
-  
+graph_1_final
 ```
 
 1. It looks like there is a sustained gap between people with a mortgage and other types of tenure. This is quite curios, especially considering one of these alternative groups is owned outright. Equally, it appears that individuals who reported having an other form of tenure apart from those provided were less likely to have local access. 
@@ -89,6 +90,7 @@ graph_2_data %>%
 ```
 
 ```{r}
+graph_2_final <-
 graph_2_data %>%
   ggplot() + 
   aes(x = class, y = mean, fill = type) +
@@ -108,6 +110,7 @@ graph_2_data %>%
         legend.key.width = unit(0.4, "cm"))
   
   
+  graph_2_final
 ```
 
 **This is the stage to pick out some of our headline changes**
@@ -169,7 +172,12 @@ ethnicity_plot_n5s <-
         legend.title = element_text(size = 10.0)
   )
   
-ethnicity_plot_n5s  
+
+
+graph_3_final_ethnicity_plot_n5s <-
+  ethnicity_plot_n5s  
+
+graph_3_final_ethnicity_plot_n5s
 ```
 
 Now for tenure:
@@ -210,7 +218,12 @@ tenure_plot_n5s <-
         legend.title = element_text(size = 10.0)
   )
   
-tenure_plot_n5s  
+  
+
+graph_4_final_tenure_plot_n5s <-
+  tenure_plot_n5s
+
+graph_4_final_tenure_plot_n5s
 ```
 
 And by Scottish Index of Multiple Definition groupings:
@@ -244,7 +257,12 @@ simd_plot_n5s <-
         legend.title = element_text(size = 10.0)
   )
   
-simd_plot_n5s  
+ 
+
+graph_5_final_simd_plot_n5s <-
+  simd_plot_n5s 
+
+graph_5_final_simd_plot_n5s
 ```
 
 **Slide 6**
@@ -285,7 +303,9 @@ graph_6_pivot_test
 
 
 ```{r}
-#Need to switch years!!!. 
+#Need to switch years!!!.
+
+graph_6_final <- 
 graph_6_pivot_test %>% 
   ggplot() + 
   aes(x = class, y = percent, fill = year) +
@@ -295,7 +315,7 @@ graph_6_pivot_test %>%
   coord_flip() +
   scale_fill_brewer(palette = "Set3") +
   labs(title = "Percentage of Population Within a 5-minute Walk of Green Space",
-          subtitle = "2013 and 2019 - Scotland") +
+          subtitle = "2013 and 2019 - Scotland - Significant Change Highlighted") +
   xlab("") +
   ylab("%") +
   labs(fill = "") +
@@ -304,8 +324,10 @@ graph_6_pivot_test %>%
         plot.subtitle = element_text(size = 10.0),
         legend.key.size = unit(0.4, "cm"),
         legend.key.width = unit(0.4, "cm"))
-```
 
+
+  graph_6_final
+```
 
 **Slide 7**
 
@@ -325,10 +347,6 @@ graph_3_all_scot_n5s
 graph_3_all_scot_n5s %>% 
   distinct(type)
 
-```
-
-```{r}
-rm(urban_rural_extra_graph_)
 ```
 
 
@@ -361,7 +379,11 @@ urban_rural_extra_plo_n5s <-
         legend.title = element_text(size = 10.0)
   )
   
-urban_rural_extra_plo_n5s  
+
+
+graph_8_final <- urban_rural_extra_plo_n5s  
+
+graph_8_final
 ```
 
 ```{r}
@@ -391,6 +413,10 @@ graph_9_data %>%
         plot.subtitle = element_text(size = 10))
 
 graph_9_plot
+
+graph_9a_by_local_authority_final <- graph_9_plot
+
+graph_9a_by_local_authority_final
 ```
 
 ```{r}
@@ -404,6 +430,7 @@ graph_9_b_electoral_regions_data <-
   mutate(electoral_region = fct_reorder(electoral_region, mean_above_below),
          above_below_less_6 = if_else(mean_above_below < 0, "below", "above"))
            
+  graph_9_b_electoral_regions_final <-
   graph_9_b_electoral_regions_data %>%
   ggplot(aes(x = electoral_region, y = mean_above_below, label = electoral_region)) +
   geom_bar(stat = 'identity', aes(fill = above_below_less_6), width = .5) +
@@ -419,6 +446,8 @@ graph_9_b_electoral_regions_data <-
   theme(axis.text.y = element_text(size = 8),
         plot.title = element_text(size = 12),
         plot.subtitle = element_text(size = 10))
+  
+  graph_9_b_electoral_regions_final
 ```
 
 **Maps Done!!** Just a few more graphs to go now.
@@ -430,6 +459,7 @@ graph_10_data <- read_csv("data/presentation_data/graph_9_regions_distances_pivo
 ```
 
 ```{r}
+graph_10_final <-
 graph_10_data %>% 
   filter(local_authority %in% c("Dundee City", "Aberdeen City", "City of Edinburgh", "Glasgow City"),
          type == "gender",
@@ -447,6 +477,8 @@ graph_10_data %>%
         plot.title = element_text(size = 12),
         plot.subtitle = element_text(size = 10),
         legend.title = element_text(size = 8))
+
+graph_10_final
 ```
 
 ```{r}
@@ -489,6 +521,7 @@ neigh_extra_pivot %>%
   rename(mean_percent = "mean(nr_percent)")
   
   
+  graph_11_neigh_extra_final <-
   neigh_extra_pivot_means %>% 
   filter(neighbourhood_rating %in% c("nr_fairly_good", "nr_very_good")) %>% 
   ggplot() +
@@ -505,6 +538,8 @@ neigh_extra_pivot %>%
         plot.title = element_text(size = 12),
         plot.subtitle = element_text(size = 10),
         legend.title = element_text(size = 8))
+  
+  graph_11_neigh_extra_final
 ```
 ```{r}
 comm_extra_pivot <-
@@ -523,6 +558,7 @@ comm_extra_pivot %>%
   rename(mean_percent = "mean(cb_percent)")
   
   
+  graph_12_comm_extra_final <-
   comm_extra_pivot_means %>% 
   filter(community_belonging %in% c("com_bel_very_strongly", "com_bel_fairly_strongly")) %>% 
   ggplot() +
@@ -539,6 +575,10 @@ comm_extra_pivot %>%
         plot.title = element_text(size = 12),
         plot.subtitle = element_text(size = 10),
         legend.title = element_text(size = 8))
+```
+
+```{r}
+graph_12_comm_extra_final
 ```
 
 
@@ -575,6 +615,7 @@ comm_extra_pivot %>%
 
 
 ```{r}
+graph_13_final <-
 remaining_graphs_data %>% 
   filter(walking_distance_to_nearest_greenspace != "Don't Know") %>% 
   ggplot() +
@@ -592,9 +633,12 @@ remaining_graphs_data %>%
         plot.title = element_text(size = 12),
         plot.subtitle = element_text(size = 10),
         legend.title = element_text(size = 8))
+
+graph_13_final
 ```
 
 ```{r}
+graph_14_final <-
 remaining_graphs_data  %>% 
   filter(walking_distance_to_nearest_greenspace != "Don't Know") %>% 
   ggplot() +
@@ -613,5 +657,8 @@ remaining_graphs_data  %>%
         plot.subtitle = element_text(size = 10),
         legend.title = element_text(size = 8))
   
+  graph_14_final
 ```
+
+Time to write all these graphs to png. 
 
