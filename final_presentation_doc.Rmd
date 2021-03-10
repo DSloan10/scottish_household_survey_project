@@ -299,6 +299,7 @@ graph_6_pivot_test %>%
   xlab("") +
   ylab("%") +
   labs(fill = "") +
+  guides(fill = guide_legend(reverse = TRUE)) +
   theme(plot.title = element_text(size = 12.0),
         plot.subtitle = element_text(size = 10.0),
         legend.key.size = unit(0.4, "cm"),
@@ -379,6 +380,7 @@ graph_9_data %>%
   scale_fill_manual(name = "Mean Percentage",
                     labels = c("Above Scotland", "Below Scotland"),
                     values = c("above" = "#00ba38", "below"= "#f8766d")) +
+  theme_minimal() +
   labs(title = "Percentage of Population Within a 5-minute Walk of Green Space",
           subtitle = "Mean figures between 2013 - 2019 - By Local Authority") +
   coord_flip() +
@@ -408,6 +410,7 @@ graph_9_b_electoral_regions_data <-
   scale_fill_manual(name = "Mean Percentage",
                     labels = c("Above Scotland", "Below Scotland"),
                     values = c("above" = "#00ba38", "below"= "#f8766d")) +
+  theme_minimal() +
   labs(title = "Percentage of Population Within a 5-minute Walk of Green Space",
           subtitle = "Mean figures between 2013 - 2019 - By Electoral Region") +
   coord_flip() +
@@ -416,5 +419,199 @@ graph_9_b_electoral_regions_data <-
   theme(axis.text.y = element_text(size = 8),
         plot.title = element_text(size = 12),
         plot.subtitle = element_text(size = 10))
+```
+
+**Maps Done!!** Just a few more graphs to go now.
+
+**Slide 9**
+
+```{r}
+graph_10_data <- read_csv("data/presentation_data/graph_9_regions_distances_pivot_long.csv") %>% clean_names
+```
+
+```{r}
+graph_10_data %>% 
+  filter(local_authority %in% c("Dundee City", "Aberdeen City", "City of Edinburgh", "Glasgow City"),
+         type == "gender",
+         walking_distance == "a_5_minute_walk_or_less") %>% 
+  ggplot(aes(x = year, y = values, colour = class)) +
+  geom_line() +
+  theme_minimal() +
+  facet_wrap(~local_authority) +
+  labs(title = "Four Largest Cities",
+          subtitle = "Percentage within 5 minutes walk of Green Space") +
+  xlab("") +
+  ylab("%") +
+  labs(colour = "Gender") +
+  theme(axis.title.y = element_text(size = 10),
+        plot.title = element_text(size = 12),
+        plot.subtitle = element_text(size = 10),
+        legend.title = element_text(size = 8))
+```
+
+```{r}
+remaining_graphs_data <- read_csv("data/presentation_data/graph_10_11_just_walking_distance_neigh_comm.csv") %>% clean_names()
+```
+
+```{r}
+remaining_graphs_data
+```
+
+```{r}
+neigh_comm_extra_graph_data <-
+remaining_graphs_data %>% 
+    filter(walking_distance_to_nearest_greenspace != "Don't Know",
+         local_authority == "Scotland",
+         gender == "All",
+         urban_rural_classification == "All",
+         simd_quintiles == "All",
+         type_of_tenure == "All",
+         household_type == "All",
+         ethnicity == "All")
+
+neigh_comm_extra_graph_data
+```
+
+```{r}
+neigh_extra_pivot <-
+neigh_comm_extra_graph_data %>% 
+  select(-c(gender:ethnicity, local_authority, com_bel_very_strongly:com_bel_not_very_strongly)) %>% 
+  pivot_longer(cols = nr_very_good:nr_fairly_poor, names_to = "neighbourhood_rating", values_to = "nr_percent")
+#  pivot_longer(cols = com_bel_very_strongly:com_bel_not_very_strongly, names_to = #"community_belonging_rating", values_to = "cb_percent")
+
+neigh_extra_pivot
+```
+```{r}
+neigh_extra_pivot_means <-
+neigh_extra_pivot %>% 
+  group_by(walking_distance_to_nearest_greenspace, neighbourhood_rating) %>% 
+  summarise(mean(nr_percent)) %>% 
+  rename(mean_percent = "mean(nr_percent)")
+  
+  
+  neigh_extra_pivot_means %>% 
+  filter(neighbourhood_rating %in% c("nr_fairly_good", "nr_very_good")) %>% 
+  ggplot() +
+  aes(x = walking_distance_to_nearest_greenspace, y = mean_percent, fill = neighbourhood_rating) +
+  geom_col(position = "dodge") +
+  theme_minimal() +
+  labs(title = "Neighbourhood Rating by Walking Distance to Nearest Green Space",
+          subtitle = "Mean Percent - Scotland") +
+  xlab("") +
+  ylab("%") +
+  labs(fill = "Neighbourhood Rating") +
+  theme(axis.title.y = element_text(size = 8),
+        axis.title.x = element_text(size = 8),
+        plot.title = element_text(size = 12),
+        plot.subtitle = element_text(size = 10),
+        legend.title = element_text(size = 8))
+```
+```{r}
+comm_extra_pivot <-
+neigh_comm_extra_graph_data %>% 
+  select(-c(gender:ethnicity, local_authority, nr_very_good:nr_fairly_poor )) %>% 
+  pivot_longer(cols = com_bel_very_strongly:com_bel_not_very_strongly, names_to = "community_belonging", values_to = "cb_percent")
+#  pivot_longer(cols = com_bel_very_strongly:com_bel_not_very_strongly, names_to = #"community_belonging_rating", values_to = "cb_percent")
+
+comm_extra_pivot 
+```
+```{r}
+comm_extra_pivot_means <-
+comm_extra_pivot %>% 
+  group_by(walking_distance_to_nearest_greenspace, community_belonging) %>% 
+  summarise(mean(cb_percent)) %>% 
+  rename(mean_percent = "mean(cb_percent)")
+  
+  
+  comm_extra_pivot_means %>% 
+  filter(community_belonging %in% c("com_bel_very_strongly", "com_bel_fairly_strongly")) %>% 
+  ggplot() +
+  aes(x = walking_distance_to_nearest_greenspace, y = mean_percent, fill = community_belonging) +
+  geom_col(position = "dodge") +
+  theme_minimal() +
+  labs(title = "Community Belonging by Walking Distance to Nearest Green Space",
+          subtitle = "Mean Percent - Scotland") +
+  xlab("") +
+  ylab("%") +
+  labs(fill = "Community Belonging Rating") +
+  theme(axis.title.y = element_text(size = 8),
+        axis.title.x = element_text(size = 8),
+        plot.title = element_text(size = 12),
+        plot.subtitle = element_text(size = 10),
+        legend.title = element_text(size = 8))
+```
+
+
+```{r}
+#neigh_comm_extra_pivot %>% 
+#  select()
+#  filter(neighbourhood_rating %in% c("nr_very_good", "nr_fairly_good"))
+```
+
+
+```{r}
+##This is daft, I just need the Scotland all data to make a point
+#remaining_graphs_data %>% 
+#    filter(walking_distance_to_nearest_greenspace != "Don't Know",
+#         local_authority == "Scotland") %>%
+#    group_by(walking_distance_to_nearest_greenspace) %>% 
+#    summarise(nr_very_good = mean(nr_very_good), 
+#              nr_fairly_good = mean(nr_fairly_good), 
+#              cb_very_strong = mean(com_bel_very_strongly), 
+#              cb_fairly_strong = mean(com_bel_fairly_strongly)) %>% 
+#  pivot_longer(cols = nr_very_good: cb_fairly_strong, )
+
+```
+
+
+```{r}
+#remaining_graphs_data %>%
+# filter(walking_distance_to_nearest_greenspace != "Don't Know",
+#         local_authority == "Scotland") %>% 
+#  ggplot() +
+#  aes(x = walking_distance_to_nearest_greenspace, y = nr_very_good) +
+#  geom_col()
+```
+
+
+```{r}
+remaining_graphs_data %>% 
+  filter(walking_distance_to_nearest_greenspace != "Don't Know") %>% 
+  ggplot() +
+  aes(x = nr_very_good, y = com_bel_very_strongly, color = walking_distance_to_nearest_greenspace) +
+  geom_point() +
+  geom_smooth(method = lm, se = FALSE, fullrange = TRUE) +
+  theme_minimal() +
+  labs(title = "Neighbourhood Rating vs Community Belonging",
+          subtitle = "By Walking Distance to Nearest Green Space") +
+  xlab("Very Good Neighbourhood Rating") +
+  ylab("Very Strong Community Belonging") +
+  labs(colour = "Walking Distance to Nearest Green Space") +
+  theme(axis.title.y = element_text(size = 8),
+        axis.title.x = element_text(size = 8),
+        plot.title = element_text(size = 12),
+        plot.subtitle = element_text(size = 10),
+        legend.title = element_text(size = 8))
+```
+
+```{r}
+remaining_graphs_data  %>% 
+  filter(walking_distance_to_nearest_greenspace != "Don't Know") %>% 
+  ggplot() +
+  aes(x = nr_fairly_good, y = com_bel_fairly_strongly, color = walking_distance_to_nearest_greenspace) +
+  geom_point() +
+  geom_smooth(method = lm, se = FALSE, fullrange = TRUE) +
+  theme_minimal() +
+  labs(title = "Neighbourhood Rating vs Community Belonging",
+          subtitle = "By Walking Distance to Nearest Green Space") +
+  xlab("Fairly Good Neighbourhood Rating") +
+  ylab("Fairly Strong Community Belonging") +
+  labs(colour = "Walking Distance to Nearest Green Space") +
+  theme(axis.title.y = element_text(size = 8),
+        axis.title.x = element_text(size = 8),
+        plot.title = element_text(size = 12),
+        plot.subtitle = element_text(size = 10),
+        legend.title = element_text(size = 8))
+  
 ```
 
