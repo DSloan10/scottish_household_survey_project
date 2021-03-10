@@ -7,7 +7,7 @@ output: html_notebook
 library(sf)
 library(tidyverse)
 library(ggplot2)
-
+library(janitor)
 ```
 
 ```{r}
@@ -23,12 +23,6 @@ la <- st_read("https://opendata.arcgis.com/datasets/2698b6825e88404ab6272a5ff7f5
 
 ```{r}
 loc_authority_with_extra_density_2019     #S12000049    #S12000050
-```
-
-
-```{r}
-loc_authority_with_extra_density_2019 %>% 
-  mutate(recode(feature_code, ))
 ```
 
 
@@ -64,10 +58,108 @@ la_urban_rural_2019 <- left_join(urban_rural_2019_with_ex_den, la, by = c("featu
 
 la_urban_rural_2019
 ```
+
+```{r}
+la_loc_authority_ex_den_no_shetland <- 
+  la_loc_authority_ex_den %>% 
+  filter(local_authority != "Shetland Islands")
+```
+
+```{r}
+la_loc_authority_ex_den_with_shetland <- 
+  la_loc_authority_ex_den %>% 
+  filter(local_authority == "Shetland Islands")
+```
+
+
+
+```{r}
+map_1_5_min_walk <-
+ggplot() +
+  geom_sf(data = la_loc_authority_ex_den_no_shetland, mapping = aes(geometry = geometry, fill = a_5_minute_walk_or_less), colour = "grey", size = 0.005) +
+  theme_void() +
+  labs(title = "Percentage of Population Within a 5-minute Walk of Green Space",
+       subtitle = "Mean figures between 2013 - 2019 - Scotland",
+       fill = "% within 5 min Green Space") +
+  theme(legend.key.size = unit(0.3, "cm"),
+        legend.key.width = unit(0.3, "cm"),
+        legend.title = element_text(size = 7),
+        legend.text = element_text(size = 8),
+        plot.title = element_text(size = 12, hjust = 0.2),
+        plot.subtitle = element_text(size = 10, hjust = 0.067)
+        
+  ) 
+```
+
+```{r}
+extra_5_mins_shetland <-
+ggplot() +
+  geom_sf(data = la_loc_authority_ex_den_with_shetland, mapping = aes(geometry = geometry, fill = a_5_minute_walk_or_less), colour = "grey", size = 0.005) +
+  theme_void() +
+  theme(
+    legend.position = "none"
+  )
+```
+
+
+```{r}
+map_2_pop_density <-
+ggplot() +
+  geom_sf(data = la_loc_authority_ex_den_no_shetland, mapping = aes(geometry = geometry, fill = factor(population_density_deciles)), colour = "grey", size = 0.005) +
+  theme_void() +
+  labs(title = "Population Density",
+       fill = "Pop. Density Deciles (ONS)") +
+  theme(legend.key.size = unit(0.3, "cm"),
+        legend.key.width = unit(0.3, "cm"),
+        legend.title = element_text(size = 7),
+        legend.text = element_text(size = 8),
+        plot.title = element_text(size = 12, hjust = 0.1),
+  ) +
+  scale_fill_hue(h = c(180, 390),
+                 l = 50, c = 70)
+
+
+```
+
+```{r}
+extra_pop_dens_shetland <-
+ggplot() +
+  geom_sf(data = la_loc_authority_ex_den_with_shetland, mapping = aes(geometry = geometry, fill = factor(population_density_deciles)), colour = "grey", size = 0.005) +
+  theme_void() +
+  theme(
+    legend.position = "none") +
+  scale_fill_hue(h = c(180, 390),
+                 l = 50, c = 70) 
+```
+
+```{r}
+extra_pop_dens_shetland %>% 
+ggsave(filename="~/presentation_pngs/extra_pop_dens_shetland.png", 
+       device="png", 
+       dpi=500)
+```
+
+
+
+```{r}
+write_csv(la_loc_authority_ex_den, "data/presentation_data/map_2_la_loc_authority_ex_den.csv")
+```
+
+```{r}
+write_csv(la_urban_rural_2019, "data/presentation_data/map_3_la_urban_rural_2019.csv")
+```
+
+```{r}
+la_urban_rural_2019_from_file <- read_csv("data/presentation_data/map_2_la_loc_authority_ex_den.csv") %>% clean_names()
+```
+
+```{r}
+la_urban_rural_2019_from_file
+```
+
 ```{r}
 # Need to adjust the zoom, angle and color. 
 ggplot() +
-  geom_sf(data = la_loc_authority_ex_den, mapping = aes(geometry = geometry, fill = a_5_minute_walk_or_less), colour = "grey")
+  geom_sf(data = la_urban_rural_2019_from_file, mapping = aes(geometry = geometry, fill = a_5_minute_walk_or_less), colour = "grey")
 ```
-
 
