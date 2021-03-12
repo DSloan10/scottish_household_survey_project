@@ -238,6 +238,8 @@ all_walk_dist_categories %>%
 minus_5_all_cats_2019
 ```
 
+
+
 ```{r}
 minus_5_all_means_scot_groups %>%
   ggplot() + 
@@ -429,6 +431,7 @@ plus_minus_plot
 ```
 
 
+
 ```{r}
 local_means
 ```
@@ -518,6 +521,7 @@ label_above_below_with_electoral_regions <-
           subtitle = "Mean figures between 2013 - 2019") +
   coord_flip()
 ```
+
 
 
 ```{r}
@@ -642,3 +646,23 @@ urban_rural_2019_with_ex_den
 #write_csv(urban_rural_2019_with_ex_den, "urban_rural_2019_with_ex_den.csv")
 ```
 
+
+```{r}
+write_csv(all_means_scot_groups_less_11, "data/presentation_data/graph_1_all_means_scot_groups_less_11.csv")
+```
+
+```{r}
+write_csv(minus_5_all_means_scot_groups, "data/presentation_data/graph_2_minus_5_all_means_scot_groups.csv")
+```
+
+```{r}
+write_csv(local_means_plus_minus_scot, "data/presentation_data/graph_8a_local_means_plus_minus_scot.csv")
+```
+
+```{r}
+write_csv(label_above_below_with_electoral_regions, "data/presentation_data/graph_8b_label_above_below_with_electoral_regions.csv")
+```
+
+```{r}
+write_csv(regions_distances_pivot_long, "data/presentation_data/graph_9_regions_distances_pivot_long.csv")
+```

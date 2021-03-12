@@ -11,6 +11,7 @@ library(ggplot2)
 green_blue_comp_data <- read_csv("data/complete_dist_blue_green.csv") %>% clean_names()
 neighbourhood_comp_data <- read_csv("data/complete_neighbourhood_rating.csv") %>% clean_names()
 community_comp_data <- read_csv("data/complete_community_belonging.csv") %>% clean_names()
+
 ```
 
 I really want to work out if we can get all these bound together in one big dataset.
@@ -165,24 +166,25 @@ Looks all good. Right let's get cracking on those variables. So here's a list fo
 Think that may be it for now. Going to do this in a couple of stages and then try and make the join. Hoping the joins will actually work but it's still screwing with my head to work out how they should be behaving. I can't quite seem to work out how many variables we should end up with and what they should refer to. To be honest, I think that it might be best to just draw this out on a piece of paper or in excalidraw!
 
 ```{r}
+#Altered all of these to keep feature code in so that population density figures could be added later on.
 gb_filtered <-
 gb_with_las_data %>%
   filter(measurement == "Percent") %>% 
-  select(-c(feature_code, units, measurement))
+  select(-c(units, measurement))
 ```
 
 ```{r}
 commun_filtered <-
 commun_with_las_data %>%
   filter(measurement == "Percent") %>% 
-  select(-c(feature_code, units, measurement))
+  select(-c(units, measurement))
 ```
 
 ```{r}
 neigh_filtered <-
 neigh_with_las_data %>%
   filter(measurement == "Percent") %>% 
-  select(-c(feature_code, units, measurement))
+  select(-c(units, measurement))
 ```
 
 ```{r}
@@ -377,14 +379,14 @@ Think about what else we could do with means over the date covered.
 ```{r}
 all_la_percents_filtered <-
 all_la_percents %>% 
-  select(c(date_code, local_authority, less_than_11_mins, an_11_minute_walk_or_more, a_5_minute_walk_or_less, within_a_6_10_minute_walk, dont_know)) %>% 
+  select(c(date_code, feature_code, local_authority, less_than_11_mins, an_11_minute_walk_or_more, a_5_minute_walk_or_less, within_a_6_10_minute_walk, dont_know)) %>% 
   rename(year = date_code)
 ```
 
 ```{r}
 gb_long_back_ordered <-
 gb_long_pivot_back %>% 
-  select(c(date_code, local_authority, type, class, less_than_11_mins, an_11_minute_walk_or_more, a_5_minute_walk_or_less, within_a_6_10_minute_walk, dont_know)) %>% 
+  select(c(date_code, feature_code, local_authority, type, class, less_than_11_mins, an_11_minute_walk_or_more, a_5_minute_walk_or_less, within_a_6_10_minute_walk, dont_know)) %>% 
   rename(year = date_code) %>% 
   mutate(class = if_else((type == "ethnicity") &
                            (class == "Other"), 

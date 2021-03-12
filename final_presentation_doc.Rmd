@@ -662,3 +662,161 @@ remaining_graphs_data  %>%
 
 Time to write all these graphs to png. 
 
+```{r}
+graph_1_final
+graph_2_final
+graph_3_final_ethnicity_plot_n5s
+graph_4_final_tenure_plot_n5s
+graph_5_final_simd_plot_n5s
+graph_6_final
+graph_8_final
+graph_9a_by_local_authority_final
+graph_9_b_electoral_regions_final
+graph_10_final
+graph_11_neigh_extra_final
+graph_12_comm_extra_final
+graph_13_final
+graph_14_final
+```
+
+
+```{r}
+graph_1_final %>% 
+ggsave(filename="~/presentation_pngs/graph_1_final.png", 
+       device="png", 
+       height=5, 
+       width=8, 
+       units="in", 
+       dpi=500)
+```
+
+```{r}
+graph_2_final %>% 
+ggsave(filename="~/presentation_pngs/graph_2_final.png", 
+       device="png", 
+       height=5, 
+       width=8, 
+       units="in", 
+       dpi=500)
+```
+
+```{r}
+graph_3_final_ethnicity_plot_n5s %>% 
+ggsave(filename="~/presentation_pngs/graph_3_final_ethnicity_plot_n5s.png", 
+       device="png", 
+       height=5, 
+       width=8, 
+       units="in", 
+       dpi=500)
+```
+
+```{r}
+graph_4_final_tenure_plot_n5s %>% 
+ggsave(filename="~/presentation_pngs/graph_4_final_tenure_plot_n5s.png", 
+       device="png", 
+       height=5, 
+       width=8, 
+       units="in", 
+       dpi=500)
+```
+
+```{r}
+graph_5_final_simd_plot_n5s %>% 
+ggsave(filename="~/presentation_pngs/graph_5_final_simd_plot_n5s.png", 
+       device="png", 
+       height=5, 
+       width=8, 
+       units="in", 
+       dpi=500)
+```
+
+```{r}
+graph_6_final %>% 
+ggsave(filename="~/presentation_pngs/graph_6_final.png", 
+       device="png", 
+       height=5, 
+       width=8, 
+       units="in", 
+       dpi=500)
+```
+
+```{r}
+graph_8_final %>% 
+ggsave(filename="~/presentation_pngs/graph_8_final.png", 
+       device="png", 
+       height=5, 
+       width=8, 
+       units="in", 
+       dpi=500)
+```
+
+```{r}
+graph_9a_by_local_authority_final %>% 
+ggsave(filename="~/presentation_pngs/graph_9a_by_local_authority_final.png", 
+       device="png", 
+       height=5, 
+       width=8, 
+       units="in", 
+       dpi=500)
+```
+
+```{r}
+graph_9_b_electoral_regions_final %>% 
+ggsave(filename="~/presentation_pngs/graph_9_b_electoral_regions_final.png", 
+       device="png", 
+       height=5, 
+       width=8, 
+       units="in", 
+       dpi=500)
+```
+
+```{r}
+graph_10_final %>% 
+ggsave(filename="~/presentation_pngs/graph_10_final.png", 
+       device="png", 
+       height=5, 
+       width=8, 
+       units="in", 
+       dpi=500)
+```
+
+```{r}
+graph_11_neigh_extra_final %>% 
+ggsave(filename="~/presentation_pngs/graph_11_neigh_extra_final.png", 
+       device="png", 
+       height=5, 
+       width=8, 
+       units="in", 
+       dpi=500)
+```
+
+```{r}
+graph_12_comm_extra_final %>% 
+ggsave(filename="~/presentation_pngs/graph_12_comm_extra_final.png", 
+       device="png", 
+       height=5, 
+       width=8, 
+       units="in", 
+       dpi=500)
+```
+
+```{r}
+graph_13_final %>% 
+ggsave(filename="~/presentation_pngs/graph_13_final.png", 
+       device="png", 
+       height=5, 
+       width=8, 
+       units="in", 
+       dpi=500)
+```
+
+```{r}
+graph_14_final %>% 
+ggsave(filename="~/presentation_pngs/graph_14_final.png", 
+       device="png", 
+       height=5, 
+       width=8, 
+       units="in", 
+       dpi=500)
+```
+

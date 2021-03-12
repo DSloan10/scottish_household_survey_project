@@ -79,7 +79,7 @@ ggplot() +
   geom_sf(data = la_loc_authority_ex_den_no_shetland, mapping = aes(geometry = geometry, fill = a_5_minute_walk_or_less), colour = "grey", size = 0.005) +
   theme_void() +
   labs(title = "Percentage of Population Within a 5-minute Walk of Green Space",
-       subtitle = "Mean figures between 2013 - 2019 - Scotland",
+       subtitle = "2019 - Scotland",
        fill = "% within 5 min Green Space") +
   theme(legend.key.size = unit(0.3, "cm"),
         legend.key.width = unit(0.3, "cm"),
@@ -107,7 +107,7 @@ map_2_pop_density <-
 ggplot() +
   geom_sf(data = la_loc_authority_ex_den_no_shetland, mapping = aes(geometry = geometry, fill = factor(population_density_deciles)), colour = "grey", size = 0.005) +
   theme_void() +
-  labs(title = "Population Density",
+  labs(title = "Population Density in 2019",
        fill = "Pop. Density Deciles (ONS)") +
   theme(legend.key.size = unit(0.3, "cm"),
         legend.key.width = unit(0.3, "cm"),
@@ -133,8 +133,8 @@ ggplot() +
 ```
 
 ```{r}
-extra_pop_dens_shetland %>% 
-ggsave(filename="~/presentation_pngs/extra_pop_dens_shetland.png", 
+map_2_pop_density %>% 
+ggsave(filename="~/presentation_pngs/map_2_pop_density.png", 
        device="png", 
        dpi=500)
 ```

@@ -123,6 +123,59 @@ gb_with_las_data %>%
          date_code %in% c(2013, 2019))
 ```
 
+**Extra below added in for presentation!!!**
+
+```{r}
+gb_scot_all_years_las_5_min <-
+  gb_with_las_data %>% 
+  filter(distance_to_nearest_green_or_blue_space == "A 5 minute walk or less",
+         local_authority == "Scotland") %>% 
+  pivot_wider(names_from = measurement, values_from = value) %>% 
+  clean_names()
+  #mutate(upper_interval = x95_percent_upper_confidence_limit_percent - percent,
+  #         lower_interval = percent - x95_percent_lower_confidence_limit_percent, 
+  #         combined_interval = upper_interval + lower_interval) %>% 
+  #arrange(date_code) #%>% 
+  #pivot_wider(names_from = date_code, values_from = x95_percent_lower_confidence_limit_percent:x95_percent_upper_confidence_limit_percent)
+
+scot_to_add_all_years_sig_less_5 <-
+gb_scot_all_years_las_5_min %>% 
+  pivot_longer(c(age, gender, urban_rural_classification, simd_quintiles, type_of_tenure, household_type, ethnicity), names_to = "type", values_to = "class") %>% 
+  filter(class != "All")
+
+extra_scot_to_add_all_years_sig_less_5 <-
+gb_scot_all_years_las_5_min %>% 
+    filter(age == "All", 
+         gender == "All",
+         urban_rural_classification == "All",
+         simd_quintiles == "All",
+         type_of_tenure == "All",
+         household_type == "All",
+         ethnicity == "All",
+    ) %>% 
+  pivot_longer(c(age, gender, urban_rural_classification, simd_quintiles, type_of_tenure, household_type, ethnicity), names_to = "type", values_to = "class") %>%
+  slice_head(n = 1) %>% 
+  mutate(type = recode(type, age = "All"))
+
+final_all_scot_all_years_sig_less_5 <-
+bind_rows(scot_to_add_all_years_sig_less_5 , extra_scot_to_add_all_years_sig_less_5)
+  
+```
+
+```{r}
+final_all_scot_all_years_sig_less_5
+```
+
+```{r}
+write_csv(final_all_scot_all_years_sig_less_5, "data/presentation_data/graph_3_final_scot_all_years_sig_less_5.csv")
+```
+
+**Extra Code Finished**
+
+**Screwed the above up, I didn't need to pivot wider I needed the year!!**
+
+
+
 ```{r}
 all_2013_2019_pivot_with_intervals <-
   gb_2013_2019_las_5_min %>%
@@ -261,5 +314,13 @@ final_all_13_19_sig_less_5 %>%
 ```{r}
 final_all_13_19_sig_less_5 %>% 
   filter(sign_change_13_to_19 != TRUE)
+```
+
+```{r}
+write_csv(final_scot_13_19_sig_less_5, "data/presentation_data/graph_3_4_5_final_scot_13_19_sig_less_5.csv")
+```
+
+```{r}
+write_csv(final_all_13_19_sig_less_5, "data/presentation_data/all_graph_3_4_5_final_all_13_19_sig_less_5.csv")
 ```
 

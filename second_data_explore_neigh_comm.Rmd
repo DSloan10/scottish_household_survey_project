@@ -133,6 +133,10 @@ just_walking_distance_neigh_comm %>%
   geom_point()
 ```
 
+```{r}
+write_csv(just_walking_distance_neigh_comm, "data/presentation_data/graph_10_11_just_walking_distance_neigh_comm.csv")
+```
+
 Cool, so we've plotted some of the relationships between the the neighbourhood ratings and the community belonging ratings, based on the fact that they both pretty much exist on a evenly spaced four-point scale (with an extra don't know section each). 
 
 This is us trying out some of the extra pivots to see if we can shed any further light on the questions. 
@@ -223,5 +227,9 @@ just_walking_distance_neigh_comm %>%
 just_walking_distance_neigh_comm %>% 
   dplyr::filter(walking_distance_to_nearest_greenspace != "Don't Know") %>%
   plot_ly( x = ~nr_very_good, y = ~com_bel_very_strongly, z = ~walking_distance_to_nearest_greenspace,type = "scatter3d", mode = "markers", color = ~walking_distance_to_nearest_greenspace)
+```
+
+```{r}
+
 ```
 
