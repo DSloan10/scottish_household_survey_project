@@ -28,4 +28,29 @@ There were three main issues that I had when dealing with the above datasets:
 
 ![Example of selection page for data](https://github.com/DSloan10/scottish_household_survey_project/blob/main/presentation_pngs/Database%20Screenshot.png)
 
+<br />
+
 ![Example of data once read into R](https://github.com/DSloan10/scottish_household_survey_project/blob/main/presentation_pngs/R%20Example.png)
+
+## Useful definitions
+
+There are a few definitions useful when considering the data and the resulting insights:
+
+* All percentages refer in some way or another to adults, classed as over the age of 16, between the years 2013 and 2019.
+* Green and Blue Space is described in the Scottish Household Survey as comprising ‘public green or open spaces in your local area, for example a park, countryside, wood, play area, canal path, riverside or beach’.
+* The walking-distance responses detailed are purely subjective. It seems quite a good measure to capture the desired information (i.e psychological rather than necessarily physical).
+
+##Q1: Do certain groups that have more/less access to green space?
+
+In addressing the first of these questions, it was important to decide on a suitable meausure of "local access". Two potential measures were available through the data set, post wrangling. The first was for those that lived within a 10-minute walk of green space, the second for those that lived within a 5-minute walk.
+
+I decided to start by assertaining whether any sustained gaps were evident amongst different groups of the population. To do this, I took mean percetages from across the years addressed (2013 and 2019) for these different groups.
+
+In terms of the 10-minute measure, dividing the population by categories and then sub groups produced a fairly homogenous picture, with the majority of groups having 80 per cent of respondents or higher. The exception to this pattern was those labeled as of "Non White Ethnicity", and the first sign of a fairly worrying trend in the data:
+
+![](https://github.com/DSloan10/scottish_household_survey_project/blob/main/presentation_pngs/graph_1_final.png)
+
+
+
+
+
