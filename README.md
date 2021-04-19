@@ -16,3 +16,16 @@ Using datasets derived from historic Scottish Household Surveys, the intention o
 
 3. [Community belonging - SHS](https://statistics.gov.scot/resource?uri=http%3A%2F%2Fstatistics.gov.scot%2Fdata%2Fcommunity-belonging---shs)
 
+## Issues with the data
+
+There were three main issues that I had when dealing with the above datasets:
+
+1. Only one characteristic variable could be sub-divided at a time. i.e age or gender but not both (no figures for Males over 65 years old for example)
+
+2. Although these variables could be sub-divided by local authority and year, some figures were missing
+
+3. All numeric values were in the form of percentages. i.e. the percentage of Males in Edinburgh that reported living 10 minutes from green spaces.
+
+![Example of selection page for data][
+
+![Example of data once read into R][
