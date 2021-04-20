@@ -154,6 +154,13 @@ Taking a single year (2019) as an example, we can see there is perhaps more vari
 
 <br />
 
+![](https://github.com/DSloan10/scottish_household_survey_project/blob/main/presentation_pngs/5-min_map_with_shet.png)
+
+<br />
+
+![](https://github.com/DSloan10/scottish_household_survey_project/blob/main/presentation_pngs/pop_dens_with_shet.png)
+
+
 
 
 
