@@ -208,7 +208,7 @@ With reference to the community belonging ratings, once again the majority of pe
 
 <br />
 
-##Q3 Extra. NR vs CBR - by Walking Distance
+## Q3 Extra. NR vs CBR - by Walking Distance
 
 As a small piece of extra analysis, I decided to look at the correlations between the very positive ratings and the fairly positive ratings seperately. I thought it would be interesting to see not only if there was a clear correlation but also if this was stronger among those with greater or less access to green space.
 
@@ -224,7 +224,7 @@ All points on the plot refer to individual local authorities in a separate year.
 
 <br />
 
-##Conclusions
+## Conclusions
 
 **Q1** - Notable inequalities seem to exist in terms of access to green space between some groups.
 
