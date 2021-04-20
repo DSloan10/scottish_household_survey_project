@@ -54,7 +54,7 @@ In addressing the first of these questions, it was important to decide on a suit
 
 I decided to start by assertaining whether any sustained gaps were evident amongst different groups of the Scottish population. To do this, I took mean percetages from across the years addressed (2013 and 2019) for these different groups.
 
-In terms of the 10-minute measure, dividing the population by categories and then sub groups produced a fairly homogenous picture, with the majority of groups having 80 per cent of respondents or higher. The exception to this pattern was those labeled as of "Non White Ethnicity", and the first sign of a fairly worrying trend in the data:
+In terms of the 10-minute measure, dividing the population by categories and then sub groups produced a fairly homogenous picture, with the majority of groups having 80% of respondents or higher. The exception to this pattern was those labeled as of "Non White Ethnicity", and the first sign of a fairly worrying trend in the data:
 
 <br />
 
@@ -160,7 +160,54 @@ Taking a single year (2019) as an example, we can see there is perhaps more vari
 
 ![](https://github.com/DSloan10/scottish_household_survey_project/blob/main/presentation_pngs/pop_dens_with_shet.png)
 
+Returning to mean figures between 2013 and 2019, I decided that it would be appropriate to explore differences between local authorities(LAs):
 
+<br />
+
+![](https://github.com/DSloan10/scottish_household_survey_project/blob/main/presentation_pngs/graph_9a_by_local_authority_final.png)
+
+Addressing each of the LAs in relation to the all Scottish mean, it is clear that many 'all city' authorities fall well below the Scottish average in terms of local access, with Glasgow City and Dundee City reporting particuarly low average percentages. It is intesting to note the position of some LAs that I would first have thought would be higher or lower e.g. Orkney Islands lower, City of Edinburgh higher. This showcases the fact that there are certainly exceptions to the Rural = Good Access, Urban = Bad Access rule. Equally, it demonstrates that just because individuals are surrounded by green space, it does not necessarily mean that such individuals feel like they have access to it. 
+
+<br />
+
+![](https://github.com/DSloan10/scottish_household_survey_project/blob/main/presentation_pngs/graph_9_b_electoral_regions_final.png)
+
+Grouping these LAs into Electoral Regions demonstrates the impact that surrounding authorities can have on lower percentages of access in some urban areas. Those living in Aberdeen and Dundee, when grouped in the overall Grampian and Tayside regions, are part of groups with far more positive levels of access. In comparison, Glasgow as an Electoral Region in its own right has by far the lowest level of access amongst this grouping.
+
+<br />
+
+## Q2 Extra. Gender Divide?: Four largest cities 
+
+Looking in some more detail at the percentages of access reported in individual cities, some more interesting insights on become apparent:
+
+<br />
+
+![](https://github.com/DSloan10/scottish_household_survey_project/blob/main/presentation_pngs/graph_10_final.png)
+
+The impetus to investigate the gender divides within the four largest cities came from the fact that, when reviewing the data, the lowest percentage of 5-minute access reported across all groups was that of Females in Dundee in 2014 (43%). Looking at comparisons between different years and between cities, this looks like is could be a bit of an anomoly, although it certainly merits further investigation.
+
+In general, we see percentages reporting local access to green spaces generally being lower amongst emales that amongst males in cities, although the differences are neglible for most years. What is clear is that in Aberdeen and Dundee, female and male genders both have falling percentages reporting local access, with the trend particualtly pronounced in Aberdeen since 2014. In comparison, both Edinburgh and Glasgow appear to have relatively stable access for both male and female genders, although the former has consistently higher access than the latter.
+
+<br />
+
+## Differences in Neighbourhood and Community Belonging Ratings - by Walking Distance
+
+The datasets providing neighbourhood and community belonging ratings also included detail on respondents access to green spaces. However, only two options were provided to respondents: **less than 10 minutes** to nearest green space; or **more than 10 minutes** to nearest green space. As we have been addressing mostly percentages for respondents living within a 5-minute walk of green space, this unfortunately means we have a degree of inconsistency within the overall analysis. Nevertheless, the relationship between these ratings and 10-minute access is worth exploring:
+
+<br />
+
+![](https://github.com/DSloan10/scottish_household_survey_project/blob/main/presentation_pngs/graph_11_neigh_extra_final.png)
+
+With a majority of respondents in Scotland reporting either "fairly good" or "very good" neighbourhood ratings, I decided to focus only on differences in terms of more or less access amongst these two groups. It seems clear from the above graph that only a negligible difference exists. 
+
+<br />
+
+![](https://github.com/DSloan10/scottish_household_survey_project/blob/main/presentation_pngs/graph_12_comm_extra_final.png)
+
+With reference to the community belonging ratings, once again the majority of people reported positive sentiments in the form of "very strongly" or "fairly strongly" feeling part of their community. The same very small difference seems appartent between those with more or less access to green spaces. With only the ±10-minute measure avaiable, it seems that there is no clear correlation betwen local access and the neigbourhood/community belonging ratings.
+
+
+##Q3 Extra. NR vs CB - by Walking Distance
 
 
 
