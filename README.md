@@ -48,7 +48,7 @@ There are a few definitions useful when considering the data and the resulting i
 
 <br />
 
-##Q1: Do certain groups that have more/less access to green space?
+## Q1: Do certain groups that have more/less access to green space?
 
 In addressing the first of these questions, it was important to decide on a suitable meausure of "local access". Two potential measures were available through the data set, after wrangling. The first was for those that lived within a 10-minute walk of green space, the second for those that lived within a 5-minute walk.
 
@@ -56,9 +56,13 @@ I decided to start by assertaining whether any sustained gaps were evident among
 
 In terms of the 10-minute measure, dividing the population by categories and then sub groups produced a fairly homogenous picture, with the majority of groups having 80 per cent of respondents or higher. The exception to this pattern was those labeled as of "Non White Ethnicity", and the first sign of a fairly worrying trend in the data:
 
+<br />
+
 ![](https://github.com/DSloan10/scottish_household_survey_project/blob/main/presentation_pngs/graph_1_final.png)
 
 After checking [National Performance indicators that the Scottish Government had previously used](https://nationalperformance.gov.scot/access-green-and-blue-space), I also decided to look at the differences among groups in 5-minute access:
+
+<br />
 
 ![](https://github.com/DSloan10/scottish_household_survey_project/blob/main/presentation_pngs/graph_2_final.png)
 
@@ -72,17 +76,23 @@ Casting aside the urban/rural divide (more on this in Q2), it seemed apparent th
 
 <br />
 
-###Further analysis of differences between these groups
+### Further analysis of differences between these groups
 
 95% confident intervals were included within the datasets for each percentage reported. Along with these intervals, I plotted the percentages across the years being addressed to establish whether I could be confident that a sustained gap between the groups was evident:
+
+<br />
 
 ![](https://github.com/DSloan10/scottish_household_survey_project/blob/main/presentation_pngs/graph_3_final_ethnicity_plot_n5s.png)
 
 Although, the confidence intervals where fairly wide for the "Non-White Ethnicity" group, it was clear that even with this wide interval applied, a sustained gap existing over all but one year. To me, this suggested that there was a sustained inequality between the two groups in their level of access across the years addressed.
 
+<br />
+
 ![](https://github.com/DSloan10/scottish_household_survey_project/blob/main/presentation_pngs/graph_4_final_tenure_plot_n5s.png)
 
 With the 95% confidence intervals applied, a sustained gap in 5-minute access is shown between those with a mortgage and those in social rented accomodation. Interestingly, the gap seemed to narrow between the two groups in the most recent year that figures are available. I will be interesting to see if this is a sustained trend or if it merely a blip on the more general gap. 
+
+<br />
 
 ![](https://github.com/DSloan10/scottish_household_survey_project/blob/main/presentation_pngs/graph_5_final_simd_plot_n5s.png)
 
