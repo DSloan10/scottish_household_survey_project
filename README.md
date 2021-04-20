@@ -98,8 +98,61 @@ With the 95% confidence intervals applied, a sustained gap in 5-minute access is
 
 Once again, a gap is maintained across the years addressed when looking at the most and least deprived members of Scottish society. The gap once again narrows in 2019, suggested a degree of correlation between the second and third inequalites addressed here, although this should be more thoroughly evidenced if it is to be stated with great confidence.
 
+<br />
 
+## Q1 Extra. SG - Estimating Statistically Significant Change 
 
+To retrospectively access the level of statistical significance in any reported change, the Scottish Government sometimes use a methodology combining point estimates and 95% confidence intervals.
+
+<br />
+
+**_Method_**
+
+Check the following:
+
+1.	The difference between a and b is greater than or equal to the sum of the magnitude of the intervals 
+
+**if False**
+
+2.  The difference between a and b is smaller than the larger interval of the two points
+
+**if False**
+
+3. The difference between a and b is greater than or equal to the square root of the sum of the squares of the two magnitudes
+
+**if none of the above are True, no statistical significance**
+
+<br />
+
+I applied this method to the different sub-groups for which percentages where available across the Scottish population. Percentages reported in 2013 were taken as **a** and percentages reported in 2019 taken as **b**:
+
+<br />
+
+![](https://github.com/DSloan10/scottish_household_survey_project/blob/main/presentation_pngs/graph_6_final.png)
+
+This tells an interesting story in terms of some of the groups we have previously addressed. The main takeaway from the analysis however is that, amongst those group that there is a statistically significant change, all have seen have seen a drop in percentages reflecting access since 2013.
+
+<br />
+
+## Q2. Urban vs Rural Access
+
+Multiple definitions of what constitutes Urban or Rural living used in Scottish Government data gathering. The definition used in the SHS is 2-fold, defined as follows:
+
+**Urban** - areas of settlement with 10,000 people or more.
+
+**Rural** - areas of settlement with less than 10,000 people. 
+
+This seems quite a strict dichotomy:
+
+<br />
+
+![](https://github.com/DSloan10/scottish_household_survey_project/blob/main/presentation_pngs/00533574.jpg)
+
+Returning to the 95% confidence intervals, the most consistent gap between two groups across the datasets presents itself. In many ways this seems like an unsurprising and intuititive insight.
+
+Taking a single year (2019) as an example, we can see there is perhaps more variation in access at a local authority level than simple population density would suggest:
+
+<br />
 
 
 
