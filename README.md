@@ -207,7 +207,7 @@ With a majority of respondents in Scotland reporting either "fairly good" or "ve
 With reference to the community belonging ratings, once again the majority of people reported positive sentiments in the form of "very strongly" or "fairly strongly" feeling part of their community. The same very small difference seems appartent between those with more or less access to green spaces. With only the ±10-minute measure avaiable, it seems that there is no clear correlation betwen local access and the neigbourhood/community belonging ratings.
 
 
-##Q3 Extra. NR vs CB - by Walking Distance
+##Q3 Extra. NR vs CBR - by Walking Distance
 
 
 
